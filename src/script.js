@@ -41,18 +41,38 @@ const bakedTexture = textureLoader.load('baked.jpg')
 bakedTexture.flipY = false
 bakedTexture.encoding = THREE.sRGBEncoding
 
+const cbcTex = textureLoader.load('cbcmat.png')
+cbcTex.flipY = false
+cbcTex.encoding = THREE.sRGBEncoding
+
 const bakedMaterial = new THREE.MeshBasicMaterial(({ map: bakedTexture }))
+const cbcMat = new THREE.MeshBasicMaterial({map:cbcTex})
 let test
 
+// gltfLoader.load(
+//     'platform.glb',
+//     (gltf) => {
+//         gltf.scene.traverse((child) =>{
+//             child.material = bakedMaterial
+//         })
+//         scene.add(gltf.scene)
+//         test = gltf.scene
+//         console.log(test)
+//     }
+// )
+
 gltfLoader.load(
-    'platform.glb',
+    'CBC.glb',
     (gltf) => {
         gltf.scene.traverse((child) =>{
-            child.material = bakedMaterial
+            child.material = cbcMat
+            child.castShadow = true
+            child.receiveShadow = true
         })
+        gltf.castShadow = true
         scene.add(gltf.scene)
-        test = gltf.scene
-        console.log(test)
+        // test = gltf.scene
+        // console.log(test)
     }
 )
 
@@ -117,6 +137,8 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true
 })
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.outputEncoding = THREE.sRGBEncoding
@@ -208,6 +230,18 @@ const points = [
         element: document.querySelector('.point-3')
     }
 ]
+
+const dirlight = new THREE.DirectionalLight( 0xFFF7A0, 1, 1000 );
+dirlight.position.set( 0, 10, 0 ); //default; light shining from top
+dirlight.castShadow = true; // default false
+scene.add( dirlight );
+
+// const light = new THREE.AmbientLight(0xFFF7A0)
+// scene.add(light)
+
+
+const helper = new THREE.CameraHelper( dirlight.shadow.camera );
+scene.add( helper );
 
 /**
  * Animate
