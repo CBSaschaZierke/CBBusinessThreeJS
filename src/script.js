@@ -24,6 +24,8 @@ const scene = new THREE.Scene()
  */
 // Texture loader
 const textureLoader = new THREE.TextureLoader()
+const matCapTexture = textureLoader.load('textures/matcaps/whitegrey.png')
+const matCapTexture2 = textureLoader.load('textures/matcaps/BB.png')
 
 // Draco loader
 const dracoLoader = new DRACOLoader()
@@ -32,6 +34,121 @@ dracoLoader.setDecoderPath('draco/')
 // GLTF loader
 const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
+
+const fontLoader = new THREE.FontLoader()
+
+
+/**
+ * Fonts
+ */
+const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture})
+fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
+    const textGeometry = new THREE.TextGeometry('Health Care', {
+        font: font,
+        size: 1,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const text1Material = new THREE.MeshMatcapMaterial({matcap: matCapTexture2})
+    const text = new THREE.Mesh(textGeometry, text1Material)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    textGeometry.center()
+    text.position.set(-10, .55, 55) //.22
+    scene.add(text)
+
+    const text2Geometry = new THREE.TextGeometry('Income', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const text2 = new THREE.Mesh(text2Geometry, textMaterial)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    text2Geometry.center()
+    text2.position.set(-15, .25, 60) //.22
+    scene.add(text2)
+
+    const text3Geometry = new THREE.TextGeometry('In Progress', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const text3 = new THREE.Mesh(text3Geometry, textMaterial)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    text3Geometry.center()
+    text3.position.set(-10, .25, 60) //.22
+    scene.add(text3)
+
+    const text4Geometry = new THREE.TextGeometry('Closed', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const text4 = new THREE.Mesh(text4Geometry, textMaterial)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    text4Geometry.center()
+    text4.position.set(-5, .25, 60) //.22
+    scene.add(text4)
+
+    const text5Geometry = new THREE.TextGeometry('COMMERCIAL', {
+        font: font,
+        size: 1,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const text5 = new THREE.Mesh(text5Geometry, textMaterial)
+    text5Geometry.center()
+    text5.position.set(-42, .55, 17) //.22
+    text5.rotation.y = Math.PI * .5
+    scene.add(text5)
+})
 
 /**
  * Object
@@ -61,15 +178,20 @@ let test
 //     }
 // )
 
+const light = new THREE.AmbientLight( 0xFFF7A0, .7 );
+scene.add( light );
+
+
 gltfLoader.load(
-    'CBC.glb',
+    'CBCnew.glb',
     (gltf) => {
         gltf.scene.traverse((child) =>{
-            child.material = cbcMat
+            //child.material = cbcMat
             child.castShadow = true
             child.receiveShadow = true
         })
-        gltf.castShadow = true
+        // gltf.castShadow = true
+        // gltf.receiveShadow = true
         scene.add(gltf.scene)
         // test = gltf.scene
         // console.log(test)
@@ -141,7 +263,29 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.outputEncoding = THREE.sRGBEncoding
+// renderer.outputEncoding = THREE.sRGBEncoding
+
+// const dirlight = new THREE.DirectionalLight( 0xFFF7A0, 1, 100 );
+// dirlight.position.set( 0, 10, 0 ); //default; light shining from top
+// dirlight.rotation.z = Math.PI * .5
+// dirlight.castShadow = true; // default false
+// dirlight.shadow.mapSize.width = 256;
+// dirlight.shadow.mapSize.height = 256;
+// dirlight.shadow.camera.near = 0.5;
+// dirlight.shadow.camera.far = 40;
+// scene.add( dirlight );
+
+const directionalLight = new THREE.DirectionalLight(0xFFF7A0, 0.5)
+directionalLight.position.set(5, 20, 0)
+directionalLight.target.position.set(-200,0,10)
+directionalLight.castShadow = true
+directionalLight.shadow.mapSize.width = 1024*8;
+directionalLight.shadow.mapSize.height = 1024*8;
+ directionalLight.shadow.camera.left = - 64
+ directionalLight.shadow.camera.top = 64
+ directionalLight.shadow.camera.right = 64
+ directionalLight.shadow.camera.bottom = - 64
+scene.add(directionalLight)
 
 
 // Mouse
@@ -155,27 +299,27 @@ window.addEventListener('mousemove', (e) => {
 
 window.addEventListener('click', (e) => {
     if(currentIntersect && rayBool){
-
+        // Techniker
         if(currentIntersect.object.name === 'Cube032'){
             camera.position.set(-12, 4, 6)
             controls.target = new THREE.Vector3(-7, 0, 5);
         }
-
+        // Bank
         if(currentIntersect.object.name === 'Cube002'){
             camera.position.set(5, 4, 11)
             controls.target = new THREE.Vector3(4, 0, 5);
         }
-
+        // Makler
         if(currentIntersect.object.name === 'Cube001'){
             camera.position.set(10, 4, -8)
             controls.target = new THREE.Vector3(5, 0, -6);
         }
-
+        // Gesellschaft
         if(currentIntersect.object.name === 'Cube003'){
-            camera.position.set(-6, 4, -11)
-            controls.target = new THREE.Vector3(-3, 0, -5);
+            camera.position.set(-7, 4, -11)
+            controls.target = new THREE.Vector3(-5, 0, -5);
         }
-
+        //Ground
         if(currentIntersect.object.name === 'Plane'){
             camera.position.set(-6, 5, 3)
             controls.target = new THREE.Vector3(0,0,0);
@@ -230,17 +374,11 @@ const points = [
         element: document.querySelector('.point-3')
     }
 ]
-
-const dirlight = new THREE.DirectionalLight( 0xFFF7A0, 1, 1000 );
-dirlight.position.set( 0, 10, 0 ); //default; light shining from top
-dirlight.castShadow = true; // default false
-scene.add( dirlight );
-
 // const light = new THREE.AmbientLight(0xFFF7A0)
 // scene.add(light)
 
 
-const helper = new THREE.CameraHelper( dirlight.shadow.camera );
+const helper = new THREE.CameraHelper( directionalLight.shadow.camera );
 scene.add( helper );
 
 /**
