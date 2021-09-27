@@ -4,6 +4,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import {gsap} from "gsap/gsap-core";
+import {waitFor} from "@babel/core/lib/gensync-utils/async";
 
 /**
  * Base
@@ -85,8 +87,32 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     //     -(textGeometry.boundingBox.max.z -.03) * .5
     // )
     text2Geometry.center()
-    text2.position.set(-15, .25, 60) //.22
+    text2.position.set(-15, 0, 60) //.22
+    text2.rotation.x = -Math.PI * .5
     scene.add(text2)
+
+    const textInGeometry = new THREE.TextGeometry('5', {
+        font: font,
+        size: .5,
+        height: .1,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textIn = new THREE.Mesh(textInGeometry, textMaterial)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    textInGeometry.center()
+    textIn.position.set(-15, 0, 61) //.22
+    textIn.rotation.x = -Math.PI * .5
+    scene.add(textIn)
 
     const text3Geometry = new THREE.TextGeometry('In Progress', {
         font: font,
@@ -100,15 +126,27 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
         bevelSegments: 5
     })
     const text3 = new THREE.Mesh(text3Geometry, textMaterial)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
     text3Geometry.center()
-    text3.position.set(-10, .25, 60) //.22
+    text3.position.set(-10, 0, 60) //.22
+    text3.rotation.x = -Math.PI * .5
     scene.add(text3)
+
+    const textProGeometry = new THREE.TextGeometry('2', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textPro = new THREE.Mesh(textProGeometry, textMaterial)
+    textProGeometry.center()
+    textPro.position.set(-10, 0, 61) //.22
+    textPro.rotation.x = -Math.PI * .5
+    scene.add(textPro)
 
     const text4Geometry = new THREE.TextGeometry('Closed', {
         font: font,
@@ -122,15 +160,27 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
         bevelSegments: 5
     })
     const text4 = new THREE.Mesh(text4Geometry, textMaterial)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
     text4Geometry.center()
-    text4.position.set(-5, .25, 60) //.22
+    text4.position.set(-5, 0, 60) //.22
+    text4.rotation.x = -Math.PI * .5
     scene.add(text4)
+
+    const textcloGeometry = new THREE.TextGeometry('2', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textclo = new THREE.Mesh(textcloGeometry, textMaterial)
+    textcloGeometry.center()
+    textclo.position.set(-5, 0, 61) //.22
+    textclo.rotation.x = -Math.PI * .5
+    scene.add(textclo)
 
     const text5Geometry = new THREE.TextGeometry('COMMERCIAL', {
         font: font,
@@ -148,6 +198,241 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text5.position.set(-42, .55, 17) //.22
     text5.rotation.y = Math.PI * .5
     scene.add(text5)
+
+    const textComInGeometry = new THREE.TextGeometry('Income', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComInc = new THREE.Mesh(textComInGeometry, textMaterial)
+    textComInGeometry.center()
+    textComInc.position.set(-45, 12.5, 16.5) //.22
+    textComInc.rotation.x = Math.PI * .25
+    textComInc.rotation.y = -Math.PI
+    scene.add(textComInc)
+
+    const textComInValGeometry = new THREE.TextGeometry('2', {
+        font: font,
+        size: .35,
+        height: .1,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComIncVal = new THREE.Mesh(textComInValGeometry, textMaterial)
+    textComInValGeometry.center()
+    textComIncVal.position.set(-45, 12.5, 15.5) //.22
+    textComIncVal.rotation.x = Math.PI * .25
+    textComIncVal.rotation.y = -Math.PI
+    scene.add(textComIncVal)
+
+    const textComProGeometry = new THREE.TextGeometry('In Progress', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComPro = new THREE.Mesh(textComProGeometry, textMaterial)
+    textComProGeometry.center()
+    textComPro.position.set(-46, 13.3, 13) //.22
+    textComPro.rotation.x = Math.PI * .25
+    textComPro.rotation.y = -Math.PI
+    scene.add(textComPro)
+
+    const textComProValGeometry = new THREE.TextGeometry('1', {
+        font: font,
+        size: .4,
+        height: .1,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComProVal = new THREE.Mesh(textComProValGeometry, textMaterial)
+    textComProValGeometry.center()
+    textComProVal.position.set(-45, 13.3, 12) //.22
+    textComProVal.rotation.x = Math.PI * .25
+    textComProVal.rotation.y = -Math.PI
+    scene.add(textComProVal)
+
+    const textComCloGeometry = new THREE.TextGeometry('Closed', {
+        font: font,
+        size: .5,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComClo = new THREE.Mesh(textComCloGeometry, textMaterial)
+    textComCloGeometry.center()
+    textComClo.position.set(-44.5, 18.8, 8) //.22
+    textComClo.rotation.x = Math.PI * .5
+    textComClo.rotation.y = -Math.PI
+    scene.add(textComClo)
+
+    const textComCloValGeometry = new THREE.TextGeometry('3', {
+        font: font,
+        size: .4,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textComCloVal = new THREE.Mesh(textComCloValGeometry, textMaterial)
+    textComCloValGeometry.center()
+    textComCloVal.position.set(-44.5, 18.8, 7) //.22
+    textComCloVal.rotation.x = Math.PI * .5
+    textComCloVal.rotation.y = -Math.PI
+    scene.add(textComCloVal)
+
+    const textResGeometry = new THREE.TextGeometry('RESIDENTIAL', {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textRes = new THREE.Mesh(textResGeometry, textMaterial)
+    textResGeometry.center()
+    textRes.position.set(-35, 0, -19.5) //.22
+    textRes.rotation.x = Math.PI * .5
+    textRes.rotation.y = Math.PI
+    // textRes.rotation.z = Math.PI
+    scene.add(textRes)
+
+    const textResIncGeometry = new THREE.TextGeometry('Income', {
+        font: font,
+        size: .5,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResInc = new THREE.Mesh(textResIncGeometry, textMaterial)
+    textResIncGeometry.center()
+    textResInc.position.set(-39.9, 10, -16) //.22
+    // textResInc.rotation.x = -Math.PI
+    textResInc.rotation.y = -Math.PI * 0.5
+    scene.add(textResInc)
+
+    const textResIncValGeometry = new THREE.TextGeometry('5', {
+        font: font,
+        size: .4,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResIncVal = new THREE.Mesh(textResIncValGeometry, textMaterial)
+    textResIncValGeometry.center()
+    textResIncVal.position.set(-39.9, 9, -16) //.22
+    // textResIncVal.rotation.x = - Math.PI
+    textResIncVal.rotation.y = -Math.PI * 0.5
+    scene.add(textResIncVal)
+
+    const textResProGeometry = new THREE.TextGeometry('In Progress', {
+        font: font,
+        size: .5,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResPro = new THREE.Mesh(textResProGeometry, textMaterial)
+    textResProGeometry.center()
+    textResPro.position.set(-39.9, 10, -10) //.22
+    // textResInc.rotation.x = -Math.PI
+    textResPro.rotation.y = -Math.PI * 0.5
+    scene.add(textResPro)
+
+    const textResProValGeometry = new THREE.TextGeometry('2', {
+        font: font,
+        size: .4,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResProVal = new THREE.Mesh(textResProValGeometry, textMaterial)
+    textResProValGeometry.center()
+    textResProVal.position.set(-39.8, 9, -10) //.22
+    // textResIncVal.rotation.x = - Math.PI
+    textResProVal.rotation.y = -Math.PI * 0.5
+    scene.add(textResProVal)
+
+    const textResCloGeometry = new THREE.TextGeometry('Closed', {
+        font: font,
+        size: .5,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResClo = new THREE.Mesh(textResCloGeometry, textMaterial)
+    textResCloGeometry.center()
+    textResClo.position.set(-39.7, 9, -4) //.22
+    // textResInc.rotation.x = -Math.PI
+    textResClo.rotation.y = -Math.PI * 0.5
+    scene.add(textResClo)
+
+    const textResCloValGeometry = new THREE.TextGeometry('4', {
+        font: font,
+        size: .4,
+        height: .01,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .01,
+        bevelSize: .01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textResCloVal = new THREE.Mesh(textResCloValGeometry, textMaterial)
+    textResCloValGeometry.center()
+    textResCloVal.position.set(-39.6, 8, -4) //.22
+    // textResIncVal.rotation.x = - Math.PI
+    textResCloVal.rotation.y = -Math.PI * 0.5
+    scene.add(textResCloVal)
 })
 
 /**
@@ -227,15 +512,418 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -6
-camera.position.y = 5
-camera.position.z = 3
-camera.lookAt(0,0,0)
+camera.position.x = -11
+camera.position.y = 4
+camera.position.z = -10
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
+controls.target = new THREE.Vector3(-11,4,-12)
+
+let anim1 = gsap.to( camera.position, {
+    duration: 5,
+    x: -11,
+    y: 4,
+    z: -7,
+    onStart: () => {
+        gsap.to( controls.target, {
+            duration: 10,
+            x: -15,
+            y: 3,
+            z: -7,
+        })
+    },
+    onComplete: () => {
+        return true
+
+    }
+})
+anim1.pause()
+anim1.play()
+
+let anim2 = gsap.to( camera.position, {
+    duration: 10,
+    x: -11,
+    y: 1,
+    z: -6,
+    onComplete: () => {
+        gsap.to(controls.target, {
+            duration: 1,
+            x: camera.position.x -1,
+            y: camera.position.y,
+            z: camera.position.z,
+        })
+    }
+})
+anim2.pause()
+anim2.play()
+
+let anim3 = gsap.to( controls.target, {
+    delay: 15,
+    duration: 5,
+    x: camera.position.x,
+    y: 1,
+    z: 3,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 3,
+            x: camera.position.x,
+            y: camera.position.y,
+            z: 0,
+        })
+    }
+})
+anim3.pause()
+anim3.play()
+
+let anim4 = gsap.to( controls.target, {
+    delay: 23,
+    duration: 5,
+    x: -40,
+    y: 1,
+    z: 0,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -20,
+            y: 1,
+            z: 0,
+        })
+    }
+})
+anim4.pause()
+anim4.play()
+
+let anim5 = gsap.to( controls.target, {
+    delay: 31,
+    duration: 5,
+    x: -20,
+    y: 1,
+    z: 40,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -20,
+            y: 1,
+            z: 36,
+        })
+    }
+})
+anim5.pause()
+anim5.play()
+
+let anim6 = gsap.to( controls.target, {
+    delay: 40,
+    duration: 5,
+    x: -40,
+    y: 1,
+    z: 36,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -32,
+            y: 1,
+            z: 36,
+        })
+    }
+})
+anim6.pause()
+anim6.play()
+
+let anim7 = gsap.to( controls.target, {
+    delay: 49,
+    duration: 5,
+    x: -32,
+    y: 1,
+    z: 66,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -32,
+            y: 1,
+            z: 56,
+        })
+    }
+})
+anim7.pause()
+anim7.play()
+
+let anim8 = gsap.to( controls.target, {
+    delay: 58,
+    duration: 5,
+    x: -10,
+    y: 1,
+    z: 55,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -10,
+            y: 2,
+            z: 70,
+        })
+    }
+})
+anim8.pause()
+anim8.play()
+
+let anim9 = gsap.to( controls.target, {
+    delay: 67,
+    duration: 10,
+    x: -10,
+    y: 1,
+    z: 60,
+    onStart: () => {
+        gsap.to(camera.position, {
+            duration: 10,
+            x: -10,
+            y: 15,
+            z: 70,
+        })
+    }
+})
+anim9.pause()
+anim9.play()
+
+let anim10 = gsap.to( controls.target, {
+    delay: 78,
+    duration: 10,
+    x: -20,
+    y: 1,
+    z: 36,
+    onStart: () => {
+        gsap.to(camera.position, {
+            duration: 10,
+            x: 5,
+            y: 1,
+            z: 36,
+        })
+    }
+})
+anim10.pause()
+anim10.play()
+
+let anim11 = gsap.to( controls.target, {
+    delay: 87,
+    duration: 10,
+    x: -100,
+    y: 1,
+    z: 36,
+    onStart: () => {
+        gsap.to(camera.position, {
+            duration: 10,
+            x: -51.5,
+            y: 1,
+            z: 36,
+        })
+    }
+})
+anim11.pause()
+anim11.play()
+
+let anim12 = gsap.to( controls.target, {
+    delay: 96,
+    duration: 5,
+    x: -51.5,
+    y: 1,
+    z: -80,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -51.5,
+            y: 1,
+            z: 0,
+        })
+    }
+})
+anim12.pause()
+anim12.play()
+
+let anim13 = gsap.to( controls.target, {
+    delay: 114,
+    duration: 5,
+    x: -71.5,
+    y: 1,
+    z: 100,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -71.5,
+            y: 1,
+            z: 20,
+        })
+    }
+})
+anim13.pause()
+anim13.play()
+
+let anim14 = gsap.to( controls.target, {
+    delay: 105,
+    duration: 5,
+    x: -100,
+    y: 1,
+    z: 0,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -71.5,
+            y: 1,
+            z: 0,
+        })
+    }
+})
+anim14.pause()
+anim14.play()
+
+let anim15 = gsap.to( controls.target, {
+    delay: 124,
+    duration:5,
+    x: -42,
+    y: 1,
+    z: 17,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -36,
+            y: 1,
+            z: 17,
+        })
+    }
+})
+anim15.pause()
+anim15.play()
+
+let anim16 = gsap.to( controls.target, {
+    delay: 136,
+    duration: 5,
+    x: -45,
+    y: 15,
+    z: 10,
+    onStart: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -45,
+            y: 25,
+            z: 3,
+            onComplete: () =>{
+                gsap.to(camera.position, {
+                    duration:2,
+                    x: -45,
+                    y: 25,
+                    z: 5,
+                })
+            }
+        })
+    }
+})
+anim16.pause()
+anim16.play()
+
+let anim17 = gsap.to( controls.target, {
+    delay: 150,
+    duration: 5,
+    x: 0,
+    y: 1,
+    z: 0,
+    onStart: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -45,
+            y: 25,
+            z: 0,
+            onComplete: () =>{
+                gsap.to(camera.position, {
+                    duration:2,
+                    x: -45,
+                    y: 1,
+                    z: 0,
+                })
+            }
+        })
+    }
+})
+anim17.pause()
+anim17.play()
+
+let anim18 = gsap.to( camera.position, {
+    delay: 159,
+    duration:5,
+    x: -20,
+    y: 1,
+    z: 0,
+})
+anim18.pause()
+anim18.play()
+
+let anim19 = gsap.to( controls.target, {
+    delay: 163,
+    duration: 5,
+    x: -20,
+    y: 1,
+    z: -50,
+})
+anim19.pause()
+anim19.play()
+
+let anim19_pos = gsap.to( camera.position, {
+    delay: 166,
+    duration:5,
+    x: -20,
+    y: 1,
+    z: -20,
+})
+anim19_pos.pause()
+anim19_pos.play()
+
+let anim20 = gsap.to( controls.target, {
+    delay: 170,
+    duration: 5,
+    x: -35,
+    y: 1,
+    z: -20.5,
+})
+anim20.pause()
+anim20.play()
+
+let anim20_pos = gsap.to( camera.position, {
+    delay: 176,
+    duration:5,
+    x: -35,
+    y: 10,
+    z: -21,
+})
+anim20_pos.pause()
+anim20_pos.play()
+
+let anim21 = gsap.to( controls.target, {
+    delay: 180,
+    duration: 5,
+    x: -35,
+    y: 1,
+    z: -9.9,
+})
+anim21.pause()
+anim21.play()
+
+let anim21_pos = gsap.to( camera.position, {
+    delay: 180,
+    duration:5,
+    x: -35,
+    y: 15,
+    z: -10,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -50,
+            y: 17,
+            z: -10,
+        })
+    }
+})
+anim21_pos.pause()
+anim21_pos.play()
 
 // window.addEventListener('click', () => {
 //     console.log('clicked')
@@ -281,10 +969,10 @@ directionalLight.target.position.set(-200,0,10)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.width = 1024*8;
 directionalLight.shadow.mapSize.height = 1024*8;
- directionalLight.shadow.camera.left = - 64
- directionalLight.shadow.camera.top = 64
- directionalLight.shadow.camera.right = 64
- directionalLight.shadow.camera.bottom = - 64
+directionalLight.shadow.camera.left = - 64
+directionalLight.shadow.camera.top = 64
+directionalLight.shadow.camera.right = 64
+directionalLight.shadow.camera.bottom = - 64
 scene.add(directionalLight)
 
 
