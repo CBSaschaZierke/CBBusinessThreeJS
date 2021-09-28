@@ -72,3 +72,20 @@ body
     transition: opacity 0.3s;
     pointer-events: none;
 }
+
+.video-1{
+    position: absolute;
+    top: 120px;
+    left: 160px;
+    height: 600px;
+    width: 1400px;
+    opacity: 0;
+
+    transform: scale(0,0);
+    transition: transform .1s;
+}
+
+.video-1.visible{
+    opacity: 1;
+    transform: scale(1,1);
+}

@@ -5,7 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import {gsap} from "gsap/gsap-core";
-import {waitFor} from "@babel/core/lib/gensync-utils/async";
 
 /**
  * Base
@@ -523,64 +522,65 @@ controls.enableDamping = true
 
 controls.target = new THREE.Vector3(-11,4,-12)
 
+let animArray = []
+
 let anim1 = gsap.to( camera.position, {
-    duration: 5,
+    // duration: 5,
     x: -11,
     y: 4,
     z: -7,
-    onStart: () => {
+    onComplete: () => {
         gsap.to( controls.target, {
             duration: 10,
             x: -15,
             y: 3,
             z: -7,
         })
-    },
-    onComplete: () => {
-        return true
-
     }
 })
 anim1.pause()
+animArray.push(anim1)
 anim1.play()
 
 let anim2 = gsap.to( camera.position, {
-    duration: 10,
+    // delay: 15,
+    duration: 5,
     x: -11,
     y: 1,
     z: -6,
     onComplete: () => {
         gsap.to(controls.target, {
             duration: 1,
-            x: camera.position.x -1,
-            y: camera.position.y,
-            z: camera.position.z,
+            x: -12,
+            y: 1,
+            z: -6,
         })
     }
 })
 anim2.pause()
-anim2.play()
+animArray.push(anim2)
+
 
 let anim3 = gsap.to( controls.target, {
-    delay: 15,
+    // delay: 20,
     duration: 5,
-    x: camera.position.x,
+    x: -12,
     y: 1,
     z: 3,
     onComplete: () => {
         gsap.to(camera.position, {
             duration: 3,
-            x: camera.position.x,
-            y: camera.position.y,
+            x: -12,
+            y: 1,
             z: 0,
         })
     }
 })
 anim3.pause()
-anim3.play()
+animArray.push(anim3)
 
 let anim4 = gsap.to( controls.target, {
-    delay: 23,
+    // delay: 23,
     duration: 5,
     x: -40,
     y: 1,
@@ -595,10 +595,10 @@ let anim4 = gsap.to( controls.target, {
     }
 })
 anim4.pause()
-anim4.play()
+animArray.push(anim4)
 
 let anim5 = gsap.to( controls.target, {
-    delay: 31,
+    // delay: 31,
     duration: 5,
     x: -20,
     y: 1,
@@ -613,10 +613,10 @@ let anim5 = gsap.to( controls.target, {
     }
 })
 anim5.pause()
-anim5.play()
+animArray.push(anim5)
 
 let anim6 = gsap.to( controls.target, {
-    delay: 40,
+    // delay: 40,
     duration: 5,
     x: -40,
     y: 1,
@@ -631,10 +631,10 @@ let anim6 = gsap.to( controls.target, {
     }
 })
 anim6.pause()
-anim6.play()
+animArray.push(anim6)
 
 let anim7 = gsap.to( controls.target, {
-    delay: 49,
+    // delay: 49,
     duration: 5,
     x: -32,
     y: 1,
@@ -649,10 +649,10 @@ let anim7 = gsap.to( controls.target, {
     }
 })
 anim7.pause()
-anim7.play()
+animArray.push(anim7)
 
 let anim8 = gsap.to( controls.target, {
-    delay: 58,
+    // delay: 58,
     duration: 5,
     x: -10,
     y: 1,
@@ -667,10 +667,10 @@ let anim8 = gsap.to( controls.target, {
     }
 })
 anim8.pause()
-anim8.play()
+animArray.push(anim8)
 
 let anim9 = gsap.to( controls.target, {
-    delay: 67,
+    // delay: 67,
     duration: 10,
     x: -10,
     y: 1,
@@ -685,10 +685,10 @@ let anim9 = gsap.to( controls.target, {
     }
 })
 anim9.pause()
-anim9.play()
+animArray.push(anim9)
 
 let anim10 = gsap.to( controls.target, {
-    delay: 78,
+    // delay: 78,
     duration: 10,
     x: -20,
     y: 1,
@@ -703,10 +703,10 @@ let anim10 = gsap.to( controls.target, {
     }
 })
 anim10.pause()
-anim10.play()
+animArray.push(anim10)
 
 let anim11 = gsap.to( controls.target, {
-    delay: 87,
+    // delay: 87,
     duration: 10,
     x: -100,
     y: 1,
@@ -721,10 +721,10 @@ let anim11 = gsap.to( controls.target, {
     }
 })
 anim11.pause()
-anim11.play()
+animArray.push(anim11)
 
 let anim12 = gsap.to( controls.target, {
-    delay: 96,
+    // delay: 96,
     duration: 5,
     x: -51.5,
     y: 1,
@@ -739,28 +739,10 @@ let anim12 = gsap.to( controls.target, {
     }
 })
 anim12.pause()
-anim12.play()
+animArray.push(anim12)
 
 let anim13 = gsap.to( controls.target, {
-    delay: 114,
-    duration: 5,
-    x: -71.5,
-    y: 1,
-    z: 100,
-    onComplete: () => {
-        gsap.to(camera.position, {
-            duration: 5,
-            x: -71.5,
-            y: 1,
-            z: 20,
-        })
-    }
-})
-anim13.pause()
-anim13.play()
-
-let anim14 = gsap.to( controls.target, {
-    delay: 105,
+    // delay: 105,
     duration: 5,
     x: -100,
     y: 1,
@@ -774,11 +756,29 @@ let anim14 = gsap.to( controls.target, {
         })
     }
 })
+anim13.pause()
+animArray.push(anim13)
+
+let anim14 = gsap.to( controls.target, {
+    // delay: 114,
+    duration: 5,
+    x: -71.5,
+    y: 1,
+    z: 100,
+    onComplete: () => {
+        gsap.to(camera.position, {
+            duration: 5,
+            x: -71.5,
+            y: 1,
+            z: 20,
+        })
+    }
+})
 anim14.pause()
-anim14.play()
+animArray.push(anim14)
 
 let anim15 = gsap.to( controls.target, {
-    delay: 124,
+    // delay: 124,
     duration:5,
     x: -42,
     y: 1,
@@ -793,10 +793,10 @@ let anim15 = gsap.to( controls.target, {
     }
 })
 anim15.pause()
-anim15.play()
+animArray.push(anim15)
 
 let anim16 = gsap.to( controls.target, {
-    delay: 136,
+    // delay: 136,
     duration: 5,
     x: -45,
     y: 15,
@@ -819,10 +819,10 @@ let anim16 = gsap.to( controls.target, {
     }
 })
 anim16.pause()
-anim16.play()
+animArray.push(anim16)
 
 let anim17 = gsap.to( controls.target, {
-    delay: 150,
+    // delay: 150,
     duration: 5,
     x: 0,
     y: 1,
@@ -845,70 +845,70 @@ let anim17 = gsap.to( controls.target, {
     }
 })
 anim17.pause()
-anim17.play()
+animArray.push(anim17)
 
 let anim18 = gsap.to( camera.position, {
-    delay: 159,
+    // delay: 159,
     duration:5,
     x: -20,
     y: 1,
     z: 0,
 })
 anim18.pause()
-anim18.play()
+animArray.push(anim18)
 
 let anim19 = gsap.to( controls.target, {
-    delay: 163,
+    // delay: 163,
     duration: 5,
     x: -20,
     y: 1,
     z: -50,
 })
 anim19.pause()
-anim19.play()
+animArray.push(anim19)
 
 let anim19_pos = gsap.to( camera.position, {
-    delay: 166,
+    // delay: 166,
     duration:5,
     x: -20,
     y: 1,
     z: -20,
 })
 anim19_pos.pause()
-anim19_pos.play()
+animArray.push(anim19_pos)
 
 let anim20 = gsap.to( controls.target, {
-    delay: 170,
+    // delay: 170,
     duration: 5,
     x: -35,
     y: 1,
     z: -20.5,
 })
 anim20.pause()
-anim20.play()
+animArray.push(anim20)
 
 let anim20_pos = gsap.to( camera.position, {
-    delay: 176,
+    // delay: 176,
     duration:5,
     x: -35,
     y: 10,
     z: -21,
 })
 anim20_pos.pause()
-anim20_pos.play()
+animArray.push(anim20_pos)
 
 let anim21 = gsap.to( controls.target, {
-    delay: 180,
+    // delay: 180,
     duration: 5,
     x: -35,
     y: 1,
     z: -9.9,
 })
 anim21.pause()
-anim21.play()
+animArray.push(anim21)
 
 let anim21_pos = gsap.to( camera.position, {
-    delay: 180,
+    // delay: 180,
     duration:5,
     x: -35,
     y: 15,
@@ -923,7 +923,25 @@ let anim21_pos = gsap.to( camera.position, {
     }
 })
 anim21_pos.pause()
-anim21_pos.play()
+animArray.push(anim21_pos)
+
+let anim22_pos = gsap.to( camera.position, {
+    // delay: 176,
+    duration:5,
+    x: -11,
+    y: 4,
+    z: -10,
+    onStart: () => {
+        gsap.to(controls.target,{
+            duration: 5,
+            x: -11,
+            y: 4,
+            z: -12,
+        })
+    }
+})
+anim22_pos.pause()
+animArray.push(anim22_pos)
 
 // window.addEventListener('click', () => {
 //     console.log('clicked')
@@ -1043,6 +1061,8 @@ window.addEventListener('keydown', (e) => {
     }
 })
 
+const vidraycaster = new THREE.Raycaster()
+
 // Points of Interes
 const points = [
     {
@@ -1060,6 +1080,13 @@ const points = [
     {
         position: new THREE.Vector3(8, .3, -6),
         element: document.querySelector('.point-3')
+    }
+]
+
+const videos = [
+    {
+        position: new THREE.Vector3(-15,2.5,-7.2),
+        element: document.querySelector('.video-1')
     }
 ]
 // const light = new THREE.AmbientLight(0xFFF7A0)
@@ -1083,12 +1110,56 @@ const tick = () =>
     // Update controls
     controls.update()
 
-    for(const point of points){
+    // for(const point of points){
+    //     const screenPosition = point.position.clone()
+    //     screenPosition.project(camera)
+    //
+    //     const translateX = screenPosition.x * sizes.width *.5
+    //     const translateY = -screenPosition.y * sizes.height *.5
+    //     point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+    // }
+
+    // Go through each point
+    for(const point of videos)
+    {
+        // Get 2D screen position
         const screenPosition = point.position.clone()
         screenPosition.project(camera)
 
-        const translateX = screenPosition.x * sizes.width *.5
-        const translateY = -screenPosition.y * sizes.height *.5
+        // // Set the raycaster
+        // vidraycaster.setFromCamera(screenPosition, camera)
+        // const intersects = vidraycaster.intersectObjects(scene.children, true)
+        //
+        // // No intersect found
+        // if(intersects.length === 0)
+        // {
+        //     // Show
+        //     point.element.classList.add('visible')
+        // }
+        //
+        // // Intersect found
+        // else
+        // {
+        //     // Get the distance of the intersection and the distance of the point
+        //     const intersectionDistance = intersects[0].distance
+        //     const pointDistance = point.position.distanceTo(camera.position)
+        //
+        //     // Intersection is close than the point
+        //     if(intersectionDistance < pointDistance)
+        //     {
+        //         // Hide
+        //         point.element.classList.remove('visible')
+        //     }
+        //     // Intersection is further than the point
+        //     else
+        //     {
+        //         // Show
+        //         point.element.classList.add('visible')
+        //     }
+        // }
+
+        const translateX = screenPosition.x * sizes.width * 0.1
+        const translateY = - screenPosition.y * sizes.height * 0.1
         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
     }
 
@@ -1125,3 +1196,22 @@ const tick = () =>
 }
 
 tick()
+
+let cameraAnimIndex = 0
+function cameraAnimation(){
+    if(cameraAnimIndex >= animArray.length){
+        cameraAnimIndex = 0
+    }
+    for(let i=0; i<animArray.length;i++){
+        animArray[i].pause()
+    }
+    if(cameraAnimIndex !== 1){
+        videos[0].element.classList.remove('visible')
+    }else{
+        videos[0].element.classList.add('visible')
+    }
+    animArray[cameraAnimIndex].restart()
+    cameraAnimIndex++
+    setTimeout(cameraAnimation, 10000)
+}
+cameraAnimation()
