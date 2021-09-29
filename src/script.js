@@ -39,12 +39,33 @@ gltfLoader.setDRACOLoader(dracoLoader)
 const fontLoader = new THREE.FontLoader()
 
 
+const textIncome = 'Income'
+const textInProgess = 'In Progress'
+const textClosed = 'Closed'
+
+const textHealthCare = 'HEALTH CARE'
+const textCommercial = 'COMMERCIAL'
+const textResidential = 'RESIDENTIAL'
+
+let textHCIncVal = '3'
+let textHCProVal = '2'
+let textHCCloVal = '1'
+
+let textCOIncVal = '7'
+let textCOProVal = '6'
+let textCOCloVal = '5'
+
+let textREIncVal = '5'
+let textREProVal = '4'
+let textRECloVal = '3'
+
+
 /**
  * Fonts
  */
 const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture})
 fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
-    const textGeometry = new THREE.TextGeometry('Health Care', {
+    const textGeometry = new THREE.TextGeometry(textHealthCare, {
         font: font,
         size: 1,
         height: .2,
@@ -64,10 +85,11 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     //     -(textGeometry.boundingBox.max.z -.03) * .5
     // )
     textGeometry.center()
+    textGeometry.text = 'test'
     text.position.set(-10, .55, 55) //.22
     scene.add(text)
 
-    const text2Geometry = new THREE.TextGeometry('Income', {
+    const text2Geometry = new THREE.TextGeometry(textIncome, {
         font: font,
         size: .5,
         height: .2,
@@ -90,7 +112,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text2.rotation.x = -Math.PI * .5
     scene.add(text2)
 
-    const textInGeometry = new THREE.TextGeometry('5', {
+    const textInGeometry = new THREE.TextGeometry(textHCIncVal, {
         font: font,
         size: .5,
         height: .1,
@@ -113,7 +135,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textIn.rotation.x = -Math.PI * .5
     scene.add(textIn)
 
-    const text3Geometry = new THREE.TextGeometry('In Progress', {
+    const text3Geometry = new THREE.TextGeometry(textInProgess, {
         font: font,
         size: .5,
         height: .2,
@@ -130,7 +152,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text3.rotation.x = -Math.PI * .5
     scene.add(text3)
 
-    const textProGeometry = new THREE.TextGeometry('2', {
+    const textProGeometry = new THREE.TextGeometry(textHCProVal, {
         font: font,
         size: .5,
         height: .2,
@@ -147,7 +169,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textPro.rotation.x = -Math.PI * .5
     scene.add(textPro)
 
-    const text4Geometry = new THREE.TextGeometry('Closed', {
+    const text4Geometry = new THREE.TextGeometry(textClosed, {
         font: font,
         size: .5,
         height: .2,
@@ -164,7 +186,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text4.rotation.x = -Math.PI * .5
     scene.add(text4)
 
-    const textcloGeometry = new THREE.TextGeometry('2', {
+    const textcloGeometry = new THREE.TextGeometry(textHCCloVal, {
         font: font,
         size: .5,
         height: .2,
@@ -181,7 +203,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textclo.rotation.x = -Math.PI * .5
     scene.add(textclo)
 
-    const text5Geometry = new THREE.TextGeometry('COMMERCIAL', {
+    const text5Geometry = new THREE.TextGeometry(textCommercial, {
         font: font,
         size: 1,
         height: .2,
@@ -198,7 +220,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text5.rotation.y = Math.PI * .5
     scene.add(text5)
 
-    const textComInGeometry = new THREE.TextGeometry('Income', {
+    const textComInGeometry = new THREE.TextGeometry(textIncome, {
         font: font,
         size: .5,
         height: .2,
@@ -216,7 +238,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComInc.rotation.y = -Math.PI
     scene.add(textComInc)
 
-    const textComInValGeometry = new THREE.TextGeometry('2', {
+    const textComInValGeometry = new THREE.TextGeometry(textCOIncVal, {
         font: font,
         size: .35,
         height: .1,
@@ -234,7 +256,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComIncVal.rotation.y = -Math.PI
     scene.add(textComIncVal)
 
-    const textComProGeometry = new THREE.TextGeometry('In Progress', {
+    const textComProGeometry = new THREE.TextGeometry(textInProgess, {
         font: font,
         size: .5,
         height: .2,
@@ -252,7 +274,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComPro.rotation.y = -Math.PI
     scene.add(textComPro)
 
-    const textComProValGeometry = new THREE.TextGeometry('1', {
+    const textComProValGeometry = new THREE.TextGeometry(textCOProVal, {
         font: font,
         size: .4,
         height: .1,
@@ -270,7 +292,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComProVal.rotation.y = -Math.PI
     scene.add(textComProVal)
 
-    const textComCloGeometry = new THREE.TextGeometry('Closed', {
+    const textComCloGeometry = new THREE.TextGeometry(textClosed, {
         font: font,
         size: .5,
         height: .01,
@@ -288,7 +310,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComClo.rotation.y = -Math.PI
     scene.add(textComClo)
 
-    const textComCloValGeometry = new THREE.TextGeometry('3', {
+    const textComCloValGeometry = new THREE.TextGeometry(textCOCloVal, {
         font: font,
         size: .4,
         height: .01,
@@ -306,7 +328,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textComCloVal.rotation.y = -Math.PI
     scene.add(textComCloVal)
 
-    const textResGeometry = new THREE.TextGeometry('RESIDENTIAL', {
+    const textResGeometry = new THREE.TextGeometry(textResidential, {
         font: font,
         size: .5,
         height: .2,
@@ -325,7 +347,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     // textRes.rotation.z = Math.PI
     scene.add(textRes)
 
-    const textResIncGeometry = new THREE.TextGeometry('Income', {
+    const textResIncGeometry = new THREE.TextGeometry(textIncome, {
         font: font,
         size: .5,
         height: .01,
@@ -343,7 +365,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textResInc.rotation.y = -Math.PI * 0.5
     scene.add(textResInc)
 
-    const textResIncValGeometry = new THREE.TextGeometry('5', {
+    const textResIncValGeometry = new THREE.TextGeometry(textREIncVal, {
         font: font,
         size: .4,
         height: .01,
@@ -361,7 +383,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textResIncVal.rotation.y = -Math.PI * 0.5
     scene.add(textResIncVal)
 
-    const textResProGeometry = new THREE.TextGeometry('In Progress', {
+    const textResProGeometry = new THREE.TextGeometry(textInProgess, {
         font: font,
         size: .5,
         height: .01,
@@ -379,7 +401,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textResPro.rotation.y = -Math.PI * 0.5
     scene.add(textResPro)
 
-    const textResProValGeometry = new THREE.TextGeometry('2', {
+    const textResProValGeometry = new THREE.TextGeometry(textREProVal, {
         font: font,
         size: .4,
         height: .01,
@@ -397,7 +419,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textResProVal.rotation.y = -Math.PI * 0.5
     scene.add(textResProVal)
 
-    const textResCloGeometry = new THREE.TextGeometry('Closed', {
+    const textResCloGeometry = new THREE.TextGeometry(textClosed, {
         font: font,
         size: .5,
         height: .01,
@@ -415,7 +437,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textResClo.rotation.y = -Math.PI * 0.5
     scene.add(textResClo)
 
-    const textResCloValGeometry = new THREE.TextGeometry('4', {
+    const textResCloValGeometry = new THREE.TextGeometry(textRECloVal, {
         font: font,
         size: .4,
         height: .01,
