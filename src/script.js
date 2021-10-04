@@ -1107,7 +1107,7 @@ const points = [
 
 const videos = [
     {
-        position: new THREE.Vector3(-15,2.5,-7.2),
+        position: new THREE.Vector3(-15,2.5,-7.5),
         element: document.querySelector('.video-1')
     }
 ]
@@ -1149,40 +1149,46 @@ const tick = () =>
         screenPosition.project(camera)
 
         // // Set the raycaster
-        // vidraycaster.setFromCamera(screenPosition, camera)
-        // const intersects = vidraycaster.intersectObjects(scene.children, true)
-        //
-        // // No intersect found
-        // if(intersects.length === 0)
-        // {
-        //     // Show
-        //     point.element.classList.add('visible')
-        // }
-        //
-        // // Intersect found
-        // else
-        // {
-        //     // Get the distance of the intersection and the distance of the point
-        //     const intersectionDistance = intersects[0].distance
-        //     const pointDistance = point.position.distanceTo(camera.position)
-        //
-        //     // Intersection is close than the point
-        //     if(intersectionDistance < pointDistance)
-        //     {
-        //         // Hide
-        //         point.element.classList.remove('visible')
-        //     }
-        //     // Intersection is further than the point
-        //     else
-        //     {
-        //         // Show
-        //         point.element.classList.add('visible')
-        //     }
-        // }
+        vidraycaster.setFromCamera(screenPosition, camera)
+        const intersects = vidraycaster.intersectObjects(scene.children, true)
 
-        const translateX = screenPosition.x * sizes.width * 0.1
-        const translateY = - screenPosition.y * sizes.height * 0.1
-        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        if(intersects.length === 0)
+        {
+            // Show
+            point.element.classList.add('visible')
+        }
+
+        // Intersect found
+        else
+        {
+            // Get the distance of the intersection and the distance of the point
+            const intersectionDistance = intersects[0].distance
+            const pointDistance = point.position.distanceTo(camera.position)
+
+            // Intersection is close than the point
+            if(intersectionDistance === 0)
+            {
+                // Hide
+                point.element.classList.add('visible')
+            }
+            // Intersection is further than the point
+            else
+            {
+                const intersectDistance = intersects[0].distance
+                const vidDistance = point.position.distanceTo(camera.position)
+
+                if(intersectionDistance < pointDistance){
+                    point.element.classList.remove('visible')
+                }else {
+                    point.element.classList.add('visible')
+                }
+
+            }
+        }
+
+        const translateX = screenPosition.x * sizes.width * .5
+        const translateY = - screenPosition.y * sizes.height * .5
+        point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
     }
 
     // Render
@@ -1227,11 +1233,11 @@ function cameraAnimation(){
     for(let i=0; i<animArray.length;i++){
         animArray[i].pause()
     }
-    if(cameraAnimIndex !== 1){
-        videos[0].element.classList.remove('visible')
-    }else{
-        videos[0].element.classList.add('visible')
-    }
+    // if(cameraAnimIndex !== 1){
+    //     videos[0].element.classList.remove('visible')
+    // }else{
+    //     videos[0].element.classList.add('visible')
+    // }
     animArray[cameraAnimIndex].restart()
     cameraAnimIndex++
     setTimeout(cameraAnimation, 10000)
