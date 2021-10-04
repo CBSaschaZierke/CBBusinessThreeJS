@@ -606,6 +606,7 @@ controls.enableDamping = true
 controls.target = new THREE.Vector3(-11,4,-12)
 
 let animArray = []
+let playMeToo = false
 
 let anim1 = gsap.to( camera.position, {
     duration: 5,
@@ -735,16 +736,23 @@ let anim7_1 = gsap.to(camera.position, {
     x: -32,
     y: 1,
     z: 56,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim7_1.pause()
 animArray.push(anim7_1)
 
+// Play more
 let anim8 = gsap.to( controls.target, {
     // delay: 58,
     duration: 5,
     x: -10,
     y: 1,
     z: 55,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim8.pause()
 animArray.push(anim8)
@@ -760,7 +768,7 @@ animArray.push(anim8_1)
 
 let anim9 = gsap.to( controls.target, {
     // delay: 67,
-    duration: 10,
+    duration: 5,
     x: -10,
     y: 1,
     z: 60,
@@ -773,6 +781,9 @@ let anim9_1 = gsap.to(camera.position, {
     x: -10,
     y: 15,
     z: 70,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim9_1.pause()
 animArray.push(anim9_1)
@@ -788,17 +799,20 @@ anim10.pause()
 animArray.push(anim10)
 
 let anim10_1 = gsap.to(camera.position, {
-    duration: 10,
+    duration: 5,
     x: 5,
     y: 1,
     z: 36,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim10_1.pause()
 animArray.push(anim10_1)
 
 let anim11 = gsap.to( controls.target, {
     // delay: 87,
-    duration: 10,
+    duration: 5,
     x: -100,
     y: 1,
     z: 36,
@@ -807,7 +821,7 @@ anim11.pause()
 animArray.push(anim11)
 
 let anim11_1 = gsap.to(camera.position, {
-    duration: 10,
+    duration: 5,
     x: -51.5,
     y: 1,
     z: 36,
@@ -863,6 +877,7 @@ let anim14 = gsap.to( controls.target, {
 anim14.pause()
 animArray.push(anim14)
 
+// TOO
 let anim14_1 = gsap.to(camera.position, {
     duration: 5,
     x: -71.5,
@@ -882,18 +897,22 @@ let anim15 = gsap.to( controls.target, {
 anim15.pause()
 animArray.push(anim15)
 
+//TOO
 let anim15_1 = gsap.to(camera.position, {
-    duration: 5,
+    duration: 7,
     x: -36,
     y: 1,
     z: 17,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim15_1.pause()
 animArray.push(anim15_1)
 
 let anim16 = gsap.to( controls.target, {
     // delay: 136,
-    duration: 5,
+    duration: 10,
     x: -45,
     y: 15,
     z: 10,
@@ -902,7 +921,7 @@ anim16.pause()
 animArray.push(anim16)
 
 let anim16_1 = gsap.to(camera.position, {
-    duration: 5,
+    duration: 10,
     x: -45,
     y: 25,
     z: 3,
@@ -910,11 +929,15 @@ let anim16_1 = gsap.to(camera.position, {
 anim16_1.pause()
 animArray.push(anim16_1)
 
+//TOO
 let anim16_2 = gsap.to(camera.position, {
     duration:2,
     x: -45,
     y: 25,
     z: 5,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim16_2.pause()
 animArray.push(anim16_2)
@@ -987,12 +1010,16 @@ let anim20 = gsap.to( controls.target, {
 anim20.pause()
 animArray.push(anim20)
 
+// TOO
 let anim20_pos = gsap.to( camera.position, {
     // delay: 176,
     duration:5,
     x: -35,
     y: 10,
     z: -21,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim20_pos.pause()
 animArray.push(anim20_pos)
@@ -1017,11 +1044,15 @@ let anim21_pos = gsap.to( camera.position, {
 anim21_pos.pause()
 animArray.push(anim21_pos)
 
+//TOO
 let anim21_pos_1 = gsap.to(camera.position, {
     duration: 5,
     x: -50,
     y: 17,
     z: -10,
+    onStart: () => {
+        playMeToo = true
+    }
 })
 anim21_pos_1.pause()
 animArray.push(anim21_pos_1)
@@ -1191,6 +1222,21 @@ const videos = [
         element: document.querySelector('.video-1')
     }
 ]
+
+const hccards = [
+    {
+        position: new THREE.Vector3(-15, 2.5, 61),
+        element: document.querySelector('.hccardIncome')
+    },
+    {
+        position: new THREE.Vector3(-10, 2.5, 58),
+        element: document.querySelector('.hccardProgress')
+    },
+    {
+        position: new THREE.Vector3(-5, 2.5, 60),
+        element: document.querySelector('.hccardClosed')
+    },
+]
 // const light = new THREE.AmbientLight(0xFFF7A0)
 // scene.add(light)
 
@@ -1200,6 +1246,7 @@ const videos = [
 const clock = new THREE.Clock()
 
 let currentIntersect = null
+
 
 const tick = () =>
 {
@@ -1262,9 +1309,66 @@ const tick = () =>
         //     }
         // }
 
-        const translateX = screenPosition.x * sizes.width * .5
-        const translateY = - screenPosition.y * sizes.height * .5
-        point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
+        const x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
+        const y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
+
+        // move the elem to that position
+        point.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+    }
+
+    for(const card of hccards)
+    {
+        // Get 2D screen position
+        const screenPosition = card.position.clone()
+        screenPosition.project(camera)
+
+        // // Set the raycaster
+        vidraycaster.setFromCamera(screenPosition, camera)
+        const intersects = vidraycaster.intersectObjects(scene.children, true)
+
+        if(intersects.length === 0)
+        {
+            // Show
+            card.element.classList.add('visible')
+        }
+
+        // Intersect found
+        else
+        {
+            // Get the distance of the intersection and the distance of the point
+            const intersectionDistance = intersects[0].distance
+            const pointDistance = card.position.distanceTo(camera.position)
+
+            // Intersection is close than the point
+            if(intersectionDistance === 0)
+            {
+                // Hide
+                card.element.classList.add('visible')
+            }
+            // Intersection is further than the point
+            else
+            {
+                const intersectDistance = intersects[0].distance
+                const vidDistance = card.position.distanceTo(camera.position)
+
+                if(intersectionDistance < pointDistance){
+                    card.element.classList.remove('visible')
+                }else {
+                    card.element.classList.add('visible')
+                }
+
+            }
+        }
+
+        // const translateX = (screenPosition.x * sizes.width) * .5
+        // const translateY = -(screenPosition.y * sizes.height) * .5
+        // card.element.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px)`
+
+        const x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
+        const y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
+
+        // move the elem to that position
+        card.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
     }
 
     // Render
@@ -1294,6 +1398,7 @@ const tick = () =>
 
 
     renderer.render(scene, camera)
+    console.log(camera.position)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
@@ -1314,18 +1419,27 @@ function cameraAnimation(){
     }else{
         videos[0].element.classList.remove('visible')
     }
-    animArray[cameraAnimIndex].restart() //12 , 14, 16, 18, (26), 28, 31, 39, 42
-    if(cameraAnimIndex === 12 || cameraAnimIndex === 14 || cameraAnimIndex === 16 || cameraAnimIndex === 18 || cameraAnimIndex === 26 || cameraAnimIndex === 28 || cameraAnimIndex === 31 || cameraAnimIndex === 39 || cameraAnimIndex === 42){
+    animArray[cameraAnimIndex].restart()
+    // if(cameraAnimIndex === 12 || cameraAnimIndex === 14 || cameraAnimIndex === 16 || cameraAnimIndex === 18 || cameraAnimIndex === 26 || cameraAnimIndex === 28 || cameraAnimIndex === 31 || cameraAnimIndex === 39 || cameraAnimIndex === 42){
+    //     playMultipleAnims(cameraAnimIndex)
+    // }
+    if(playMeToo){
         playMultipleAnims(cameraAnimIndex)
+        console.log('I am in')
     }
     console.log(cameraAnimIndex)
     let timeout = animArray[cameraAnimIndex].duration() * 1000
+    if(cameraAnimIndex == 15 || cameraAnimIndex == 30 || cameraAnimIndex == 41){
+        timeout += 15000
+    }
     cameraAnimIndex++
     setTimeout(cameraAnimation, timeout)
 }
-cameraAnimation()
+// cameraAnimation()
 
 function playMultipleAnims(index){
     animArray[index+1].restart()
     cameraAnimIndex++
+    console.log(playMeToo)
+    playMeToo = false
 }
