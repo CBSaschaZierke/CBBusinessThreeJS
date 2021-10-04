@@ -47,6 +47,8 @@ const textHealthCare = 'HEALTH CARE'
 const textCommercial = 'COMMERCIAL'
 const textResidential = 'RESIDENTIAL'
 
+let textBundesland = 'Berlin'
+
 let textHCIncVal = '3'
 let textHCProVal = '2'
 let textHCCloVal = '1'
@@ -88,6 +90,29 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textGeometry.text = 'test'
     text.position.set(-10, .55, 55) //.22
     scene.add(text)
+
+    const textBundeslandHCGeometry = new THREE.TextGeometry(textBundesland, {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textBundeslandHC = new THREE.Mesh(textBundeslandHCGeometry, textMaterial)
+    // textGeometry.computeBoundingBox()
+    // textGeometry.translate(
+    //     -(textGeometry.boundingBox.max.x -.02) * .5,
+    //     (textGeometry.boundingBox.max.y - .5),
+    //     -(textGeometry.boundingBox.max.z -.03) * .5
+    // )
+    textBundeslandHCGeometry.center()
+    textBundeslandHC.position.set(-10, 0, 57) //.22
+    textBundeslandHC.rotation.x = -Math.PI * .5
+    scene.add(textBundeslandHC)
 
     const text2Geometry = new THREE.TextGeometry(textIncome, {
         font: font,
@@ -220,6 +245,23 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text5.rotation.y = Math.PI * .5
     scene.add(text5)
 
+    const textBundeslandComGeometry = new THREE.TextGeometry(textBundesland, {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textBundeslandCom = new THREE.Mesh(textBundeslandComGeometry, textMaterial)
+    textBundeslandComGeometry.center()
+    textBundeslandCom.position.set(-40, .22, 17) //.22
+    textBundeslandCom.rotation.y = Math.PI * .5
+    scene.add(textBundeslandCom)
+
     const textComInGeometry = new THREE.TextGeometry(textIncome, {
         font: font,
         size: .5,
@@ -346,6 +388,25 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textRes.rotation.y = Math.PI
     // textRes.rotation.z = Math.PI
     scene.add(textRes)
+
+    const textBundeslandResGeometry = new THREE.TextGeometry(textBundesland, {
+        font: font,
+        size: .5,
+        height: .2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: .03,
+        bevelSize: .02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textBundeslandRes = new THREE.Mesh(textBundeslandResGeometry, textMaterial)
+    textBundeslandResGeometry.center()
+    textBundeslandRes.position.set(-35, 0, -8) //.22
+    textBundeslandRes.rotation.x = Math.PI * .5
+    textBundeslandRes.rotation.y = Math.PI
+    // textRes.rotation.z = Math.PI
+    scene.add(textBundeslandRes)
 
     const textResIncGeometry = new THREE.TextGeometry(textIncome, {
         font: font,
@@ -547,44 +608,43 @@ controls.target = new THREE.Vector3(-11,4,-12)
 let animArray = []
 
 let anim1 = gsap.to( camera.position, {
-    // duration: 5,
+    duration: 5,
     x: -11,
-    y: 4,
+    y: 2,
     z: -7,
-    onComplete: () => {
+    onStart: () => {
         gsap.to( controls.target, {
             duration: 10,
             x: -15,
-            y: 3,
+            y: 2,
             z: -7,
         })
     }
 })
 anim1.pause()
 animArray.push(anim1)
-anim1.play()
 
-let anim2 = gsap.to( camera.position, {
-    // delay: 15,
-    duration: 5,
-    x: -11,
-    y: 1,
-    z: -6,
-    onComplete: () => {
-        gsap.to(controls.target, {
-            duration: 1,
-            x: -12,
-            y: 1,
-            z: -6,
-        })
-    }
-})
-anim2.pause()
-animArray.push(anim2)
+// let anim2 = gsap.to( camera.position, {
+//     // delay: 15,
+//     duration: 5,
+//     x: -11,
+//     y: 1,
+//     z: -6,
+//     onComplete: () => {
+//         gsap.to(controls.target, {
+//             duration: 1,
+//             x: -12,
+//             y: 1,
+//             z: -6,
+//         })
+//     }
+// })
+// anim2.pause()
+// animArray.push(anim2)
 
 
 let anim3 = gsap.to( controls.target, {
-    // delay: 20,
+    //delay: 20,
     duration: 5,
     x: -12,
     y: 1,
@@ -1107,16 +1167,12 @@ const points = [
 
 const videos = [
     {
-        position: new THREE.Vector3(-15,2.5,-7.5),
+        position: new THREE.Vector3(-15,2.15,-6.2),
         element: document.querySelector('.video-1')
     }
 ]
 // const light = new THREE.AmbientLight(0xFFF7A0)
 // scene.add(light)
-
-
-const helper = new THREE.CameraHelper( directionalLight.shadow.camera );
-scene.add( helper );
 
 /**
  * Animate
@@ -1152,39 +1208,39 @@ const tick = () =>
         vidraycaster.setFromCamera(screenPosition, camera)
         const intersects = vidraycaster.intersectObjects(scene.children, true)
 
-        if(intersects.length === 0)
-        {
-            // Show
-            point.element.classList.add('visible')
-        }
-
-        // Intersect found
-        else
-        {
-            // Get the distance of the intersection and the distance of the point
-            const intersectionDistance = intersects[0].distance
-            const pointDistance = point.position.distanceTo(camera.position)
-
-            // Intersection is close than the point
-            if(intersectionDistance === 0)
-            {
-                // Hide
-                point.element.classList.add('visible')
-            }
-            // Intersection is further than the point
-            else
-            {
-                const intersectDistance = intersects[0].distance
-                const vidDistance = point.position.distanceTo(camera.position)
-
-                if(intersectionDistance < pointDistance){
-                    point.element.classList.remove('visible')
-                }else {
-                    point.element.classList.add('visible')
-                }
-
-            }
-        }
+        // if(intersects.length === 0)
+        // {
+        //     // Show
+        //     point.element.classList.add('visible')
+        // }
+        //
+        // // Intersect found
+        // else
+        // {
+        //     // Get the distance of the intersection and the distance of the point
+        //     const intersectionDistance = intersects[0].distance
+        //     const pointDistance = point.position.distanceTo(camera.position)
+        //
+        //     // Intersection is close than the point
+        //     if(intersectionDistance === 0)
+        //     {
+        //         // Hide
+        //         point.element.classList.add('visible')
+        //     }
+        //     // Intersection is further than the point
+        //     else
+        //     {
+        //         const intersectDistance = intersects[0].distance
+        //         const vidDistance = point.position.distanceTo(camera.position)
+        //
+        //         if(intersectionDistance < pointDistance){
+        //             point.element.classList.remove('visible')
+        //         }else {
+        //             point.element.classList.add('visible')
+        //         }
+        //
+        //     }
+        // }
 
         const translateX = screenPosition.x * sizes.width * .5
         const translateY = - screenPosition.y * sizes.height * .5
@@ -1226,6 +1282,7 @@ const tick = () =>
 tick()
 
 let cameraAnimIndex = 0
+let timeout
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
         cameraAnimIndex = 0
@@ -1233,13 +1290,27 @@ function cameraAnimation(){
     for(let i=0; i<animArray.length;i++){
         animArray[i].pause()
     }
-    // if(cameraAnimIndex !== 1){
-    //     videos[0].element.classList.remove('visible')
-    // }else{
-    //     videos[0].element.classList.add('visible')
-    // }
+    if(cameraAnimIndex === 0){
+        videos[0].element.classList.add('visible')
+    }else{
+        videos[0].element.classList.remove('visible')
+    }
     animArray[cameraAnimIndex].restart()
+    getTimeout(cameraAnimIndex)
     cameraAnimIndex++
     setTimeout(cameraAnimation, 10000)
 }
 cameraAnimation()
+
+function getTimeout(test){
+    if(animArray[test].vars.onComplete){
+        // animArray[test].vars.duration + animArray[test].vars.onComplete.duration
+        console.log(animArray[test].vars.duration)
+    }
+
+    if(animArray[test].vars.onStart){
+        // animArray[test].vars.duration + animArray[test].vars.onStart.duration
+        // console.log(animArray[test].vars.duration)
+        console.log(animArray[test].totalDuration())
+    }
+}
