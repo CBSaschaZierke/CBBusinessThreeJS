@@ -218,6 +218,7 @@ controls.target = new THREE.Vector3(-11,4,-12)
 
 let animArray = []
 let playMeToo = false
+let longerTimeout = false
 
 let anim1 = gsap.to( camera.position, {
     duration: 5,
@@ -349,6 +350,7 @@ let anim7_1 = gsap.to(camera.position, {
     z: 56,
     onStart: () => {
         playMeToo = true
+        longerTimeout = true
     }
 })
 anim7_1.pause()
@@ -361,9 +363,6 @@ let anim8 = gsap.to( controls.target, {
     x: -10,
     y: 1,
     z: 55,
-    onStart: () => {
-        playMeToo = true
-    }
 })
 anim8.pause()
 animArray.push(anim8)
@@ -373,31 +372,12 @@ let anim8_1 = gsap.to(camera.position, {
     x: -10,
     y: 2,
     z: 70,
-})
-anim8_1.pause()
-animArray.push(anim8_1)
-
-let anim9 = gsap.to( controls.target, {
-    // delay: 67,
-    duration: 5,
-    x: -10,
-    y: 1,
-    z: 60,
-})
-anim9.pause()
-animArray.push(anim9)
-
-let anim9_1 = gsap.to(camera.position, {
-    duration: 10,
-    x: -10,
-    y: 15,
-    z: 70,
     onStart: () => {
         playMeToo = true
     }
 })
-anim9_1.pause()
-animArray.push(anim9_1)
+anim8_1.pause()
+animArray.push(anim8_1)
 
 let anim10 = gsap.to( controls.target, {
     // delay: 78,
@@ -502,56 +482,61 @@ let anim15 = gsap.to( controls.target, {
     // delay: 124,
     duration:5,
     x: -42,
-    y: 1,
+    y: 3,
     z: 17,
+    onStart: () => {
+        // longer timeout
+        longerTimeout = true
+    }
 })
 anim15.pause()
 animArray.push(anim15)
 
-//TOO
+// show Com Data
 let anim15_1 = gsap.to(camera.position, {
     duration: 7,
-    x: -36,
-    y: 1,
+    x: -28.5,
+    y: 4.5,
     z: 17,
     onStart: () => {
+        // longer timeout
         playMeToo = true
     }
 })
 anim15_1.pause()
 animArray.push(anim15_1)
 
-let anim16 = gsap.to( controls.target, {
-    // delay: 136,
-    duration: 10,
-    x: -45,
-    y: 15,
-    z: 10,
-})
-anim16.pause()
-animArray.push(anim16)
-
-let anim16_1 = gsap.to(camera.position, {
-    duration: 10,
-    x: -45,
-    y: 25,
-    z: 3,
-})
-anim16_1.pause()
-animArray.push(anim16_1)
-
-//TOO
-let anim16_2 = gsap.to(camera.position, {
-    duration:2,
-    x: -45,
-    y: 25,
-    z: 5,
-    onStart: () => {
-        playMeToo = true
-    }
-})
-anim16_2.pause()
-animArray.push(anim16_2)
+// let anim16 = gsap.to( controls.target, {
+//     // delay: 136,
+//     duration: 10,
+//     x: -45,
+//     y: 15,
+//     z: 10,
+// })
+// anim16.pause()
+// animArray.push(anim16)
+//
+// let anim16_1 = gsap.to(camera.position, {
+//     duration: 10,
+//     x: -45,
+//     y: 25,
+//     z: 3,
+// })
+// anim16_1.pause()
+// animArray.push(anim16_1)
+//
+// //TOO
+// let anim16_2 = gsap.to(camera.position, {
+//     duration:2,
+//     x: -45,
+//     y: 25,
+//     z: 5,
+//     onStart: () => {
+//         playMeToo = true
+//     }
+// })
+// anim16_2.pause()
+// animArray.push(anim16_2)
 
 let anim17 = gsap.to( controls.target, {
     // delay: 150,
@@ -565,21 +550,13 @@ animArray.push(anim17)
 
 let anim17_1 = gsap.to(camera.position, {
     duration: 5,
-    x: -45,
-    y: 25,
+    x: -30,
+    y: 1,
     z: 0,
 })
 anim17_1.pause()
 animArray.push(anim17_1)
 
-let anim17_2 = gsap.to(camera.position, {
-        duration:2,
-        x: -45,
-        y: 1,
-        z: 0,
-})
-anim17_2.pause()
-animArray.push(anim17_2)
 
 let anim18 = gsap.to( camera.position, {
     // delay: 159,
@@ -630,6 +607,7 @@ let anim20_pos = gsap.to( camera.position, {
     z: -21,
     onStart: () => {
         playMeToo = true
+        longerTimeout = true
     }
 })
 anim20_pos.pause()
@@ -645,19 +623,20 @@ let anim21 = gsap.to( controls.target, {
 anim21.pause()
 animArray.push(anim21)
 
+// Show Res Data
 let anim21_pos = gsap.to( camera.position, {
     // delay: 180,
     duration:5,
-    x: -35,
-    y: 15,
-    z: -10,
+    x: -50,
+    y: 5,
+    z: -9,
 })
 anim21_pos.pause()
 animArray.push(anim21_pos)
 
 //TOO
 let anim21_pos_1 = gsap.to(camera.position, {
-    duration: 5,
+    duration: 2,
     x: -50,
     y: 17,
     z: -10,
@@ -670,7 +649,7 @@ animArray.push(anim21_pos_1)
 
 let anim22_pos = gsap.to( camera.position, {
     // delay: 176,
-    duration:5,
+    duration:2,
     x: -11,
     y: 4,
     z: -10,
@@ -679,7 +658,7 @@ anim22_pos.pause()
 animArray.push(anim22_pos)
 
 let anim22_pos_1 = gsap.to(controls.target,{
-    duration: 5,
+    duration: 2,
     x: -11,
     y: 4,
     z: -12,
@@ -829,7 +808,7 @@ const points = [
 
 const videos = [
     {
-        position: new THREE.Vector3(-15,2.15,-6.2),
+        position: new THREE.Vector3(-15,2.75,-6.3),
         element: document.querySelector('.video-1')
     }
 ]
@@ -840,7 +819,7 @@ const hccards = [
         element: document.querySelector('.hccardIncome')
     },
     {
-        position: new THREE.Vector3(-10, 2.5, 58),
+        position: new THREE.Vector3(-10.5, 2.5, 58),
         element: document.querySelector('.hccardProgress')
     },
     {
@@ -853,36 +832,36 @@ const hccards = [
     },
 
     {
-        position: new THREE.Vector3(-40, 2.5, 22),
+        position: new THREE.Vector3(-41.6, 2.5, 22.25),
         element: document.querySelector('.cocardIncome')
     },
     {
-        position: new THREE.Vector3(-40, 2.5, 17),
+        position: new THREE.Vector3(-41.6, 2.5, 17.75),
         element: document.querySelector('.cocardProgress')
     },
     {
-        position: new THREE.Vector3(-40, 2.5, 13),
+        position: new THREE.Vector3(-41.6, 2.5, 13.25),
         element: document.querySelector('.cocardClosed')
     },
     {
-        position: new THREE.Vector3(-40, 6, 15),
+        position: new THREE.Vector3(-42.1, 6.25, 13.5),
         element: document.querySelector('.coimg')
     },
 
     {
-        position: new THREE.Vector3(-41, 2.5, -13),
+        position: new THREE.Vector3(-40.2, 2.5, -13.75),
         element: document.querySelector('.rescardIncome')
     },
     {
-        position: new THREE.Vector3(-41, 2.5, -8.5),
+        position: new THREE.Vector3(-40.2, 2.5, -9),
         element: document.querySelector('.rescardProgress')
     },
     {
-        position: new THREE.Vector3(-41, 2.5, -4),
+        position: new THREE.Vector3(-40.2, 2.5, -4.25),
         element: document.querySelector('.rescardClosed')
     },
     {
-        position: new THREE.Vector3(-41, 5, -10),
+        position: new THREE.Vector3(-40.2, 5.25, -10),
         element: document.querySelector('.resimg')
     },
 ]
@@ -1055,7 +1034,15 @@ const tick = () =>
 
 tick()
 
-let cameraAnimIndex = 0
+// index 10 für Healcare View
+
+// index 22 für Com View
+
+// index 30 für res view
+
+
+
+let cameraAnimIndex = 30
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
         cameraAnimIndex = 0
@@ -1069,18 +1056,17 @@ function cameraAnimation(){
         videos[0].element.classList.remove('visible')
     }
     animArray[cameraAnimIndex].restart()
+    if(playMeToo){
+        playMultipleAnims(cameraAnimIndex)
+    }
+    let timeout = animArray[cameraAnimIndex].duration() * 1000
+    if(longerTimeout){
+        timeout += 15000
+        longerTimeout = false
+    }
     // if(cameraAnimIndex === 12 || cameraAnimIndex === 14 || cameraAnimIndex === 16 || cameraAnimIndex === 18 || cameraAnimIndex === 26 || cameraAnimIndex === 28 || cameraAnimIndex === 31 || cameraAnimIndex === 39 || cameraAnimIndex === 42){
     //     playMultipleAnims(cameraAnimIndex)
     // }
-    if(playMeToo){
-        playMultipleAnims(cameraAnimIndex)
-        console.log('I am in')
-    }
-    console.log(cameraAnimIndex)
-    let timeout = animArray[cameraAnimIndex].duration() * 1000
-    if(cameraAnimIndex == 15 || cameraAnimIndex == 30 || cameraAnimIndex == 41){
-        timeout += 15000
-    }
     cameraAnimIndex++
     setTimeout(cameraAnimation, timeout)
 }
@@ -1089,6 +1075,5 @@ cameraAnimation()
 function playMultipleAnims(index){
     animArray[index+1].restart()
     cameraAnimIndex++
-    console.log(playMeToo)
     playMeToo = false
 }
