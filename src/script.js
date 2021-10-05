@@ -350,17 +350,26 @@ anim7.pause()
 animArray.push(anim7)
 
 let anim7_1 = gsap.to(camera.position, {
-    duration: 5,
+    duration: 2,
     x: -32,
     y: 1,
     z: 56,
+})
+anim7_1.pause()
+animArray.push(anim7_1)
+
+let anim7_2 = gsap.to(camera.position, {
+    duration: 5,
+    x: -12,
+    y: 1,
+    z: 60,
     onStart: () => {
         playMeToo = true
         longerTimeout = true
     }
 })
-anim7_1.pause()
-animArray.push(anim7_1)
+anim7_2.pause()
+animArray.push(anim7_2)
 
 // Play more
 let anim8 = gsap.to( controls.target, {
@@ -611,13 +620,23 @@ let anim20_pos = gsap.to( camera.position, {
     x: -35,
     y: 10,
     z: -21,
+})
+anim20_pos.pause()
+animArray.push(anim20_pos)
+
+let anim20_pos1 = gsap.to( camera.position, {
+    // delay: 176,
+    duration:5,
+    x: -40,
+    y: 10,
+    z: -21,
     onStart: () => {
         playMeToo = true
         longerTimeout = true
     }
 })
-anim20_pos.pause()
-animArray.push(anim20_pos)
+anim20_pos1.pause()
+animArray.push(anim20_pos1)
 
 let anim21 = gsap.to( controls.target, {
     // delay: 180,
@@ -653,6 +672,15 @@ let anim21_pos_1 = gsap.to(camera.position, {
 anim21_pos_1.pause()
 animArray.push(anim21_pos_1)
 
+let anim22_pos_1 = gsap.to(controls.target,{
+    duration: 2,
+    x: -11,
+    y: 4,
+    z: -12,
+})
+anim22_pos_1.pause()
+animArray.push(anim22_pos_1)
+
 let anim22_pos = gsap.to( camera.position, {
     // delay: 176,
     duration:2,
@@ -663,14 +691,6 @@ let anim22_pos = gsap.to( camera.position, {
 anim22_pos.pause()
 animArray.push(anim22_pos)
 
-let anim22_pos_1 = gsap.to(controls.target,{
-    duration: 2,
-    x: -11,
-    y: 4,
-    z: -12,
-})
-anim22_pos_1.pause()
-animArray.push(anim22_pos_1)
 
 // window.addEventListener('click', () => {
 //     console.log('clicked')
@@ -1052,7 +1072,7 @@ tick()
 
 
 
-let cameraAnimIndex = 0
+let cameraAnimIndex = 30
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
         cameraAnimIndex = 0
@@ -1074,7 +1094,7 @@ function cameraAnimation(){
     }
     let timeout = animArray[cameraAnimIndex].duration() * 1000
     if(longerTimeout){
-        if(cameraAnimIndex > 10 && cameraAnimIndex < 20 || cameraAnimIndex > 20 && cameraAnimIndex < 28 || cameraAnimIndex > 33 && cameraAnimIndex < 35){
+        if(cameraAnimIndex > 10 && cameraAnimIndex < 20 || cameraAnimIndex > 20 && cameraAnimIndex < 28 || cameraAnimIndex > 31 && cameraAnimIndex < 37){
             showElBool = true
         }else {
             showElBool = false
@@ -1095,7 +1115,9 @@ function cameraAnimation(){
 cameraAnimation()
 
 function playMultipleAnims(index){
-    animArray[index+1].restart()
-    cameraAnimIndex++
-    playMeToo = false
+    if(index+1 < animArray.length){
+        animArray[index+1].restart()
+        cameraAnimIndex++
+        playMeToo = false
+    }
 }
