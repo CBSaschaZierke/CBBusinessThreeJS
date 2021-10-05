@@ -87,146 +87,8 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     //     -(textGeometry.boundingBox.max.z -.03) * .5
     // )
     textGeometry.center()
-    textGeometry.text = 'test'
-    text.position.set(-10, .55, 55) //.22
+    text.position.set(-10, .55, 61) //.22
     scene.add(text)
-
-    const textBundeslandHCGeometry = new THREE.TextGeometry(textBundesland, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textBundeslandHC = new THREE.Mesh(textBundeslandHCGeometry, textMaterial)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
-    textBundeslandHCGeometry.center()
-    textBundeslandHC.position.set(-10, 0, 57) //.22
-    textBundeslandHC.rotation.x = -Math.PI * .5
-    scene.add(textBundeslandHC)
-
-    const text2Geometry = new THREE.TextGeometry(textIncome, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const text2 = new THREE.Mesh(text2Geometry, textMaterial)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
-    text2Geometry.center()
-    text2.position.set(-15, 0, 60) //.22
-    text2.rotation.x = -Math.PI * .5
-    scene.add(text2)
-
-    const textInGeometry = new THREE.TextGeometry(textHCIncVal, {
-        font: font,
-        size: .5,
-        height: .1,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textIn = new THREE.Mesh(textInGeometry, textMaterial)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
-    textInGeometry.center()
-    textIn.position.set(-15, 0, 61) //.22
-    textIn.rotation.x = -Math.PI * .5
-    scene.add(textIn)
-
-    const text3Geometry = new THREE.TextGeometry(textInProgess, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const text3 = new THREE.Mesh(text3Geometry, textMaterial)
-    text3Geometry.center()
-    text3.position.set(-10, 0, 60) //.22
-    text3.rotation.x = -Math.PI * .5
-    scene.add(text3)
-
-    const textProGeometry = new THREE.TextGeometry(textHCProVal, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textPro = new THREE.Mesh(textProGeometry, textMaterial)
-    textProGeometry.center()
-    textPro.position.set(-10, 0, 61) //.22
-    textPro.rotation.x = -Math.PI * .5
-    scene.add(textPro)
-
-    const text4Geometry = new THREE.TextGeometry(textClosed, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const text4 = new THREE.Mesh(text4Geometry, textMaterial)
-    text4Geometry.center()
-    text4.position.set(-5, 0, 60) //.22
-    text4.rotation.x = -Math.PI * .5
-    scene.add(text4)
-
-    const textcloGeometry = new THREE.TextGeometry(textHCCloVal, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textclo = new THREE.Mesh(textcloGeometry, textMaterial)
-    textcloGeometry.center()
-    textclo.position.set(-5, 0, 61) //.22
-    textclo.rotation.x = -Math.PI * .5
-    scene.add(textclo)
 
     const text5Geometry = new THREE.TextGeometry(textCommercial, {
         font: font,
@@ -241,134 +103,9 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     })
     const text5 = new THREE.Mesh(text5Geometry, textMaterial)
     text5Geometry.center()
-    text5.position.set(-42, .55, 17) //.22
+    text5.position.set(-40, .55, 17) //.22
     text5.rotation.y = Math.PI * .5
     scene.add(text5)
-
-    const textBundeslandComGeometry = new THREE.TextGeometry(textBundesland, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textBundeslandCom = new THREE.Mesh(textBundeslandComGeometry, textMaterial)
-    textBundeslandComGeometry.center()
-    textBundeslandCom.position.set(-40, .22, 17) //.22
-    textBundeslandCom.rotation.y = Math.PI * .5
-    scene.add(textBundeslandCom)
-
-    const textComInGeometry = new THREE.TextGeometry(textIncome, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComInc = new THREE.Mesh(textComInGeometry, textMaterial)
-    textComInGeometry.center()
-    textComInc.position.set(-45, 12.5, 16.5) //.22
-    textComInc.rotation.x = Math.PI * .25
-    textComInc.rotation.y = -Math.PI
-    scene.add(textComInc)
-
-    const textComInValGeometry = new THREE.TextGeometry(textCOIncVal, {
-        font: font,
-        size: .35,
-        height: .1,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComIncVal = new THREE.Mesh(textComInValGeometry, textMaterial)
-    textComInValGeometry.center()
-    textComIncVal.position.set(-45, 12.5, 15.5) //.22
-    textComIncVal.rotation.x = Math.PI * .25
-    textComIncVal.rotation.y = -Math.PI
-    scene.add(textComIncVal)
-
-    const textComProGeometry = new THREE.TextGeometry(textInProgess, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComPro = new THREE.Mesh(textComProGeometry, textMaterial)
-    textComProGeometry.center()
-    textComPro.position.set(-46, 13.3, 13) //.22
-    textComPro.rotation.x = Math.PI * .25
-    textComPro.rotation.y = -Math.PI
-    scene.add(textComPro)
-
-    const textComProValGeometry = new THREE.TextGeometry(textCOProVal, {
-        font: font,
-        size: .4,
-        height: .1,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComProVal = new THREE.Mesh(textComProValGeometry, textMaterial)
-    textComProValGeometry.center()
-    textComProVal.position.set(-45, 13.3, 12) //.22
-    textComProVal.rotation.x = Math.PI * .25
-    textComProVal.rotation.y = -Math.PI
-    scene.add(textComProVal)
-
-    const textComCloGeometry = new THREE.TextGeometry(textClosed, {
-        font: font,
-        size: .5,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComClo = new THREE.Mesh(textComCloGeometry, textMaterial)
-    textComCloGeometry.center()
-    textComClo.position.set(-44.5, 18.8, 8) //.22
-    textComClo.rotation.x = Math.PI * .5
-    textComClo.rotation.y = -Math.PI
-    scene.add(textComClo)
-
-    const textComCloValGeometry = new THREE.TextGeometry(textCOCloVal, {
-        font: font,
-        size: .4,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textComCloVal = new THREE.Mesh(textComCloValGeometry, textMaterial)
-    textComCloValGeometry.center()
-    textComCloVal.position.set(-44.5, 18.8, 7) //.22
-    textComCloVal.rotation.x = Math.PI * .5
-    textComCloVal.rotation.y = -Math.PI
-    scene.add(textComCloVal)
 
     const textResGeometry = new THREE.TextGeometry(textResidential, {
         font: font,
@@ -389,132 +126,6 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     // textRes.rotation.z = Math.PI
     scene.add(textRes)
 
-    const textBundeslandResGeometry = new THREE.TextGeometry(textBundesland, {
-        font: font,
-        size: .5,
-        height: .2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .03,
-        bevelSize: .02,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textBundeslandRes = new THREE.Mesh(textBundeslandResGeometry, textMaterial)
-    textBundeslandResGeometry.center()
-    textBundeslandRes.position.set(-35, 0, -8) //.22
-    textBundeslandRes.rotation.x = Math.PI * .5
-    textBundeslandRes.rotation.y = Math.PI
-    // textRes.rotation.z = Math.PI
-    scene.add(textBundeslandRes)
-
-    const textResIncGeometry = new THREE.TextGeometry(textIncome, {
-        font: font,
-        size: .5,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResInc = new THREE.Mesh(textResIncGeometry, textMaterial)
-    textResIncGeometry.center()
-    textResInc.position.set(-39.9, 10, -16) //.22
-    // textResInc.rotation.x = -Math.PI
-    textResInc.rotation.y = -Math.PI * 0.5
-    scene.add(textResInc)
-
-    const textResIncValGeometry = new THREE.TextGeometry(textREIncVal, {
-        font: font,
-        size: .4,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResIncVal = new THREE.Mesh(textResIncValGeometry, textMaterial)
-    textResIncValGeometry.center()
-    textResIncVal.position.set(-39.9, 9, -16) //.22
-    // textResIncVal.rotation.x = - Math.PI
-    textResIncVal.rotation.y = -Math.PI * 0.5
-    scene.add(textResIncVal)
-
-    const textResProGeometry = new THREE.TextGeometry(textInProgess, {
-        font: font,
-        size: .5,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResPro = new THREE.Mesh(textResProGeometry, textMaterial)
-    textResProGeometry.center()
-    textResPro.position.set(-39.9, 10, -10) //.22
-    // textResInc.rotation.x = -Math.PI
-    textResPro.rotation.y = -Math.PI * 0.5
-    scene.add(textResPro)
-
-    const textResProValGeometry = new THREE.TextGeometry(textREProVal, {
-        font: font,
-        size: .4,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResProVal = new THREE.Mesh(textResProValGeometry, textMaterial)
-    textResProValGeometry.center()
-    textResProVal.position.set(-39.8, 9, -10) //.22
-    // textResIncVal.rotation.x = - Math.PI
-    textResProVal.rotation.y = -Math.PI * 0.5
-    scene.add(textResProVal)
-
-    const textResCloGeometry = new THREE.TextGeometry(textClosed, {
-        font: font,
-        size: .5,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResClo = new THREE.Mesh(textResCloGeometry, textMaterial)
-    textResCloGeometry.center()
-    textResClo.position.set(-39.7, 9, -4) //.22
-    // textResInc.rotation.x = -Math.PI
-    textResClo.rotation.y = -Math.PI * 0.5
-    scene.add(textResClo)
-
-    const textResCloValGeometry = new THREE.TextGeometry(textRECloVal, {
-        font: font,
-        size: .4,
-        height: .01,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: .01,
-        bevelSize: .01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    })
-    const textResCloVal = new THREE.Mesh(textResCloValGeometry, textMaterial)
-    textResCloValGeometry.center()
-    textResCloVal.position.set(-39.6, 8, -4) //.22
-    // textResIncVal.rotation.x = - Math.PI
-    textResCloVal.rotation.y = -Math.PI * 0.5
-    scene.add(textResCloVal)
 })
 
 /**
@@ -1236,6 +847,44 @@ const hccards = [
         position: new THREE.Vector3(-5, 2.5, 60),
         element: document.querySelector('.hccardClosed')
     },
+    {
+        position: new THREE.Vector3(-11.5, 7.5, 47),
+        element: document.querySelector('.hcimg')
+    },
+
+    {
+        position: new THREE.Vector3(-40, 2.5, 22),
+        element: document.querySelector('.cocardIncome')
+    },
+    {
+        position: new THREE.Vector3(-40, 2.5, 17),
+        element: document.querySelector('.cocardProgress')
+    },
+    {
+        position: new THREE.Vector3(-40, 2.5, 13),
+        element: document.querySelector('.cocardClosed')
+    },
+    {
+        position: new THREE.Vector3(-40, 6, 15),
+        element: document.querySelector('.coimg')
+    },
+
+    {
+        position: new THREE.Vector3(-41, 2.5, -13),
+        element: document.querySelector('.rescardIncome')
+    },
+    {
+        position: new THREE.Vector3(-41, 2.5, -8.5),
+        element: document.querySelector('.rescardProgress')
+    },
+    {
+        position: new THREE.Vector3(-41, 2.5, -4),
+        element: document.querySelector('.rescardClosed')
+    },
+    {
+        position: new THREE.Vector3(-41, 5, -10),
+        element: document.querySelector('.resimg')
+    },
 ]
 // const light = new THREE.AmbientLight(0xFFF7A0)
 // scene.add(light)
@@ -1435,7 +1084,7 @@ function cameraAnimation(){
     cameraAnimIndex++
     setTimeout(cameraAnimation, timeout)
 }
-// cameraAnimation()
+cameraAnimation()
 
 function playMultipleAnims(index){
     animArray[index+1].restart()
