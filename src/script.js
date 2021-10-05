@@ -88,6 +88,8 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     // )
     textGeometry.center()
     text.position.set(-10, .55, 61) //.22
+    text.castShadow = true
+    text.receiveShadow = true
     scene.add(text)
 
     const text5Geometry = new THREE.TextGeometry(textCommercial, {
@@ -105,6 +107,8 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     text5Geometry.center()
     text5.position.set(-40, .55, 17) //.22
     text5.rotation.y = Math.PI * .5
+    text5.castShadow = true
+    text5.receiveShadow = true
     scene.add(text5)
 
     const textResGeometry = new THREE.TextGeometry(textResidential, {
@@ -124,6 +128,8 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     textRes.rotation.x = Math.PI * .5
     textRes.rotation.y = Math.PI
     // textRes.rotation.z = Math.PI
+    textRes.castShadow = true
+    textRes.receiveShadow = true
     scene.add(textRes)
 
 })
@@ -874,6 +880,7 @@ const hccards = [
 const clock = new THREE.Clock()
 
 let currentIntersect = null
+let showElBool = false
 
 
 const tick = () =>
@@ -937,67 +944,71 @@ const tick = () =>
         //     }
         // }
 
-        const x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
-        const y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
+        let x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
+        let y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
 
         // move the elem to that position
         point.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
     }
 
-    for(const card of hccards)
-    {
-        // Get 2D screen position
-        const screenPosition = card.position.clone()
-        screenPosition.project(camera)
-
-        // // Set the raycaster
-        vidraycaster.setFromCamera(screenPosition, camera)
-        const intersects = vidraycaster.intersectObjects(scene.children, true)
-
-        if(intersects.length === 0)
+    console.log(showElBool)
+    if(showElBool){
+        for(const card of hccards)
         {
-            // Show
-            card.element.classList.add('visible')
-        }
+            // Get 2D screen position
+            const screenPosition = card.position.clone()
+            screenPosition.project(camera)
 
-        // Intersect found
-        else
-        {
-            // Get the distance of the intersection and the distance of the point
-            const intersectionDistance = intersects[0].distance
-            const pointDistance = card.position.distanceTo(camera.position)
+            // // Set the raycaster
+            vidraycaster.setFromCamera(screenPosition, camera)
+            const intersects = vidraycaster.intersectObjects(scene.children, true)
 
-            // Intersection is close than the point
-            if(intersectionDistance === 0)
+            if(intersects.length === 0)
             {
-                // Hide
+                // Show
                 card.element.classList.add('visible')
             }
-            // Intersection is further than the point
+
+            // Intersect found
             else
             {
-                const intersectDistance = intersects[0].distance
-                const vidDistance = card.position.distanceTo(camera.position)
+                // Get the distance of the intersection and the distance of the point
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = card.position.distanceTo(camera.position)
 
-                if(intersectionDistance < pointDistance){
-                    card.element.classList.remove('visible')
-                }else {
+                // Intersection is close than the point
+                if(intersectionDistance === 0)
+                {
+                    // Hide
                     card.element.classList.add('visible')
                 }
+                // Intersection is further than the point
+                else
+                {
+                    const intersectDistance = intersects[0].distance
+                    const vidDistance = card.position.distanceTo(camera.position)
 
+                    if(intersectionDistance < pointDistance){
+                        card.element.classList.remove('visible')
+                    }else {
+                        card.element.classList.add('visible')
+                    }
+
+                }
             }
+
+            // const translateX = (screenPosition.x * sizes.width) * .5
+            // const translateY = -(screenPosition.y * sizes.height) * .5
+            // card.element.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px)`
+
+            let x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
+            let y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
+
+            // move the elem to that position
+            card.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
         }
-
-        // const translateX = (screenPosition.x * sizes.width) * .5
-        // const translateY = -(screenPosition.y * sizes.height) * .5
-        // card.element.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px)`
-
-        const x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
-        const y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
-
-        // move the elem to that position
-        card.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
     }
+
 
     // Render
 
@@ -1026,7 +1037,6 @@ const tick = () =>
 
 
     renderer.render(scene, camera)
-    console.log(camera.position)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
@@ -1042,13 +1052,16 @@ tick()
 
 
 
-let cameraAnimIndex = 30
+let cameraAnimIndex = 0
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
         cameraAnimIndex = 0
     }
     for(let i=0; i<animArray.length;i++){
         animArray[i].pause()
+    }
+    for(let i = 0; i<hccards.length;i++){
+        hccards[i].element.classList.remove('visible')
     }
     if(cameraAnimIndex === 1){
         videos[0].element.classList.add('visible')
@@ -1061,8 +1074,17 @@ function cameraAnimation(){
     }
     let timeout = animArray[cameraAnimIndex].duration() * 1000
     if(longerTimeout){
+        if(cameraAnimIndex > 10 && cameraAnimIndex < 20 || cameraAnimIndex > 20 && cameraAnimIndex < 28 || cameraAnimIndex > 33 && cameraAnimIndex < 35){
+            showElBool = true
+        }else {
+            showElBool = false
+        }
+        console.log(cameraAnimIndex)
         timeout += 15000
         longerTimeout = false
+    }
+    else {
+        showElBool = false
     }
     // if(cameraAnimIndex === 12 || cameraAnimIndex === 14 || cameraAnimIndex === 16 || cameraAnimIndex === 18 || cameraAnimIndex === 26 || cameraAnimIndex === 28 || cameraAnimIndex === 31 || cameraAnimIndex === 39 || cameraAnimIndex === 42){
     //     playMultipleAnims(cameraAnimIndex)
