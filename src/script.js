@@ -1072,7 +1072,7 @@ tick()
 
 
 
-let cameraAnimIndex = 30
+let cameraAnimIndex = 0
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
         cameraAnimIndex = 0
