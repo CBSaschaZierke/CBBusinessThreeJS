@@ -1,4 +1,5 @@
 import './style.css'
+import './main.js'
 import * as dat from 'dat.gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -124,9 +125,9 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     })
     const textRes = new THREE.Mesh(textResGeometry, textMaterial)
     textResGeometry.center()
-    textRes.position.set(-35, 0, -19.5) //.22
-    textRes.rotation.x = Math.PI * .5
-    textRes.rotation.y = Math.PI
+    textRes.position.set(-42, .22, -9) //.22
+    // textRes.rotation.x = Math.PI * .5
+    textRes.rotation.y = - Math.PI * .5
     // textRes.rotation.z = Math.PI
     textRes.castShadow = true
     textRes.receiveShadow = true
@@ -162,7 +163,7 @@ let test
 //     }
 // )
 
-const light = new THREE.AmbientLight( 0xFFF7A0, .7 );
+const light = new THREE.AmbientLight( 0xFFFFFF, .7 ); //0xFFF7A0
 scene.add( light );
 
 
@@ -284,7 +285,7 @@ animArray.push(anim3_1)
 
 let anim4 = gsap.to( controls.target, {
     // delay: 23,
-    duration: 5,
+    duration: 2,
     x: -40,
     y: 1,
     z: 0,
@@ -293,7 +294,7 @@ anim4.pause()
 animArray.push(anim4)
 
 let anim4_1 =  gsap.to(camera.position, {
-    duration: 5,
+    duration: 2,
     x: -20,
     y: 1,
     z: 0,
@@ -303,7 +304,7 @@ animArray.push(anim4_1)
 
 let anim5 = gsap.to( controls.target, {
     // delay: 31,
-    duration: 5,
+    duration:2,
     x: -20,
     y: 1,
     z: 40,
@@ -312,64 +313,64 @@ anim5.pause()
 animArray.push(anim5)
 
 let anim5_1 = gsap.to(camera.position, {
-    duration: 5,
+    duration: 2,
     x: -20,
     y: 1,
     z: 36,
-})
-anim5_1.pause()
-animArray.push(anim5_1)
-
-let anim6 = gsap.to( controls.target, {
-    // delay: 40,
-    duration: 5,
-    x: -40,
-    y: 1,
-    z: 36,
-})
-anim6.pause()
-animArray.push(anim6)
-
-let anim6_1 = gsap.to(camera.position, {
-    duration: 5,
-    x: -32,
-    y: 1,
-    z: 36,
-})
-anim6_1.pause()
-animArray.push(anim6_1)
-
-let anim7 = gsap.to( controls.target, {
-    // delay: 49,
-    duration: 5,
-    x: -32,
-    y: 1,
-    z: 66,
-})
-anim7.pause()
-animArray.push(anim7)
-
-let anim7_1 = gsap.to(camera.position, {
-    duration: 2,
-    x: -32,
-    y: 1,
-    z: 56,
-})
-anim7_1.pause()
-animArray.push(anim7_1)
-
-let anim7_2 = gsap.to(camera.position, {
-    duration: 5,
-    x: -12,
-    y: 1,
-    z: 60,
     onStart: () => {
         playMeToo = true
         longerTimeout = true
     }
 })
-anim7_2.pause()
-animArray.push(anim7_2)
+anim5_1.pause()
+animArray.push(anim5_1)
+
+// let anim6 = gsap.to( controls.target, {
+//     // delay: 40,
+//     duration: 2,
+//     x: -40,
+//     y: 1,
+//     z: 36,
+// })
+// anim6.pause()
+// animArray.push(anim6)
+
+// let anim6_1 = gsap.to(camera.position, {
+//     duration: 2,
+//     x: -32,
+//     y: 1,
+//     z: 36,
+// })
+// anim6_1.pause()
+// animArray.push(anim6_1)
+//
+// let anim7 = gsap.to( controls.target, {
+//     // delay: 49,
+//     duration: 2,
+//     x: -32,
+//     y: 1,
+//     z: 66,
+// })
+// anim7.pause()
+// animArray.push(anim7)
+//
+// let anim7_1 = gsap.to(camera.position, {
+//     duration: 2,
+//     x: -32,
+//     y: 1,
+//     z: 56,
+// })
+// anim7_1.pause()
+// animArray.push(anim7_1)
+
+// let anim7_2 = gsap.to(camera.position, {
+//     duration: 5,
+//     x: -12,
+//     y: 1,
+//     z: 60,
+// })
+// anim7_2.pause()
+// animArray.push(anim7_2)
 
 // Play more
 let anim8 = gsap.to( controls.target, {
@@ -428,70 +429,74 @@ animArray.push(anim11)
 
 let anim11_1 = gsap.to(camera.position, {
     duration: 5,
-    x: -51.5,
+    x: -32,
     y: 1,
     z: 36,
+    onStart: () => {
+        playMeToo = true
+        longerTimeout = true
+    }
 })
 anim11_1.pause()
 animArray.push(anim11_1)
 
-let anim12 = gsap.to( controls.target, {
-    // delay: 96,
-    duration: 5,
-    x: -51.5,
-    y: 1,
-    z: -80,
-})
-anim12.pause()
-animArray.push(anim12)
-
-let anim12_1 = gsap.to(camera.position, {
-    duration: 5,
-    x: -51.5,
-    y: 1,
-    z: 0,
-})
-anim12_1.pause()
-animArray.push(anim12_1)
-
-let anim13 = gsap.to( controls.target, {
-    // delay: 105,
-    duration: 5,
-    x: -100,
-    y: 1,
-    z: 0,
-})
-anim13.pause()
-animArray.push(anim13)
-
-let anim13_1 = gsap.to(camera.position, {
-    duration: 5,
-    x: -71.5,
-    y: 1,
-    z: 0,
-})
-anim13_1.pause()
-animArray.push(anim13_1)
-
-let anim14 = gsap.to( controls.target, {
-    // delay: 114,
-    duration: 5,
-    x: -71.5,
-    y: 1,
-    z: 100,
-})
-anim14.pause()
-animArray.push(anim14)
-
-// TOO
-let anim14_1 = gsap.to(camera.position, {
-    duration: 5,
-    x: -71.5,
-    y: 1,
-    z: 20,
-})
-anim14_1.pause()
-animArray.push(anim14_1)
+// let anim12 = gsap.to( controls.target, {
+//     // delay: 96,
+//     duration: 5,
+//     x: -51.5,
+//     y: 1,
+//     z: -80,
+// })
+// anim12.pause()
+// animArray.push(anim12)
+//
+// let anim12_1 = gsap.to(camera.position, {
+//     duration: 5,
+//     x: -51.5,
+//     y: 1,
+//     z: 0,
+// })
+// anim12_1.pause()
+// animArray.push(anim12_1)
+//
+// let anim13 = gsap.to( controls.target, {
+//     // delay: 105,
+//     duration: 5,
+//     x: -100,
+//     y: 1,
+//     z: 0,
+// })
+// anim13.pause()
+// animArray.push(anim13)
+//
+// let anim13_1 = gsap.to(camera.position, {
+//     duration: 5,
+//     x: -71.5,
+//     y: 1,
+//     z: 0,
+// })
+// anim13_1.pause()
+// animArray.push(anim13_1)
+//
+// let anim14 = gsap.to( controls.target, {
+//     // delay: 114,
+//     duration: 5,
+//     x: -71.5,
+//     y: 1,
+//     z: 100,
+// })
+// anim14.pause()
+// animArray.push(anim14)
+//
+// // TOO
+// let anim14_1 = gsap.to(camera.position, {
+//     duration: 5,
+//     x: -71.5,
+//     y: 1,
+//     z: 20,
+// })
+// anim14_1.pause()
+// animArray.push(anim14_1)
 
 let anim15 = gsap.to( controls.target, {
     // delay: 124,
@@ -501,7 +506,6 @@ let anim15 = gsap.to( controls.target, {
     z: 17,
     onStart: () => {
         // longer timeout
-        longerTimeout = true
     }
 })
 anim15.pause()
@@ -1094,7 +1098,7 @@ function cameraAnimation(){
     }
     let timeout = animArray[cameraAnimIndex].duration() * 1000
     if(longerTimeout){
-        if(cameraAnimIndex > 10 && cameraAnimIndex < 20 || cameraAnimIndex > 20 && cameraAnimIndex < 28 || cameraAnimIndex > 31 && cameraAnimIndex < 37){
+        if(cameraAnimIndex > 6 && cameraAnimIndex < 15 || cameraAnimIndex > 9 && cameraAnimIndex < 18 || cameraAnimIndex > 20 && cameraAnimIndex < 26){
             showElBool = true
         }else {
             showElBool = false
