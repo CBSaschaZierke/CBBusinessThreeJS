@@ -845,7 +845,7 @@ const hccards = [
         element: document.querySelector('.hccardProgress')
     },
     {
-        position: new THREE.Vector3(-6.5, 3, 60),
+        position: new THREE.Vector3(-6, 3, 58.5),
         element: document.querySelector('.hccardClosed')
     },
     {
@@ -866,7 +866,7 @@ const hccards = [
         element: document.querySelector('.cocardClosed')
     },
     {
-        position: new THREE.Vector3(-42.1, 6.75, 14.5),
+        position: new THREE.Vector3(-41.6, 6.75, 14.5),
         element: document.querySelector('.coimg')
     },
 
@@ -902,7 +902,7 @@ let homecards=[
         element: document.querySelector('.GermanClosed')
     },
     {
-        position: new THREE.Vector3(-10.6, 5.2, 9),
+        position: new THREE.Vector3(-10.45, 5.2, 9),
         element: document.querySelector('.Germanimg')
     },
 ]

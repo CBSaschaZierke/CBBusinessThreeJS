@@ -1,5 +1,6 @@
 :root {
     --content-bg-color: rgba(0,0,0,0.5);
+    --footer-bg-color: rgba(0,0,0,0.7);
 
     /*Font Weights*/
     --header: 700;
@@ -61,7 +62,7 @@ body
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
+    width: 50%;
     height: 50%;
 }
 
@@ -89,11 +90,12 @@ body
 .gcard .label{
     position: absolute;
     display: flex;
-    top: 0%;
-    left: 0%;
-    width: 100%;
+    width: 250%;
     height: 40%;
+    background-color: var(--content-bg-color);
     color: white;
+    border-radius: 10px;
+    border: 2px solid white;
     text-align: center;
     line-height: 1.3em;
     font-weight: 100;
@@ -105,8 +107,9 @@ body
 }
 
 .headercard {
-    font-size: 2rem;
-    line-height: 2rem;
+    font-size: 150%;
+    line-height: 150%;
+    margin-top: 2%;
     margin-bottom: 2%;
 }
 
@@ -138,6 +141,7 @@ body
     margin-top: 50%;
     margin-left: 25%;
     width: 50%;
+    line-height: 100%;
 }
 
 /* Footer Bar */
@@ -150,7 +154,7 @@ body
     width: 100%;
     color: white;
     height: 7.5%;
-    background-color: var(--content-bg-color);
+    background-color: var(--footer-bg-color);
     border-top: 2px solid white;
     overflow: hidden;
 }
@@ -215,7 +219,7 @@ body
 }
 
 .tableg{
-    margin: 2% auto;
+    margin: 6% auto;
     font-size: 75%;
     line-height: 100%;
 }
@@ -238,6 +242,9 @@ body
 .germandesc{
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 10%;
+    margin-left: 5%;
     width: 50%;
+    color: #bfab60;
+    font-weight: 700;
+    font-size: 125%;
 }
