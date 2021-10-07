@@ -219,7 +219,6 @@ scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
 
 controls.target = new THREE.Vector3(-11,4,-12)
 
@@ -241,6 +240,9 @@ let anim1_1 = gsap.to( controls.target, {
     x: -15,
     y: 2,
     z: -7,
+    onStart: () =>{
+        longerTimeout = true
+    }
 })
 anim1_1.pause()
 animArray.push(anim1_1)
@@ -307,7 +309,7 @@ let anim5 = gsap.to( controls.target, {
     duration:2,
     x: -20,
     y: 1,
-    z: 40,
+    z: 60,
 })
 anim5.pause()
 animArray.push(anim5)
@@ -374,6 +376,7 @@ animArray.push(anim5_1)
 
 // Play more
 let anim8 = gsap.to( controls.target, {
+    delay: 2,
     // delay: 58,
     duration: 5,
     x: -10,
@@ -383,11 +386,14 @@ let anim8 = gsap.to( controls.target, {
 anim8.pause()
 animArray.push(anim8)
 
+/**
+ * View Healthcare view
+ */
 let anim8_1 = gsap.to(camera.position, {
     duration: 5,
     x: -10,
     y: 2,
-    z: 70,
+    z: 73,
     onStart: () => {
         playMeToo = true
     }
@@ -511,10 +517,14 @@ let anim15 = gsap.to( controls.target, {
 anim15.pause()
 animArray.push(anim15)
 
-// show Com Data
+
+/**
+ * view Commercial
+ */
+
 let anim15_1 = gsap.to(camera.position, {
     duration: 7,
-    x: -28.5,
+    x: -30,
     y: 4.5,
     z: 17,
     onStart: () => {
@@ -652,11 +662,13 @@ let anim21 = gsap.to( controls.target, {
 anim21.pause()
 animArray.push(anim21)
 
-// Show Res Data
+/**
+ * View Residential
+ */
 let anim21_pos = gsap.to( camera.position, {
     // delay: 180,
     duration:5,
-    x: -50,
+    x: -52,
     y: 5,
     z: -9,
 })
@@ -792,49 +804,29 @@ window.addEventListener('click', (e) => {
 
 let rayBool = true
 
-window.addEventListener('keydown', (e) => {
-    if(e.code === 'Space'){
-        camera.position.set(0, 30, 0)
-        controls.target = new THREE.Vector3(0,0,0);
-        for(const point of points){
-            point.element.classList.add('visible')
-        }
-        rayBool = false
-    }
-})
-
-window.addEventListener('keydown', (e) => {
-    if(e.code === 'Escape'){
-        camera.position.set(-6, 5, 3)
-        controls.target = new THREE.Vector3(0,0,0);
-        for(const point of points){
-            point.element.classList.remove('visible')
-        }
-        rayBool = true
-    }
-})
+// window.addEventListener('keydown', (e) => {
+//     if(e.code === 'Space'){
+//         camera.position.set(0, 30, 0)
+//         controls.target = new THREE.Vector3(0,0,0);
+//         for(const point of points){
+//             point.element.classList.add('visible')
+//         }
+//         rayBool = false
+//     }
+// })
+//
+// window.addEventListener('keydown', (e) => {
+//     if(e.code === 'Escape'){
+//         camera.position.set(-6, 5, 3)
+//         controls.target = new THREE.Vector3(0,0,0);
+//         for(const point of points){
+//             point.element.classList.remove('visible')
+//         }
+//         rayBool = true
+//     }
+// })
 
 const vidraycaster = new THREE.Raycaster()
-
-// Points of Interes
-const points = [
-    {
-        position: new THREE.Vector3(1.55, .3, 9),
-        element: document.querySelector('.point-0')
-    },
-    {
-        position: new THREE.Vector3(-10, .3, 5),
-        element: document.querySelector('.point-1')
-    },
-    {
-        position: new THREE.Vector3(-8, .3, -8),
-        element: document.querySelector('.point-2')
-    },
-    {
-        position: new THREE.Vector3(8, .3, -6),
-        element: document.querySelector('.point-3')
-    }
-]
 
 const videos = [
     {
@@ -845,54 +837,73 @@ const videos = [
 
 const hccards = [
     {
-        position: new THREE.Vector3(-15, 2.5, 61),
+        position: new THREE.Vector3(-16.4, 3, 62),
         element: document.querySelector('.hccardIncome')
     },
     {
-        position: new THREE.Vector3(-10.5, 2.5, 58),
+        position: new THREE.Vector3(-12.5, 3, 58),
         element: document.querySelector('.hccardProgress')
     },
     {
-        position: new THREE.Vector3(-5, 2.5, 60),
+        position: new THREE.Vector3(-6.5, 3, 60),
         element: document.querySelector('.hccardClosed')
     },
     {
-        position: new THREE.Vector3(-11.5, 7.5, 47),
+        position: new THREE.Vector3(-13.5, 8, 47),
         element: document.querySelector('.hcimg')
     },
 
     {
-        position: new THREE.Vector3(-41.6, 2.5, 22.25),
+        position: new THREE.Vector3(-41.6, 3, 24.25),
         element: document.querySelector('.cocardIncome')
     },
     {
-        position: new THREE.Vector3(-41.6, 2.5, 17.75),
+        position: new THREE.Vector3(-41.6, 3, 19.25),
         element: document.querySelector('.cocardProgress')
     },
     {
-        position: new THREE.Vector3(-41.6, 2.5, 13.25),
+        position: new THREE.Vector3(-41.6, 3, 14.5),
         element: document.querySelector('.cocardClosed')
     },
     {
-        position: new THREE.Vector3(-42.1, 6.25, 13.5),
+        position: new THREE.Vector3(-42.1, 6.75, 14.5),
         element: document.querySelector('.coimg')
     },
 
     {
-        position: new THREE.Vector3(-40.2, 2.5, -13.75),
+        position: new THREE.Vector3(-40.2, 3, -15.5),
         element: document.querySelector('.rescardIncome')
     },
     {
-        position: new THREE.Vector3(-40.2, 2.5, -9),
+        position: new THREE.Vector3(-40.2, 3, -10.75),
         element: document.querySelector('.rescardProgress')
     },
     {
-        position: new THREE.Vector3(-40.2, 2.5, -4.25),
+        position: new THREE.Vector3(-40.2, 3, -5.75),
         element: document.querySelector('.rescardClosed')
     },
     {
-        position: new THREE.Vector3(-40.2, 5.25, -10),
+        position: new THREE.Vector3(-40.2, 5.25, -11),
         element: document.querySelector('.resimg')
+    }
+]
+
+let homecards=[
+    {
+        position: new THREE.Vector3(-7, 2.5, 5),
+        element: document.querySelector('.GermanIncome')
+    },
+    {
+        position: new THREE.Vector3(-10.8, 2.5, 5),
+        element: document.querySelector('.GermanProgress')
+    },
+    {
+        position: new THREE.Vector3(-14.8, 2.5, 2),
+        element: document.querySelector('.GermanClosed')
+    },
+    {
+        position: new THREE.Vector3(-10.6, 5.2, 9),
+        element: document.querySelector('.Germanimg')
     },
 ]
 // const light = new THREE.AmbientLight(0xFFF7A0)
@@ -904,7 +915,10 @@ const hccards = [
 const clock = new THREE.Clock()
 
 let currentIntersect = null
-let showElBool = false
+let showElBool1 = false
+let showElBool2 = false
+let showElBool3 = false
+let showHomeBool = false
 
 
 const tick = () =>
@@ -913,15 +927,6 @@ const tick = () =>
 
     // Update controls
     controls.update()
-
-    // for(const point of points){
-    //     const screenPosition = point.position.clone()
-    //     screenPosition.project(camera)
-    //
-    //     const translateX = screenPosition.x * sizes.width *.5
-    //     const translateY = -screenPosition.y * sizes.height *.5
-    //     point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
-    // }
 
     // Go through each point
     for(const point of videos)
@@ -975,22 +980,22 @@ const tick = () =>
         point.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
     }
 
-    console.log(showElBool)
-    if(showElBool){
-        for(const card of hccards)
+    if(showElBool1){
+        for(let i=0;i<4;i++)
         {
             // Get 2D screen position
-            const screenPosition = card.position.clone()
+            const screenPosition = hccards[i].position.clone()
             screenPosition.project(camera)
 
-            // // Set the raycaster
-            vidraycaster.setFromCamera(screenPosition, camera)
-            const intersects = vidraycaster.intersectObjects(scene.children, true)
+            // Set the raycaster
+            raycaster.setFromCamera(screenPosition, camera)
+            const intersects = raycaster.intersectObjects(scene.children, true)
 
+            // No intersect found
             if(intersects.length === 0)
             {
                 // Show
-                card.element.classList.add('visible')
+                hccards[i].element.classList.add('visible')
             }
 
             // Intersect found
@@ -998,67 +1003,164 @@ const tick = () =>
             {
                 // Get the distance of the intersection and the distance of the point
                 const intersectionDistance = intersects[0].distance
-                const pointDistance = card.position.distanceTo(camera.position)
+                const pointDistance = hccards[i].position.distanceTo(camera.position)
 
                 // Intersection is close than the point
-                if(intersectionDistance === 0)
+                if(intersectionDistance < pointDistance)
                 {
                     // Hide
-                    card.element.classList.add('visible')
+                    hccards[i].element.classList.remove('visible')
                 }
                 // Intersection is further than the point
                 else
                 {
-                    const intersectDistance = intersects[0].distance
-                    const vidDistance = card.position.distanceTo(camera.position)
-
-                    if(intersectionDistance < pointDistance){
-                        card.element.classList.remove('visible')
-                    }else {
-                        card.element.classList.add('visible')
-                    }
-
+                    // Show
+                    hccards[i].element.classList.add('visible')
                 }
             }
 
-            // const translateX = (screenPosition.x * sizes.width) * .5
-            // const translateY = -(screenPosition.y * sizes.height) * .5
-            // card.element.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px)`
+            const translateX = screenPosition.x * sizes.width * 0.5
+            const translateY = - screenPosition.y * sizes.height * 0.5
+            hccards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        }
+    }
 
-            let x = (screenPosition.x *  .5 + .5) * canvas.clientWidth;
-            let y = (screenPosition.y * -.5 + .5) * canvas.clientHeight;
+    if(showElBool2){
+        for(let i=4;i<8;i++)
+        {
+            // Get 2D screen position
+            const screenPosition = hccards[i].position.clone()
+            screenPosition.project(camera)
 
-            // move the elem to that position
-            card.element.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+            // Set the raycaster
+            raycaster.setFromCamera(screenPosition, camera)
+            const intersects = raycaster.intersectObjects(scene.children, true)
+
+            // No intersect found
+            if(intersects.length === 0)
+            {
+                // Show
+                hccards[i].element.classList.add('visible')
+            }
+
+            // Intersect found
+            else
+            {
+                // Get the distance of the intersection and the distance of the point
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = hccards[i].position.distanceTo(camera.position)
+
+                // Intersection is close than the point
+                if(intersectionDistance < pointDistance)
+                {
+                    // Hide
+                    hccards[i].element.classList.remove('visible')
+                }
+                // Intersection is further than the point
+                else
+                {
+                    // Show
+                    hccards[i].element.classList.add('visible')
+                }
+            }
+
+            const translateX = screenPosition.x * sizes.width * 0.5
+            const translateY = - screenPosition.y * sizes.height * 0.5
+            hccards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        }
+    }
+
+    if(showElBool3){
+        for(let i=8;i<hccards.length;i++)
+        {
+            // Get 2D screen position
+            const screenPosition = hccards[i].position.clone()
+            screenPosition.project(camera)
+
+            // Set the raycaster
+            raycaster.setFromCamera(screenPosition, camera)
+            const intersects = raycaster.intersectObjects(scene.children, true)
+
+            // No intersect found
+            if(intersects.length === 0)
+            {
+                // Show
+                hccards[i].element.classList.add('visible')
+            }
+
+            // Intersect found
+            else
+            {
+                // Get the distance of the intersection and the distance of the point
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = hccards[i].position.distanceTo(camera.position)
+
+                // Intersection is close than the point
+                if(intersectionDistance < pointDistance)
+                {
+                    // Hide
+                    hccards[i].element.classList.remove('visible')
+                }
+                // Intersection is further than the point
+                else
+                {
+                    // Show
+                    hccards[i].element.classList.add('visible')
+                }
+            }
+
+            const translateX = screenPosition.x * sizes.width * 0.5
+            const translateY = - screenPosition.y * sizes.height * 0.5
+            hccards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        }
+    }
+
+    if(showHomeBool) {
+        for (let i=0; i<homecards.length;i++) {
+            // Get 2D screen position
+            const screenPosition = homecards[i].position.clone()
+            screenPosition.project(camera)
+
+            // Set the raycaster
+            raycaster.setFromCamera(screenPosition, camera)
+            const intersects = raycaster.intersectObjects(scene.children, true)
+
+            // No intersect found
+            if(intersects.length === 0)
+            {
+                // Show
+                homecards[i].element.classList.add('visible')
+            }
+
+            // Intersect found
+            else
+            {
+                // Get the distance of the intersection and the distance of the point
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = homecards[i].position.distanceTo(camera.position)
+
+                // Intersection is close than the point
+                if(intersectionDistance < pointDistance)
+                {
+                    // Hide
+                    homecards[i].element.classList.remove('visible')
+                }
+                // Intersection is further than the point
+                else
+                {
+                    // Show
+                    homecards[i].element.classList.add('visible')
+                }
+            }
+
+            const translateX = screenPosition.x * sizes.width * 0.5
+            const translateY = - screenPosition.y * sizes.height * 0.5
+            homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
         }
     }
 
 
     // Render
-
-    if(test !== undefined && rayBool){
-        raycaster.setFromCamera(mouse, camera)
-
-        const intersects = raycaster.intersectObjects(test.children)
-
-        for( const intersect of intersects){
-            console.log(intersect.object.name)
-        }
-
-        if(intersects.length){
-            if(!currentIntersect){
-                console.log('mouse enter')
-            }
-            currentIntersect = intersects[0]
-        }
-        else{
-            if(currentIntersect){
-                console.log('mouse leave')
-            }
-            currentIntersect = null
-        }
-    }
-
 
     renderer.render(scene, camera)
 
@@ -1087,6 +1189,9 @@ function cameraAnimation(){
     for(let i = 0; i<hccards.length;i++){
         hccards[i].element.classList.remove('visible')
     }
+    for(let i=0;i<homecards.length;i++){
+        homecards[i].element.classList.remove('visible')
+    }
     if(cameraAnimIndex === 1){
         videos[0].element.classList.add('visible')
     }else{
@@ -1097,22 +1202,30 @@ function cameraAnimation(){
         playMultipleAnims(cameraAnimIndex)
     }
     let timeout = animArray[cameraAnimIndex].duration() * 1000
+
+    if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
+        showElBool1 = true
+    }
+    else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
+        showElBool2 = true
+    }
+    else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
+        showElBool3 = true
+    }
+    else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
+        showHomeBool = true
+    }
+    else {
+        showElBool1 = false
+        showElBool2 = false
+        showElBool3 = false
+        showHomeBool = false
+    }
+
     if(longerTimeout){
-        if(cameraAnimIndex > 6 && cameraAnimIndex < 15 || cameraAnimIndex > 9 && cameraAnimIndex < 18 || cameraAnimIndex > 20 && cameraAnimIndex < 26){
-            showElBool = true
-        }else {
-            showElBool = false
-        }
-        console.log(cameraAnimIndex)
         timeout += 15000
         longerTimeout = false
     }
-    else {
-        showElBool = false
-    }
-    // if(cameraAnimIndex === 12 || cameraAnimIndex === 14 || cameraAnimIndex === 16 || cameraAnimIndex === 18 || cameraAnimIndex === 26 || cameraAnimIndex === 28 || cameraAnimIndex === 31 || cameraAnimIndex === 39 || cameraAnimIndex === 42){
-    //     playMultipleAnims(cameraAnimIndex)
-    // }
     cameraAnimIndex++
     setTimeout(cameraAnimation, timeout)
 }
