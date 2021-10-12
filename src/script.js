@@ -1122,6 +1122,7 @@ const tick = () =>
             {
                 // Show
                 homecards[i].element.classList.add('visible')
+                // homecards[i].element.style.transform = `scale(${dis}, ${dis})`
             }
 
             // Intersect found
@@ -1136,18 +1137,21 @@ const tick = () =>
                 {
                     // Hide
                     homecards[i].element.classList.remove('visible')
+                    // homecards[i].element.style.transform = `scale(0, 0)`
                 }
                 // Intersection is further than the point
                 else
                 {
                     // Show
                     homecards[i].element.classList.add('visible')
+                    // homecards[i].element.style.transform = `scale(${dis}, ${dis})`
                 }
             }
 
             const translateX = screenPosition.x * sizes.width * 0.5
             const translateY = - screenPosition.y * sizes.height * 0.5
-            homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+            homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)` //  scale(${disx})
+
         }
     }
 

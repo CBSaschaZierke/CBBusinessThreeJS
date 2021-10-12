@@ -76,9 +76,7 @@ body
 
 
 .card .label{
-    position: absolute;
-    top: 0%;
-    left: 0%;
+    position: relative;
     width: 22.5%;
     height: 40%;
     background-color: var(--content-bg-color);
@@ -95,8 +93,11 @@ body
     transition: transform .3s;
 }
 
+
 .gcard .label{
     position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     width: 250%;
     height: 40%;
@@ -148,10 +149,12 @@ body
 
 .card.visible .label{
     transform: scale(1,1);
+    transition: transform .3s;
 }
 
 .gcard.visible .label{
     transform: scale(1,1);
+    transition: transform .3s;
 }
 
 .headercardtitle.visible .label{
