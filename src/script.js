@@ -890,11 +890,11 @@ const hccards = [
 
 let homecards=[
     {
-        position: new THREE.Vector3(-7, 2.5, 5),
+        position: new THREE.Vector3(-6.25, 3, 5),
         element: document.querySelector('.GermanIncome')
     },
     {
-        position: new THREE.Vector3(-10.8, 2.5, 5),
+        position: new THREE.Vector3(-10.25, 3, 5),
         element: document.querySelector('.GermanProgress')
     },
     {
@@ -902,7 +902,7 @@ let homecards=[
         element: document.querySelector('.GermanClosed')
     },
     {
-        position: new THREE.Vector3(-10.45, 5.2, 9),
+        position: new THREE.Vector3(-10.5, 6.3, 9),
         element: document.querySelector('.Germanimg')
     },
 ]
@@ -919,6 +919,8 @@ let showElBool1 = false
 let showElBool2 = false
 let showElBool3 = false
 let showHomeBool = false
+
+let homeDistanceArray = []
 
 
 const tick = () =>
@@ -1113,6 +1115,9 @@ const tick = () =>
             const screenPosition = homecards[i].position.clone()
             screenPosition.project(camera)
 
+            let dist = 9.8/homecards[i].position.distanceTo(camera.position)
+
+
             // Set the raycaster
             raycaster.setFromCamera(screenPosition, camera)
             const intersects = raycaster.intersectObjects(scene.children, true)
@@ -1148,9 +1153,15 @@ const tick = () =>
                 }
             }
 
-            const translateX = screenPosition.x * sizes.width * 0.5
-            const translateY = - screenPosition.y * sizes.height * 0.5
-            homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)` //  scale(${disx})
+            let offset = 1/dist
+
+            if(offset < 0){
+                offset *= -1
+            }
+
+            let translateX = screenPosition.x * canvas.clientWidth *offset *.5
+            let translateY = - screenPosition.y * canvas.clientHeight *offset * .5
+            homecards[i].element.style.transform = `scale(${dist}) translateX(${translateX}px) translateY(${translateY}px)` //  scale(${disx})
 
         }
     }
