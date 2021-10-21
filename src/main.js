@@ -4,6 +4,11 @@ let residential_ic = []
 let residential_hotdeals = []
 let commercial_ic = []
 let commercial_hotdeals = []
+let germany_states = []
+let germany_objects = []
+let germany_income
+let germany_inprogress
+let germany_closed
 
 let allHeaderClasses = ['Hot Deals', 'Super Core', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
 
@@ -41,6 +46,23 @@ fetch('http://127.0.0.1:5000/residential')
             residential_hotdeals.push(e)
         }
         changeResidentialdata()
+    })
+
+fetch('http://127.0.0.1:5000/germany')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.objects){
+            germany_objects.push(e)
+        }
+        for(let e of data.state){
+            germany_states.push(e)
+        }
+        germany_income = data.process
+        germany_inprogress = data.in_progress
+        germany_closed = data.closed
+
+        showGermanyData()
+        showState()
     })
 
 let healthcarecount = 0
@@ -282,6 +304,77 @@ function changeREData(index){
     coClosingCard.innerHTML = residential_ic[index].closing
 }
 
+/**
+ * Germany
+ */
+
+function showGermanyData(){
+    let gerVolInc = document.getElementById('gervol_inc')
+    let gerQuaInc = document.getElementById('gerqua_inc')
+    let gerVolPro = document.getElementById('gervol_pro')
+    let gerQuaPro = document.getElementById('gerqua_pro')
+    let gerVolClo = document.getElementById('gervol_clo')
+    let gerQuaClo = document.getElementById('gerqua_clo')
+
+    gerVolInc.innerHTML = `${germany_income.volume}Mrd € (100%)`
+    gerQuaInc.innerHTML = `${germany_income.quantity} (100%)`
+
+    gerVolPro.innerHTML = `${germany_inprogress.volume}Mrd € (100%)`
+    gerQuaPro.innerHTML = `${germany_inprogress.quantity} (100%)`
+
+    gerVolClo.innerHTML = `${germany_closed.volume}Mrd € (100%)`
+    gerQuaClo.innerHTML = `${germany_closed.quantity} (100%)`
+
+}
+
+let statecount = 0
+function showState(){
+    let state = document.getElementById('germandesc')
+    let img = document.getElementById('Germany germanyImg')
+
+    state.innerHTML = germany_states[statecount].name_eng
+    img.src = germany_states[statecount].imgsrc
+    let file = germany_states[statecount].imgsrc
+    showStateIncome(statecount)
+    showStateProgress(statecount)
+    showStateClosed(statecount)
+    statecount++
+    if(statecount > 15){
+        statecount = 0
+    }
+    setTimeout(showState, 5000)
+}
+
+function showStateIncome(index){
+    let volincome = document.getElementById('statevol_inc')
+    let quaincome = document.getElementById('statequa_inc')
+    let quapercent = germany_states[index].process.quantity/germany_income.quantity
+    quapercent = quapercent.toFixed(2)
+
+    volincome.innerHTML = `${germany_states[index].process.volume}Mrd € (${(germany_states[index].process.volume/germany_income.volume).toFixed(2)}%)`
+    quaincome.innerHTML = `${germany_states[index].process.quantity} (${quapercent}%)`
+}
+
+function showStateProgress(index){
+    let volprogress = document.getElementById('statevol_pro')
+    let quaprogress = document.getElementById('statequa_pro')
+    let quapercent = germany_states[index].in_progress.quantity/germany_inprogress.quantity
+    quapercent = quapercent.toFixed(2)
+
+    volprogress.innerHTML = `${germany_states[index].in_progress.volume}Mrd € (${(germany_states[index].in_progress.volume/germany_income.volume).toFixed(2)}%)`
+    quaprogress.innerHTML = `${germany_states[index].in_progress.quantity} (${quapercent}%)`
+}
+
+function showStateClosed(index){
+    let volclosed = document.getElementById('statevol_clo')
+    let quaclosed = document.getElementById('statequa_clo')
+    let quapercent = germany_states[index].closed.quantity/germany_closed.quantity
+    quapercent = quapercent.toFixed(2)
+
+    volclosed.innerHTML = `${germany_states[index].closed.volume}Mrd € (${(germany_states[index].closed.volume/germany_closed.volume).toFixed(2)}%)`
+    quaclosed.innerHTML = `${germany_states[index].closed.quantity} (${quapercent}%)`
+}
+
 let bls = [
     {
         "name": 'Berlin',
@@ -305,11 +398,10 @@ function changeGermanBL(){
         blindex = 0
     }
     text.innerHTML = bls[blindex].name
-    img.src = bls[blindex].src
+    // img.src = bls[blindex].src
     blindex++
     setTimeout(changeGermanBL, 1000)
 }
-changeGermanBL()
 
 let divindex = 0
 let divs = document.getElementsByClassName('footer-content')
