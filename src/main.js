@@ -1,4 +1,25 @@
-let assetclasses = ['SuperCore', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
+let healthcare_ic = []
+let residential_ic = []
+let commercial_ic = []
+
+fetch('http://127.0.0.1:5000/residential')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            healthcare_ic.push(e)
+        }
+        console.log(healthcare_ic[0])
+        // changeAssetClass()
+    })
+
+fetch('http://127.0.0.1:5000/commercial')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            commercial_ic.push(e)
+        }
+        changeCommercialData()
+    })
 
 
 let bls = [
@@ -17,17 +38,49 @@ let bls = [
 ]
 
 let acindex = 0
-function changeAssetClass() {
+export function changeAssetClass() {
     let hcard = document.getElementsByClassName('desc')
-    console.log(hcard)
-    if(acindex >= assetclasses.length){
+    if(acindex >= healthcare_ic.length){
         acindex = 0
     }
     for(let i =0; i<hcard.length;i++){
-        hcard[i].innerHTML = assetclasses[acindex]
+        hcard[i].innerHTML = healthcare_ic[acindex].name
+        changeHCData(acindex)
     }
     acindex++
+    setTimeout(changeAssetClass, 5000)
+}
+function changeHCData(index){
+    let hcIncomeCard = document.getElementById('hcIncome')
+    let hcProgressCard = document.getElementById('hcProgress')
+    let hcClosingCard = document.getElementById('hcClosed')
+
+    hcIncomeCard.innerHTML = healthcare_ic[index].income
+    hcProgressCard.innerHTML = healthcare_ic[index].progress
+    hcClosingCard.innerHTML = healthcare_ic[index].closing
+}
+
+let coindex = 0
+function changeCommercialData() {
+    let hcard = document.getElementsByClassName('desc') // TODO change it
+    if(coindex >= commercial_ic.length){
+        coindex = 0
+    }
+    for(let i =0; i<hcard.length;i++){
+        hcard[i].innerHTML = commercial_ic[acindex].name
+        changeCOData(coindex)
+    }
+    coindex++
     setTimeout(changeAssetClass, 1000)
+}
+function changeCOData(index){
+    let coIncomeCard = document.getElementById('coIncome')
+    let coProgressCard = document.getElementById('coProgress')
+    let coClosingCard = document.getElementById('coClosed')
+
+    coIncomeCard.innerHTML = commercial_ic[index].income
+    coProgressCard.innerHTML = commercial_ic[index].progress
+    coClosingCard.innerHTML = commercial_ic[index].closing
 }
 
 let blindex = 0
@@ -42,8 +95,6 @@ function changeGermanBL(){
     blindex++
     setTimeout(changeGermanBL, 1000)
 }
-
-changeAssetClass()
 changeGermanBL()
 
 let divindex = 0

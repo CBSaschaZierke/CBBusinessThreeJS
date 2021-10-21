@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import {gsap} from "gsap/gsap-core";
+import * as main from './main.js'
 
 /**
  * Base
@@ -933,45 +934,45 @@ const tick = () =>
     // Go through each point
     for(const point of videos)
     {
-            // Get 2D screen position
-            const screenPosition = point.position.clone()
-            screenPosition.project(camera)
+        // Get 2D screen position
+        const screenPosition = point.position.clone()
+        screenPosition.project(camera)
 
-            // Set the raycaster
-            raycaster.setFromCamera(screenPosition, camera)
-            const intersects = raycaster.intersectObjects(scene.children, true)
+        // Set the raycaster
+        raycaster.setFromCamera(screenPosition, camera)
+        const intersects = raycaster.intersectObjects(scene.children, true)
 
-            // // No intersect found
-            // if(intersects.length === 0)
-            // {
-            //     // Show
-            //     point.element.classList.add('visible')
-            // }
-            //
-            // // Intersect found
-            // else
-            // {
-            //     // Get the distance of the intersection and the distance of the point
-            //     const intersectionDistance = intersects[0].distance
-            //     const pointDistance = point.position.distanceTo(camera.position)
-            //
-            //     // Intersection is close than the point
-            //     if(intersectionDistance < pointDistance)
-            //     {
-            //         // Hide
-            //         point.element.classList.remove('visible')
-            //     }
-            //     // Intersection is further than the point
-            //     else
-            //     {
-            //         // Show
-            //         point.element.classList.add('visible')
-            //     }
-            // }
+        // // No intersect found
+        // if(intersects.length === 0)
+        // {
+        //     // Show
+        //     point.element.classList.add('visible')
+        // }
+        //
+        // // Intersect found
+        // else
+        // {
+        //     // Get the distance of the intersection and the distance of the point
+        //     const intersectionDistance = intersects[0].distance
+        //     const pointDistance = point.position.distanceTo(camera.position)
+        //
+        //     // Intersection is close than the point
+        //     if(intersectionDistance < pointDistance)
+        //     {
+        //         // Hide
+        //         point.element.classList.remove('visible')
+        //     }
+        //     // Intersection is further than the point
+        //     else
+        //     {
+        //         // Show
+        //         point.element.classList.add('visible')
+        //     }
+        // }
 
-            const translateX = screenPosition.x * sizes.width * 0.5
-            const translateY = - screenPosition.y * sizes.height * 0.5
-            point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        const translateX = screenPosition.x * sizes.width * 0.5
+        const translateY = - screenPosition.y * sizes.height * 0.5
+        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
     }
 
     if(showElBool1){
@@ -1212,6 +1213,7 @@ function cameraAnimation(){
 
     if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
         showElBool1 = true
+        main.changeAssetClass()
     }
     else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
         showElBool2 = true
