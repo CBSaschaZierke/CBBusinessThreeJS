@@ -77,7 +77,7 @@ body
 
 
 .card .label{
-    position: relative;
+    position: absolute;
     width: 22.5%;
     height: 40%;
     background-color: var(--content-bg-color);
@@ -285,10 +285,12 @@ body
     font-size: 125%;
 }
 
-.hotdeal{
+.card .hotdeal{
     position: absolute;
     top: 0;
     left: 0;
+    transform: scale(1,1);
+    transition: transform .3s
 }
 
 .hotdealtext{

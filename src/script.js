@@ -40,28 +40,9 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 const fontLoader = new THREE.FontLoader()
 
-
-const textIncome = 'Income'
-const textInProgess = 'In Progress'
-const textClosed = 'Closed'
-
 const textHealthCare = 'HEALTH CARE'
 const textCommercial = 'COMMERCIAL'
 const textResidential = 'RESIDENTIAL'
-
-let textBundesland = 'Berlin'
-
-let textHCIncVal = '3'
-let textHCProVal = '2'
-let textHCCloVal = '1'
-
-let textCOIncVal = '7'
-let textCOProVal = '6'
-let textCOCloVal = '5'
-
-let textREIncVal = '5'
-let textREProVal = '4'
-let textRECloVal = '3'
 
 
 /**
@@ -148,9 +129,6 @@ const cbcTex = textureLoader.load('cbcmat.png')
 cbcTex.flipY = false
 cbcTex.encoding = THREE.sRGBEncoding
 
-const bakedMaterial = new THREE.MeshBasicMaterial(({ map: bakedTexture }))
-const cbcMat = new THREE.MeshBasicMaterial({map:cbcTex})
-let test
 
 // gltfLoader.load(
 //     'platform.glb',
@@ -172,15 +150,10 @@ gltfLoader.load(
     'CBCnew.glb',
     (gltf) => {
         gltf.scene.traverse((child) =>{
-            //child.material = cbcMat
             child.castShadow = true
             child.receiveShadow = true
         })
-        // gltf.castShadow = true
-        // gltf.receiveShadow = true
         scene.add(gltf.scene)
-        // test = gltf.scene
-        // console.log(test)
     }
 )
 
@@ -1213,7 +1186,6 @@ function cameraAnimation(){
 
     if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
         showElBool1 = true
-        main.changeAssetClass()
     }
     else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
         showElBool2 = true
@@ -1232,7 +1204,7 @@ function cameraAnimation(){
     }
 
     if(longerTimeout){
-        timeout += 15000
+        timeout += (5000 * 7)
         longerTimeout = false
     }
     cameraAnimIndex++
