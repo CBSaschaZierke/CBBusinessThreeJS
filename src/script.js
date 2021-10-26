@@ -147,7 +147,7 @@ scene.add( light );
 
 
 gltfLoader.load(
-    'CBCnew.glb',
+    'CBCohne1.glb',
     (gltf) => {
         gltf.scene.traverse((child) =>{
             child.castShadow = true

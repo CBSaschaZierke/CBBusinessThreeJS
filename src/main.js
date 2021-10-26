@@ -63,6 +63,7 @@ fetch('http://127.0.0.1:5000/germany')
 
         showGermanyData()
         showState()
+        addFooterContent()
     })
 
 let healthcarecount = 0
@@ -375,54 +376,30 @@ function showStateClosed(index){
     quaclosed.innerHTML = `${germany_states[index].closed.quantity} (${quapercent}%)`
 }
 
-let bls = [
-    {
-        "name": 'Berlin',
-        "src": "https://i.imgur.com/SEJsrbS.png"
-    },
-    {
-        "name": 'Baden-Würtemberg',
-        "src": "https://i.imgur.com/woqz9f6.png"
-    },
-    {
-        "name": 'Brandenburg',
-        "src": "https://i.imgur.com/V4ekzZh.png"
-    }
-]
+/**
+ * Footer
+ */
 
-let blindex = 0
-function changeGermanBL(){
-    let text = document.getElementById('germandesc')
-    let img = document.getElementById('Germany')
-    if(blindex >= bls.length){
-        blindex = 0
-    }
-    text.innerHTML = bls[blindex].name
-    // img.src = bls[blindex].src
-    blindex++
-    setTimeout(changeGermanBL, 1000)
-}
+function addFooterContent(){
+    let contentpanel = document.getElementById('list')
 
-let divindex = 0
-let divs = document.getElementsByClassName('footer-content')
-
-function footerautoslide(){
-    let i
-    let items = divs[divindex].getElementsByClassName('footer-item')
-    divs[divindex].style.display = ''
-    for(i = 0; i < items.length; i++){
-        items[i].style.animation = 'footerslide 30s linear'
+    for(const e of germany_objects){
+        let priceperm = (e.price/e.size).toFixed(2)
+        contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm}€/m² ${e.ic}</h1></li>`
     }
-    items[items.length-1].addEventListener('animationend', testfunc)
-}
 
-function testfunc(){
-    divs[divindex].style.display = 'none'
-    if(divindex+1 == divs.length){divindex = 0}
-    else {
-        divindex += 1
-    }
     footerautoslide()
 }
 
-footerautoslide()
+let itemIndex = 0
+
+function footerautoslide(){
+    let item = document.getElementById('list')
+    item.classList.add('auto')
+    // itemIndex++
+    // if(itemIndex >= items.length){
+    //     itemIndex = 0
+    // }
+
+    setTimeout(footerautoslide, 1000)
+}
