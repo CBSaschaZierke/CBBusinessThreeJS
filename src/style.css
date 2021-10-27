@@ -31,31 +31,20 @@ body
 
 .video-1{
     position: absolute;
-    top: 120px;
-    left: 160px;
+    top: 0;
+    left: 0;
     /*height: 600px;*/
     /*width: 1400px;*/
-    height: 65%;
+    height: 105%;
     width: 100%;
-    opacity: 0;
-
-    transform: scale(0,0);
-    transition: transform .01s;
-    transition: opacity 1s;
-}
-
-.video-1.visible{
-    opacity: 1;
-    transform: scale(1,1);
-    transition: opacity 1s;
 }
 
 .card{
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70%;
-    height: 60%;
+    width: 12.5%;
+    height: 45%;
 }
 
 .gcard {
@@ -77,9 +66,9 @@ body
 
 
 .card .label{
-    position: absolute;
-    width: 22.5%;
-    height: 40%;
+    position: relative;
+    /*width: 50%;*/
+    height: 50%;
     background-color: var(--content-bg-color);
     color: white;
     border-radius: 10px;
@@ -181,10 +170,10 @@ body
 /* Footer Bar */
 
 .footer{
-    position: absolute;
+    position: fixed;
     display: flex;
-    bottom: 0;
-    left: 0;
+    bottom: 0%;
+    left: 0%;
     width: 100%;
     color: white;
     height: 7.5%;
@@ -203,7 +192,7 @@ body
 }
 
 .header{
-    position: absolute;
+    position: relative;
     /*margin: .5% 0 .5% 0;*/
     margin-top: .3%;
     left: 0;
@@ -211,7 +200,7 @@ body
     height: 90%;
     border-radius: 0 20px 20px 0;
     padding-left: 1vw;
-    background-color: #B4C6D1;
+    background-color: #bfab60;
     z-index: 2;
 }
 

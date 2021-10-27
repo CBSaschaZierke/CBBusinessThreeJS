@@ -147,7 +147,7 @@ scene.add( light );
 
 
 gltfLoader.load(
-    'CBCohne1.glb',
+    'CBCohneAlles.glb',
     (gltf) => {
         gltf.scene.traverse((child) =>{
             child.castShadow = true
@@ -802,13 +802,6 @@ let rayBool = true
 
 const vidraycaster = new THREE.Raycaster()
 
-const videos = [
-    {
-        position: new THREE.Vector3(-15,2.25,-6.2),
-        element: document.querySelector('.video-1')
-    }
-]
-
 const hccards = [
     {
         position: new THREE.Vector3(-16.4, 3, 62),
@@ -905,49 +898,6 @@ const tick = () =>
     controls.update()
 
     // Go through each point
-    for(const point of videos)
-    {
-        // Get 2D screen position
-        const screenPosition = point.position.clone()
-        screenPosition.project(camera)
-
-        // Set the raycaster
-        raycaster.setFromCamera(screenPosition, camera)
-        const intersects = raycaster.intersectObjects(scene.children, true)
-
-        // // No intersect found
-        // if(intersects.length === 0)
-        // {
-        //     // Show
-        //     point.element.classList.add('visible')
-        // }
-        //
-        // // Intersect found
-        // else
-        // {
-        //     // Get the distance of the intersection and the distance of the point
-        //     const intersectionDistance = intersects[0].distance
-        //     const pointDistance = point.position.distanceTo(camera.position)
-        //
-        //     // Intersection is close than the point
-        //     if(intersectionDistance < pointDistance)
-        //     {
-        //         // Hide
-        //         point.element.classList.remove('visible')
-        //     }
-        //     // Intersection is further than the point
-        //     else
-        //     {
-        //         // Show
-        //         point.element.classList.add('visible')
-        //     }
-        // }
-
-        const translateX = screenPosition.x * sizes.width * 0.5
-        const translateY = - screenPosition.y * sizes.height * 0.5
-        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
-    }
-
     if(showElBool1){
         for(let i=0;i<4;i++)
         {
@@ -1157,60 +1107,71 @@ tick()
 
 // index 30 für res view
 
-
-
 let cameraAnimIndex = 0
+
+function showVideo() {
+    let video = document.getElementById('video-1')
+    if(cameraAnimIndex === -1){
+        video.style.visibility = ''
+        video.currentTime = 0
+        video.load()
+    }
+    video.onended = () => {
+        video.style.visibility = 'hidden'
+        cameraAnimIndex = 0
+        cameraAnimation()
+    }
+}
+showVideo()
+
 function cameraAnimation(){
     if(cameraAnimIndex >= animArray.length){
-        cameraAnimIndex = 0
+        cameraAnimIndex = -1
+        showVideo()
     }
-    for(let i=0; i<animArray.length;i++){
-        animArray[i].pause()
-    }
-    for(let i = 0; i<hccards.length;i++){
-        hccards[i].element.classList.remove('visible')
-    }
-    for(let i=0;i<homecards.length;i++){
-        homecards[i].element.classList.remove('visible')
-    }
-    if(cameraAnimIndex === 1){
-        videos[0].element.classList.add('visible')
-    }else{
-        videos[0].element.classList.remove('visible')
-    }
-    animArray[cameraAnimIndex].restart()
-    if(playMeToo){
-        playMultipleAnims(cameraAnimIndex)
-    }
-    let timeout = animArray[cameraAnimIndex].duration() * 1000
+    if(cameraAnimIndex >= 0){
+        for(let i=0; i<animArray.length;i++){
+            animArray[i].pause()
+        }
+        for(let i = 0; i<hccards.length;i++){
+            hccards[i].element.classList.remove('visible')
+        }
+        for(let i=0;i<homecards.length;i++){
+            homecards[i].element.classList.remove('visible')
+        }
+        animArray[cameraAnimIndex].restart()
+        if(playMeToo){
+            playMultipleAnims(cameraAnimIndex)
+        }
+        let timeout = animArray[cameraAnimIndex].duration() * 1000
 
-    if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
-        showElBool1 = true
-    }
-    else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
-        showElBool2 = true
-    }
-    else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
-        showElBool3 = true
-    }
-    else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
-        showHomeBool = true
-    }
-    else {
-        showElBool1 = false
-        showElBool2 = false
-        showElBool3 = false
-        showHomeBool = false
-    }
+        if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
+            showElBool1 = true
+        }
+        else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
+            showElBool2 = true
+        }
+        else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
+            showElBool3 = true
+        }
+        else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
+            showHomeBool = true
+        }
+        else {
+            showElBool1 = false
+            showElBool2 = false
+            showElBool3 = false
+            showHomeBool = false
+        }
 
-    if(longerTimeout){
-        timeout += (5000 * 7)
-        longerTimeout = false
+        if(longerTimeout){
+            timeout += (5000 * 7)
+            longerTimeout = false
+        }
+        cameraAnimIndex++
+        setTimeout(cameraAnimation, timeout)
     }
-    cameraAnimIndex++
-    setTimeout(cameraAnimation, timeout)
 }
-cameraAnimation()
 
 function playMultipleAnims(index){
     if(index+1 < animArray.length){
