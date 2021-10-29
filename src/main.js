@@ -105,9 +105,12 @@ function showHCHotDeals(){
     let hcyield = document.getElementsByClassName('hotdealYieald')
 
     for(let i = 0; i<healthcare_hotdeals.length; i++){
+        let price = (healthcare_hotdeals[i].price / healthcare_hotdeals[i].size).toFixed(2)
         img[i].src = healthcare_hotdeals[i].imgsrc
         ac[i].innerHTML = healthcare_hotdeals[i].investclass
+        priceSize[i].innerHTML = `${price}€/m²`
         place[i].innerHTML = healthcare_hotdeals[i].place
+        hcyield[i].innerHTML = `+${healthcare_hotdeals[i].hotdealyield}%`
     }
 }
 
@@ -149,8 +152,6 @@ function changeHCData(index){
 let commercialcount = 0
 function changeCommercialdata(){
 
-    console.log(commercialcount)
-
     if(commercialcount === 0){
         showCOHotDeals()
     }
@@ -188,9 +189,12 @@ function showCOHotDeals(){
     let coyield = document.getElementsByClassName('COhotdealYieald')
 
     for(let i = 0; i<commercial_hotdeals.length; i++){
+        let price = (commercial_hotdeals[i].price / commercial_hotdeals[i].size).toFixed(2)
         img[i].src = commercial_hotdeals[i].imgsrc
         ac[i].innerHTML = commercial_hotdeals[i].investclass
+        priceSize[i].innerHTML = `${price}€/m²`
         place[i].innerHTML = commercial_hotdeals[i].place
+        coyield[i].innerHTML = `+${commercial_hotdeals[i].hotdealyield}%`
     }
 }
 
@@ -268,9 +272,12 @@ function showREHotDeals(){
     let coyield = document.getElementsByClassName('REhotdealYieald')
 
     for(let i = 0; i<residential_hotdeals.length; i++){
+        let price = (residential_hotdeals[i].price / residential_hotdeals[i].size).toFixed(2)
         img[i].src = residential_hotdeals[i].imgsrc
         ac[i].innerHTML = residential_hotdeals[i].investclass
+        priceSize[i].innerHTML = `${price}€/m²`
         place[i].innerHTML = residential_hotdeals[i].place
+        coyield[i].innerHTML = `+${residential_hotdeals[i].hotdealyield}%`
     }
 }
 
@@ -391,15 +398,7 @@ function addFooterContent(){
     footerautoslide()
 }
 
-let itemIndex = 0
-
 function footerautoslide(){
     let item = document.getElementById('list')
     item.classList.add('auto')
-    // itemIndex++
-    // if(itemIndex >= items.length){
-    //     itemIndex = 0
-    // }
-
-    setTimeout(footerautoslide, 1000)
 }

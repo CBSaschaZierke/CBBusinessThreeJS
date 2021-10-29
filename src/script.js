@@ -12,9 +12,9 @@ import * as main from './main.js'
  * Base
  */
 // Debug
-const gui = new dat.GUI({
-    width: 400
-})
+// const gui = new dat.GUI({
+//     width: 400
+// })
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -52,7 +52,7 @@ const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture})
 fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     const textGeometry = new THREE.TextGeometry(textHealthCare, {
         font: font,
-        size: 1,
+        size: .5,
         height: .2,
         curveSegments: 12,
         bevelEnabled: true,
@@ -70,7 +70,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     //     -(textGeometry.boundingBox.max.z -.03) * .5
     // )
     textGeometry.center()
-    text.position.set(-10, .55, 61) //.22
+    text.position.set(-10, .55, 67) //.22
     text.castShadow = true
     text.receiveShadow = true
     scene.add(text)
@@ -210,7 +210,7 @@ anim1.pause()
 animArray.push(anim1)
 
 let anim1_1 = gsap.to( controls.target, {
-    duration: 10,
+    duration: 5,
     x: -15,
     y: 2,
     z: -7,
@@ -821,15 +821,15 @@ const hccards = [
     },
 
     {
-        position: new THREE.Vector3(-41.6, 3, 24.25),
+        position: new THREE.Vector3(-41.6, 4, 24.25),
         element: document.querySelector('.cocardIncome')
     },
     {
-        position: new THREE.Vector3(-41.6, 3, 19.25),
+        position: new THREE.Vector3(-41.6, 4, 19.25),
         element: document.querySelector('.cocardProgress')
     },
     {
-        position: new THREE.Vector3(-41.6, 3, 14.5),
+        position: new THREE.Vector3(-41.6, 4, 14.5),
         element: document.querySelector('.cocardClosed')
     },
     {
@@ -850,31 +850,29 @@ const hccards = [
         element: document.querySelector('.rescardClosed')
     },
     {
-        position: new THREE.Vector3(-40.2, 5.25, -11),
+        position: new THREE.Vector3(-40.2, 5.4, -11),
         element: document.querySelector('.resimg')
     }
 ]
 
 let homecards=[
     {
-        position: new THREE.Vector3(-6.25, 3, 5),
+        position: new THREE.Vector3(-6.25, 2.25, 5),
         element: document.querySelector('.GermanIncome')
     },
     {
-        position: new THREE.Vector3(-10.25, 3, 5),
+        position: new THREE.Vector3(-10.25, 2.25, 5),
         element: document.querySelector('.GermanProgress')
     },
     {
-        position: new THREE.Vector3(-14.8, 2.5, 2),
+        position: new THREE.Vector3(-14.8, 2.25, 2),
         element: document.querySelector('.GermanClosed')
     },
     {
-        position: new THREE.Vector3(-10.5, 6.3, 9),
+        position: new THREE.Vector3(-10.5, 6.4, 9),
         element: document.querySelector('.Germanimg')
     },
 ]
-// const light = new THREE.AmbientLight(0xFFF7A0)
-// scene.add(light)
 
 /**
  * Animate
@@ -886,8 +884,6 @@ let showElBool1 = false
 let showElBool2 = false
 let showElBool3 = false
 let showHomeBool = false
-
-let homeDistanceArray = []
 
 
 const tick = () =>
@@ -1039,7 +1035,7 @@ const tick = () =>
             const screenPosition = homecards[i].position.clone()
             screenPosition.project(camera)
 
-            let dist = 9.8/homecards[i].position.distanceTo(camera.position)
+            // let dist = 9.8/homecards[i].position.distanceTo(camera.position) NO SCALING FOR NOW
 
 
             // Set the raycaster
@@ -1077,15 +1073,16 @@ const tick = () =>
                 }
             }
 
-            let offset = 1/dist
+            // NO SCALING FOR NOW
+            // let offset = 1/dist
+            //
+            // if(offset < 0){
+            //     offset *= -1
+            // }
 
-            if(offset < 0){
-                offset *= -1
-            }
-
-            let translateX = screenPosition.x * canvas.clientWidth *offset *.5
-            let translateY = - screenPosition.y * canvas.clientHeight *offset * .5
-            homecards[i].element.style.transform = `scale(${dist}) translateX(${translateX}px) translateY(${translateY}px)` //  scale(${disx})
+            let translateX = screenPosition.x * canvas.clientWidth *.5 // *offset
+            let translateY = - screenPosition.y * canvas.clientHeight * .5 // *offset
+            homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)` //  scale(${dist})
 
         }
     }
@@ -1112,12 +1109,12 @@ let cameraAnimIndex = 0
 function showVideo() {
     let video = document.getElementById('video-1')
     if(cameraAnimIndex === -1){
-        video.style.visibility = ''
+        video.classList.add('active')
         video.currentTime = 0
         video.load()
     }
     video.onended = () => {
-        video.style.visibility = 'hidden'
+        video.classList.remove('active')
         cameraAnimIndex = 0
         cameraAnimation()
     }

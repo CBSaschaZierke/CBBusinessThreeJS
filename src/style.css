@@ -1,5 +1,5 @@
 :root {
-    --content-bg-color: rgba(0,0,0,0.8);
+    --content-bg-color: rgba(0,0,0,0.9);
     --footer-bg-color: rgba(0,0,0,1);
 
     /*Font Weights*/
@@ -35,8 +35,15 @@ body
     left: 0;
     /*height: 600px;*/
     /*width: 1400px;*/
-    height: 105%;
+    height: 100%;
     width: 100%;
+    opacity: 0;
+    transition: opacity 1.2s;
+}
+
+.active{
+    opacity: 1;
+    transition: opacity 1.2s;
 }
 
 .card{
@@ -66,9 +73,9 @@ body
 
 
 .card .label{
-    position: relative;
-    /*width: 50%;*/
-    height: 50%;
+    position: absolute;
+    width: 120%;
+    height: 60%;
     background-color: var(--content-bg-color);
     color: white;
     border-radius: 10px;
@@ -89,16 +96,15 @@ body
     top: 0;
     left: 0;
     display: flex;
-    width: 350%;
+    width: 450%;
     height: 70%;
     background-color: var(--content-bg-color);
     color: white;
     border-radius: 10px;
     border: 2px solid white;
     text-align: center;
-    line-height: 1.3em;
+    line-height: 2rem;
     font-weight: 100;
-    font-size: 14px;
     /*opacity: 0;*/
     /*transition: opacity 0.3s;*/
     transform: scale(0,0);
@@ -116,7 +122,6 @@ body
     text-align: center;
     line-height: 1.3em;
     font-weight: 100;
-    font-size: 14px;
     /*opacity: 0;*/
     /*transition: opacity 0.3s;*/
     transform: scale(0,0);
@@ -124,15 +129,16 @@ body
 }
 
 .headercard {
-    font-size: 150%;
-    line-height: 150%;
+    font-size: 200%;
+    line-height: 200%;
+    font-weight: 600;
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
 .text {
-    font-size: 200%;
-    line-height: 200%;
+    font-size: 300%;
+    line-height: 300%;
     margin-top: 10%;
     font-weight: 500;
 }
@@ -158,7 +164,6 @@ body
     text-align: center;
     line-height: 1.3em;
     font-weight: 100;
-    font-size: 14px;
 }
 
 .desc, .REdesc, .COdesc, .hcdesc{
@@ -242,8 +247,8 @@ body
 }
 
 .auto {
-    -webkit-animation: scroll 40s linear infinite;
-    animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 80s linear infinite;
+    animation: scroll 80s linear infinite;
 }
 
 @-webkit-keyframes scroll {
@@ -261,16 +266,19 @@ body
     font-size: 75%;
     line-height: 100%;
     text-align: center;
+    border-collapse: separate;
+    border-spacing: 20px 0;
 }
 
 .tb{
     margin: 2% auto;
     padding-top: 2%;
-    text-align: center;
     color: #bfab60;
     font-weight: 700;
     font-size: 125%;
     line-height: 125%;
+    border-collapse: separate;
+    border-spacing: 20px 0;
 }
 
 .blheader{
@@ -286,7 +294,7 @@ body
     width: 50%;
     color: #bfab60;
     font-weight: 700;
-    font-size: 125%;
+    font-size: 200%;
 }
 
 .card .hotdeal{
