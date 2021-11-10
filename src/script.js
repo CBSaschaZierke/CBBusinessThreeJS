@@ -6,7 +6,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import {gsap} from "gsap/gsap-core";
-import * as main from './main.js'
 
 /**
  * Base
@@ -195,6 +194,7 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 
 controls.target = new THREE.Vector3(-11,4,-12)
+
 
 let animArray = []
 let playMeToo = false
@@ -802,6 +802,10 @@ let rayBool = true
 
 const vidraycaster = new THREE.Raycaster()
 
+
+/**
+ * HTML Content
+ */
 const hccards = [
     {
         position: new THREE.Vector3(-16.4, 3, 62),
@@ -893,7 +897,7 @@ const tick = () =>
     // Update controls
     controls.update()
 
-    // Go through each point
+    // Show healthcare cards
     if(showElBool1){
         for(let i=0;i<4;i++)
         {
@@ -939,6 +943,7 @@ const tick = () =>
         }
     }
 
+    // Show Commercial cards
     if(showElBool2){
         for(let i=4;i<8;i++)
         {
@@ -984,6 +989,7 @@ const tick = () =>
         }
     }
 
+    // Show Residential Cards
     if(showElBool3){
         for(let i=8;i<hccards.length;i++)
         {
@@ -1029,6 +1035,7 @@ const tick = () =>
         }
     }
 
+    // Show Home cards
     if(showHomeBool) {
         for (let i=0; i<homecards.length;i++) {
             // Get 2D screen position

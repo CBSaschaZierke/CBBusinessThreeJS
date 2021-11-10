@@ -139,7 +139,7 @@ body
 .text {
     font-size: 300%;
     line-height: 300%;
-    margin-top: 10%;
+    margin-top: 5%;
     font-weight: 500;
 }
 
@@ -315,4 +315,10 @@ body
 .COhotdealImg, .REhotdealImg, .hotdealImg{
     max-width: 50%;
     max-height: 25%;
+}
+
+.tbheader{
+    font-weight: 800;
+    font-size: 125%;
+    line-height: 125%;
 }
