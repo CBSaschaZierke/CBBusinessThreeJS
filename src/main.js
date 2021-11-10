@@ -103,6 +103,7 @@ function showHCHotDeals(){
     let priceSize = document.getElementsByClassName('hotdealPriceSize')
     let place = document.getElementsByClassName('hotdealPlace')
     let hcyield = document.getElementsByClassName('hotdealYieald')
+    superSexyHotDeals()
 
     for(let i = 0; i<healthcare_hotdeals.length; i++){
         let price = (healthcare_hotdeals[i].price / healthcare_hotdeals[i].size).toFixed(2)
@@ -310,6 +311,39 @@ function changeREData(index){
     coIncomeCard.innerHTML = residential_ic[index].income
     coProgressCard.innerHTML = residential_ic[index].progress
     coClosingCard.innerHTML = residential_ic[index].closing
+}
+
+// named by Kevin
+function superSexyHotDeals(){
+    let counthotdealimgs = 0
+    for(let i=counthotdealimgs; i<healthcare_hotdeals.length;i++){
+        let score = healthcare_hotdeals[i].hotdealscore
+        chilliDeals(counthotdealimgs, (counthotdealimgs+3), score)
+        counthotdealimgs = i
+    }
+}
+
+const hotdealimgs = document.querySelectorAll('.Hotimg')
+
+function chilliDeals(x,y, b){
+    let zahl = b
+    for(let i = x; i < y; i++){
+        if(zahl === 3){
+            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl--
+        }
+        else if(zahl === 2){
+            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl--
+        }
+        else if(b === 1){
+            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl--
+        }
+        else if(zahl === 0){
+            hotdealimgs[i].src = 'https://i.imgur.com/9YAX1Da.png'
+        }
+    }
 }
 
 /**
