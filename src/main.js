@@ -103,7 +103,7 @@ function showHCHotDeals(){
     let priceSize = document.getElementsByClassName('hotdealPriceSize')
     let place = document.getElementsByClassName('hotdealPlace')
     let hcyield = document.getElementsByClassName('hotdealYieald')
-    superSexyHotDeals()
+    hotScoreHealthCare()
 
     for(let i = 0; i<healthcare_hotdeals.length; i++){
         let price = (healthcare_hotdeals[i].price / healthcare_hotdeals[i].size).toFixed(2)
@@ -188,6 +188,7 @@ function showCOHotDeals(){
     let priceSize = document.getElementsByClassName('COhotdealPriceSize')
     let place = document.getElementsByClassName('COhotdealPlace')
     let coyield = document.getElementsByClassName('COhotdealYieald')
+    hotScoreCommercial()
 
     for(let i = 0; i<commercial_hotdeals.length; i++){
         let price = (commercial_hotdeals[i].price / commercial_hotdeals[i].size).toFixed(2)
@@ -271,6 +272,7 @@ function showREHotDeals(){
     let priceSize = document.getElementsByClassName('REhotdealPriceSize')
     let place = document.getElementsByClassName('REhotdealPlace')
     let coyield = document.getElementsByClassName('REhotdealYieald')
+    hotScoreResidential()
 
     for(let i = 0; i<residential_hotdeals.length; i++){
         let price = (residential_hotdeals[i].price / residential_hotdeals[i].size).toFixed(2)
@@ -313,13 +315,36 @@ function changeREData(index){
     coClosingCard.innerHTML = residential_ic[index].closing
 }
 
-// named by Kevin
-function superSexyHotDeals(){
-    let counthotdealimgs = 0
-    for(let i=counthotdealimgs; i<healthcare_hotdeals.length;i++){
-        let score = healthcare_hotdeals[i].hotdealscore
-        chilliDeals(counthotdealimgs, (counthotdealimgs+3), score)
-        counthotdealimgs = i
+
+
+function hotScoreHealthCare(){
+    let hotDealHCCount = 0
+    for(let i=0; i<healthcare_hotdeals.length;i++){
+        let score = healthcare_hotdeals[i].hotscore
+        chilliDeals(hotDealHCCount, (hotDealHCCount+3), score)
+        hotDealHCCount += 3
+    }
+}
+
+
+
+function hotScoreCommercial(){
+    let hotDealCoCount = 9
+    for(let i=0; i<commercial_hotdeals.length;i++){
+        let score = commercial_hotdeals[i].hotscore
+        chilliDeals(hotDealCoCount, (hotDealCoCount+3), score)
+        hotDealCoCount += 3
+    }
+}
+
+
+
+function hotScoreResidential(){
+    let hotDealReCount = 18
+    for(let i=0; i<residential_hotdeals.length;i++){
+        let score = residential_hotdeals[i].hotscore
+        chilliDeals(hotDealReCount, (hotDealReCount+3), score)
+        hotDealReCount += 3
     }
 }
 
@@ -327,22 +352,23 @@ const hotdealimgs = document.querySelectorAll('.Hotimg')
 
 function chilliDeals(x,y, b){
     let zahl = b
-    for(let i = x; i < y; i++){
+    for(x; x < y; x++){
         if(zahl === 3){
-            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
-            zahl--
+            hotdealimgs[x].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl = zahl -1
         }
         else if(zahl === 2){
-            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
-            zahl--
+            hotdealimgs[x].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl = zahl -1
         }
-        else if(b === 1){
-            hotdealimgs[i].src = 'https://i.imgur.com/h5iHym6.png'
-            zahl--
+        else if(zahl === 1){
+            hotdealimgs[x].src = 'https://i.imgur.com/h5iHym6.png'
+            zahl = zahl -1
         }
         else if(zahl === 0){
-            hotdealimgs[i].src = 'https://i.imgur.com/9YAX1Da.png'
+            hotdealimgs[x].src = 'https://i.imgur.com/9YAX1Da.png'
         }
+        console.log(hotdealimgs[x])
     }
 }
 
