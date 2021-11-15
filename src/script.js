@@ -808,7 +808,7 @@ const vidraycaster = new THREE.Raycaster()
  */
 const hccards = [
     {
-        position: new THREE.Vector3(-16.4, 3, 62),
+        position: new THREE.Vector3(-19, 3, 58),
         element: document.querySelector('.hccardIncome')
     },
     {
@@ -816,7 +816,7 @@ const hccards = [
         element: document.querySelector('.hccardProgress')
     },
     {
-        position: new THREE.Vector3(-6, 3, 58.5),
+        position: new THREE.Vector3(-6, 3, 58),
         element: document.querySelector('.hccardClosed')
     },
     {
@@ -833,7 +833,7 @@ const hccards = [
         element: document.querySelector('.cocardProgress')
     },
     {
-        position: new THREE.Vector3(-41.6, 4, 14.5),
+        position: new THREE.Vector3(-41.6, 4, 14.25),
         element: document.querySelector('.cocardClosed')
     },
     {
@@ -842,7 +842,7 @@ const hccards = [
     },
 
     {
-        position: new THREE.Vector3(-40.2, 3, -15.5),
+        position: new THREE.Vector3(-40.2, 3, -15.75),
         element: document.querySelector('.rescardIncome')
     },
     {
@@ -854,26 +854,26 @@ const hccards = [
         element: document.querySelector('.rescardClosed')
     },
     {
-        position: new THREE.Vector3(-40.2, 5.4, -11),
+        position: new THREE.Vector3(-40.2, 5.4, -15),
         element: document.querySelector('.resimg')
     }
 ]
 
 let homecards=[
     {
-        position: new THREE.Vector3(-6.25, 2.25, 5),
+        position: new THREE.Vector3(-7, 2.25, 2),
         element: document.querySelector('.GermanIncome')
     },
     {
-        position: new THREE.Vector3(-10.25, 2.25, 5),
+        position: new THREE.Vector3(-10.5, 2.25, 2),
         element: document.querySelector('.GermanProgress')
     },
     {
-        position: new THREE.Vector3(-14.8, 2.25, 2),
+        position: new THREE.Vector3(-14, 2.25, 2),
         element: document.querySelector('.GermanClosed')
     },
     {
-        position: new THREE.Vector3(-10.5, 6.4, 9),
+        position: new THREE.Vector3(-10, 6.4, 9),
         element: document.querySelector('.Germanimg')
     },
 ]
