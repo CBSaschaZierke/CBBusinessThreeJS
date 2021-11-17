@@ -837,7 +837,7 @@ const hccards = [
         element: document.querySelector('.cocardClosed')
     },
     {
-        position: new THREE.Vector3(-41.6, 6.75, 14.5),
+        position: new THREE.Vector3(-41.6, 6.75, 19),
         element: document.querySelector('.coimg')
     },
 
@@ -854,7 +854,7 @@ const hccards = [
         element: document.querySelector('.rescardClosed')
     },
     {
-        position: new THREE.Vector3(-40.2, 5.4, -15),
+        position: new THREE.Vector3(-40.2, 5.4, -10),
         element: document.querySelector('.resimg')
     }
 ]
