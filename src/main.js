@@ -12,7 +12,7 @@ let germany_closed
 
 let allHeaderClasses = ['Hot Deals', 'Super Core', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
 
-fetch('http://http://194.163.147.192:5555/residential')
+fetch('http://194.163.147.192:5555/residential')
     .then(res => res.json())
     .then(data => {
         for(let e of data.ic){
@@ -24,7 +24,7 @@ fetch('http://http://194.163.147.192:5555/residential')
         changeHealthCaredata()
     })
 
-fetch('http://http://194.163.147.192:5555/commercial')
+fetch('http://194.163.147.192:5555/commercial')
     .then(res => res.json())
     .then(data => {
         for(let e of data.ic){
