@@ -446,6 +446,33 @@ function showStateClosed(index){
 /**
  * Footer
  */
+// const fs = require('fs')
+// const csv = require('csv-parser')
+// const germany_objects = [];
+//
+// fs.createReadStream('test.csv')
+//     .pipe(csv({ separator: ';' }))
+//     .on('data', function (row) {
+//
+//         const data = {
+//             offerId: row.offerId,
+//             // locality: row.locality,
+//             place: `${row.locality} ${row.federalState}`,
+//             ic: row.investmentClass,
+//             ac: row.assetClass,
+//             priceEuros: row.priceEuros,
+//             plotAreaSqm: row.plotAreaSqm,
+//             priceperm: `${row.priceEuros/row.plotAreaSqm}`,
+//             netIncomeYearly: row.netIncomeYearly,
+//             federalState: row.federalState,
+//         }
+//         germany_objects.push(data)
+//     })
+//     .on('end', function () {
+//         console.table(germany_objects)
+//         // TODO: SAVE users data to another file
+//     })
+
 
 function addFooterContent(){
     let contentpanel = document.getElementById('list')
