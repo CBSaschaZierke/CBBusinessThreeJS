@@ -48,7 +48,8 @@ fetch('http://194.163.147.192:5555/residential')
         changeResidentialdata()
     })
 
-fetch('http://194.163.147.192:5555/germany')
+// fetch('http://194.163.147.192:5555/germany')
+fetch('http://localhost:5000/germany')
     .then(res => res.json())
     .then(data => {
         for(let e of data.objects){
@@ -368,7 +369,6 @@ function chilliDeals(x,y, b){
         else if(zahl === 0){
             hotdealimgs[x].src = 'https://i.imgur.com/9YAX1Da.png'
         }
-        console.log(hotdealimgs[x])
     }
 }
 
@@ -482,10 +482,13 @@ function addFooterContent(){
         contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm}€/m² ${e.ic}</h1></li>`
     }
 
-    footerautoslide()
+    let len = germany_objects.length;
+
+    footerautoslide(len)
 }
 
-function footerautoslide(){
+function footerautoslide(sec){
     let item = document.getElementById('list')
-    item.classList.add('auto')
+    item.style.animation = `scroll ${sec*15}s linear infinite`
+    // item.classList.add('auto')
 }
