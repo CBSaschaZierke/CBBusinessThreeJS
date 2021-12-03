@@ -478,8 +478,22 @@ function addFooterContent(){
     let contentpanel = document.getElementById('list')
 
     for(const e of germany_objects){
-        let priceperm = (e.price/e.size).toFixed(2)
-        contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm}€/m² ${e.ic}</h1></li>`
+        let priceperm
+        if(e.size === 0 && e.price === 0){
+            priceperm = ``
+        }
+        else if(e.price === 0){
+            priceperm = `${e.size}m²`
+        }
+        else if(e.size === 0){
+            priceperm = `${e.price}€`
+        }
+        else {
+            priceperm = `${(e.price / e.size).toFixed(0)}€/m²`
+        }
+        e.ic = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(e.ic));
+        e.ac = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(e.ac));
+        contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm} ${e.ic}</h1></li>`
     }
 
     let len = germany_objects.length;
@@ -489,6 +503,21 @@ function addFooterContent(){
 
 function footerautoslide(sec){
     let item = document.getElementById('list')
-    item.style.animation = `scroll ${sec*15}s linear infinite`
-    // item.classList.add('auto')
+    // item.style.animation = `scroll ${sec*8}s linear infinite`
+    item.classList.add('auto')
 }
+
+function upperCaseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function lowerCaseAllWordsExceptFirstLetters(string) {
+    return string.replace(/\S*/g, function (word) {
+        return word.charAt(0) + word.slice(1).toLowerCase();
+    });
+}
+
+let input = 'hello World, whatS up?';
+let desiredOutput = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(input));
+
+console.log(desiredOutput);
