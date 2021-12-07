@@ -10,9 +10,13 @@ let germany_income
 let germany_inprogress
 let germany_closed
 
+let commercial
+let residential
+let healthcare
+
 let allHeaderClasses = ['Hot Deals', 'Super Core', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
 
-fetch('http://194.163.147.192:5555/residential')
+fetch('http://localhost:5000/healthcare')
     .then(res => res.json())
     .then(data => {
         for(let e of data.ic){
@@ -21,10 +25,19 @@ fetch('http://194.163.147.192:5555/residential')
         for(let e of data.hotdeals){
             healthcare_hotdeals.push(e)
         }
+        healthcare = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+        console.log(healthcare)
         changeHealthCaredata()
     })
 
-fetch('http://194.163.147.192:5555/commercial')
+fetch('http://localhost:5000/commercial')
     .then(res => res.json())
     .then(data => {
         for(let e of data.ic){
@@ -33,10 +46,20 @@ fetch('http://194.163.147.192:5555/commercial')
         for(let e of data.hotdeals){
             commercial_hotdeals.push(e)
         }
+        commercial = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+        console.log(commercial)
+
         changeCommercialdata()
     })
 
-fetch('http://194.163.147.192:5555/residential')
+fetch('http://localhost:5000/residential')
     .then(res => res.json())
     .then(data => {
         for(let e of data.ic){
@@ -45,6 +68,15 @@ fetch('http://194.163.147.192:5555/residential')
         for(let e of data.hotdeals){
             residential_hotdeals.push(e)
         }
+        residential = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+        console.log(residential)
         changeResidentialdata()
     })
 
@@ -139,13 +171,33 @@ function changeAssetClass() {
     }
 }
 function changeHCData(index){
-    let hcIncomeCard = document.getElementById('hcIncome')
-    let hcProgressCard = document.getElementById('hcProgress')
-    let hcClosingCard = document.getElementById('hcClosed')
+    let hcIncomeCardVol = document.getElementById('hcIcvol_inc')
+    let hcIncomeCardQua = document.getElementById('hcIcqua_inc')
+    let hcProgressCardVol = document.getElementById('hcIcvol_pro')
+    let hcProgressCardQua = document.getElementById('hcIcqua_pro')
+    let hcClosingCardVol = document.getElementById('hcIcvol_clo')
+    let hcClosingCardQua = document.getElementById('hcIcqua_clo')
 
-    hcIncomeCard.innerHTML = healthcare_ic[index].income
-    hcProgressCard.innerHTML = healthcare_ic[index].progress
-    hcClosingCard.innerHTML = healthcare_ic[index].closing
+    let hcGenIncomeCardVol = document.getElementById('hcvol_inc')
+    let hcGenIncomeCardQua = document.getElementById('hcqual_inc')
+    let hcGenProgressCardVol = document.getElementById('hcvol_pro')
+    let hcGenProgressCardQua = document.getElementById('hcqual_pro')
+    let hcGenClosingCardVol = document.getElementById('hcvol_clo')
+    let hcGenClosingCardQua = document.getElementById('hcqual_clo')
+
+    hcIncomeCardVol.innerHTML = `${(healthcare_ic[index].income.volume/1000000).toFixed(2)}Mio € (${((healthcare_ic[index].income.volume/1000000)/healthcare.VolIncome).toFixed(2)}%)`
+    hcIncomeCardQua.innerHTML = `${healthcare_ic[index].income.quantity} (${(healthcare_ic[index].income.quantity/healthcare.QuaIncome).toFixed(2)}%)`
+    hcProgressCardVol.innerHTML = `${(healthcare_ic[index].progress.volume/1000000).toFixed(2)}Mio € (${((healthcare_ic[index].progress.volume/1000000)/healthcare.QuaIncome).toFixed(2)}%)`
+    hcProgressCardQua.innerHTML = `${healthcare_ic[index].progress.quantity} (${(healthcare_ic[index].progress.quantity/healthcare.QuaProgress).toFixed(2)}%)`
+    hcClosingCardVol.innerHTML = `${(healthcare_ic[index].closing.volume/1000000).toFixed(2)}Mio € (${isNaN(((healthcare_ic[index].closing.volume/1000000)/healthcare.VolClosed).toFixed(2)) ? 0 :((healthcare_ic[index].closing.volume/1000000)/healthcare.VolClosed).toFixed(2)}%)`
+    hcClosingCardQua.innerHTML = `${healthcare_ic[index].closing.quantity} (${isNaN((healthcare_ic[index].closing.quantity/healthcare.QuaClosed).toFixed(2)) ? 0 : (healthcare_ic[index].closing.quantity/healthcare.QuaClosed).toFixed(2)}%)`
+
+    hcGenIncomeCardVol.innerHTML = `${healthcare.VolIncome}Mio € (100%)`
+    hcGenProgressCardVol.innerHTML = `${healthcare.VolProgress}Mio € (100%)`
+    hcGenClosingCardVol.innerHTML = `${healthcare.VolClosed}Mio € (100%)`
+    hcGenIncomeCardQua.innerHTML = `${healthcare.QuaIncome} (100%)`
+    hcGenProgressCardQua.innerHTML = `${healthcare.QuaProgress} (100%)`
+    hcGenClosingCardQua.innerHTML = `${healthcare.QuaClosed} (100%)`
 }
 
 /**
@@ -223,13 +275,33 @@ function automateCommercialDate() {
     }
 }
 function changeCOData(index){
-    let coIncomeCard = document.getElementById('coIncome')
-    let coProgressCard = document.getElementById('coProgress')
-    let coClosingCard = document.getElementById('coClosed')
+    let coIncomeCardVol = document.getElementById('coIcvol_inc')
+    let coIncomeCardQua = document.getElementById('coIcqua_inc')
+    let coProgressCardVol = document.getElementById('coIcvol_pro')
+    let coProgressCardQua = document.getElementById('coIcqua_pro')
+    let coClosingCardVol = document.getElementById('coIcvol_clo')
+    let coClosingCardQua = document.getElementById('coIcqua_clo')
 
-    coIncomeCard.innerHTML = commercial_ic[index].income
-    coProgressCard.innerHTML = commercial_ic[index].progress
-    coClosingCard.innerHTML = commercial_ic[index].closing
+    let coGenIncomeCardVol = document.getElementById('covol_inc')
+    let coGenIncomeCardQua = document.getElementById('coqual_inc')
+    let coGenProgressCardVol = document.getElementById('covol_pro')
+    let coGenProgressCardQua = document.getElementById('coqual_pro')
+    let coGenClosingCardVol = document.getElementById('covol_clo')
+    let coGenClosingCardQua = document.getElementById('coqual_clo')
+
+    coIncomeCardVol.innerHTML = `${(commercial_ic[index].income.volume/1000000).toFixed(2)}Mio € (${((commercial_ic[index].income.volume/1000000)/commercial.VolIncome).toFixed(2)}%)`
+    coIncomeCardQua.innerHTML = `${commercial_ic[index].income.quantity} (${(commercial_ic[index].income.quantity/commercial.QuaIncome).toFixed(2)}%)`
+    coProgressCardVol.innerHTML = `${(commercial_ic[index].progress.volume/1000000).toFixed(2)}Mio € (${((commercial_ic[index].progress.volume/1000000)/commercial.VolProgress).toFixed(2)}%)`
+    coProgressCardQua.innerHTML = `${commercial_ic[index].progress.quantity} (${(commercial_ic[index].progress.quantity/commercial.QuaProgress).toFixed(2)}%)`
+    coClosingCardVol.innerHTML = `${(commercial_ic[index].closing.volume/1000000).toFixed(2)}Mio € (${isNaN(((commercial_ic[index].closing.volume/1000000)/commercial.VolClosed).toFixed(2)) ? 0 : ((commercial_ic[index].closing.volume/1000000)/commercial.VolClosed).toFixed(2)}%)`
+    coClosingCardQua.innerHTML = `${commercial_ic[index].closing.quantity} (${isNaN((commercial_ic[index].closing.quantity/commercial.QuaClosed)) ? 0 : (commercial_ic[index].closing.quantity/commercial.QuaClosed).toFixed(2)}%)`
+
+    coGenIncomeCardVol.innerHTML = `${commercial.VolIncome}Mio € (100%)`
+    coGenProgressCardVol.innerHTML = `${commercial.VolProgress}Mio € (100%)`
+    coGenClosingCardVol.innerHTML = `${commercial.VolClosed}Mio € (100%)`
+    coGenIncomeCardQua.innerHTML = `${commercial.QuaIncome} (100%)`
+    coGenProgressCardQua.innerHTML = `${commercial.QuaProgress} (100%)`
+    coGenClosingCardQua.innerHTML = `${commercial.QuaClosed} (100%)`
 }
 
 /**
@@ -307,13 +379,33 @@ function automateResidentialDate() {
     }
 }
 function changeREData(index){
-    let coIncomeCard = document.getElementById('reIncome')
-    let coProgressCard = document.getElementById('reProgress')
-    let coClosingCard = document.getElementById('reClosed')
+    let reIncomeCardVol = document.getElementById('reIcvol_inc')
+    let reIncomeCardQua = document.getElementById('reIcqua_inc')
+    let reProgressCardVol = document.getElementById('reIcvol_pro')
+    let reProgressCardQua = document.getElementById('reIcqua_pro')
+    let reClosingCardVol = document.getElementById('reIcvol_clo')
+    let reClosingCardQua = document.getElementById('reIcqua_clo')
 
-    coIncomeCard.innerHTML = residential_ic[index].income
-    coProgressCard.innerHTML = residential_ic[index].progress
-    coClosingCard.innerHTML = residential_ic[index].closing
+    let reGenIncomeCardVol = document.getElementById('revol_inc')
+    let reGenIncomeCardQua = document.getElementById('requal_inc')
+    let reGenProgressCardVol = document.getElementById('revol_pro')
+    let reGenProgressCardQua = document.getElementById('requal_pro')
+    let reGenClosingCardVol = document.getElementById('revol_clo')
+    let reGenClosingCardQua = document.getElementById('requal_clo')
+
+    reIncomeCardVol.innerHTML = `${(residential_ic[index].income.volume/1000000).toFixed(2)}Mio € (${((residential_ic[index].income.volume/1000000)/residential.VolIncome).toFixed(2)}%)`
+    reIncomeCardQua.innerHTML = `${residential_ic[index].income.quantity} (${(residential_ic[index].income.quantity/residential.QuaIncome).toFixed(2)}%)`
+    reProgressCardVol.innerHTML = `${(residential_ic[index].progress.volume/1000000).toFixed(2)}Mio € ${((residential_ic[index].progress.volume/1000000)/residential.VolProgress).toFixed(2)}%`
+    reProgressCardQua.innerHTML = `${residential_ic[index].progress.quantity} (${(residential_ic[index].progress.quantity/residential.QuaProgress).toFixed(2)}%)`
+    reClosingCardVol.innerHTML = `${(residential_ic[index].closing.volume/1000000).toFixed(2)}Mio € ${((residential_ic[index].closing.volume/1000000)/residential.VolClosed).toFixed(2)}%`
+    reClosingCardQua.innerHTML = `${residential_ic[index].closing.quantity} (${(residential_ic[index].closing.quantity/residential.QuaClosed)}%)`
+
+    reGenIncomeCardVol.innerHTML = `${residential.VolIncome}Mio € (100%)`
+    reGenProgressCardVol.innerHTML = `${residential.VolProgress}Mio € (100%)`
+    reGenClosingCardVol.innerHTML = `${residential.VolClosed}Mio € (100%)`
+    reGenIncomeCardQua.innerHTML = `${residential.QuaIncome} (100%)`
+    reGenProgressCardQua.innerHTML = `${residential.QuaProgress} (100%)`
+    reGenClosingCardQua.innerHTML = `${residential.QuaClosed} (100%)`
 }
 
 
@@ -384,13 +476,13 @@ function showGermanyData(){
     let gerVolClo = document.getElementById('gervol_clo')
     let gerQuaClo = document.getElementById('gerqua_clo')
 
-    gerVolInc.innerHTML = `${germany_income.volume}Mrd € (100%)`
+    gerVolInc.innerHTML = `${(germany_income.volume/1000000).toFixed(2)}Mio € (100%)`
     gerQuaInc.innerHTML = `${germany_income.quantity} (100%)`
 
-    gerVolPro.innerHTML = `${germany_inprogress.volume}Mrd € (100%)`
+    gerVolPro.innerHTML = `${(germany_inprogress.volume/1000000).toFixed(2)}Mrd € (100%)`
     gerQuaPro.innerHTML = `${germany_inprogress.quantity} (100%)`
 
-    gerVolClo.innerHTML = `${germany_closed.volume}Mrd € (100%)`
+    gerVolClo.innerHTML = `${(germany_closed.volume/1000000).toFixed(2)}Mrd € (100%)`
     gerQuaClo.innerHTML = `${germany_closed.quantity} (100%)`
 
 }
@@ -419,7 +511,7 @@ function showStateIncome(index){
     let quapercent = germany_states[index].process.quantity/germany_income.quantity
     quapercent = quapercent.toFixed(2)
 
-    volincome.innerHTML = `${germany_states[index].process.volume}Mrd € (${(germany_states[index].process.volume/germany_income.volume).toFixed(2)}%)`
+    volincome.innerHTML = `${(germany_states[index].process.volume/1000000).toFixed(2)}Mio € (${(germany_states[index].process.volume/germany_income.volume).toFixed(2)}%)`
     quaincome.innerHTML = `${germany_states[index].process.quantity} (${quapercent}%)`
 }
 
@@ -429,7 +521,7 @@ function showStateProgress(index){
     let quapercent = germany_states[index].in_progress.quantity/germany_inprogress.quantity
     quapercent = quapercent.toFixed(2)
 
-    volprogress.innerHTML = `${germany_states[index].in_progress.volume}Mrd € (${(germany_states[index].in_progress.volume/germany_income.volume).toFixed(2)}%)`
+    volprogress.innerHTML = `${(germany_states[index].in_progress.volume/1000000).toFixed(2)}Mio € (${(germany_states[index].in_progress.volume/germany_income.volume).toFixed(2)}%)`
     quaprogress.innerHTML = `${germany_states[index].in_progress.quantity} (${quapercent}%)`
 }
 
@@ -439,7 +531,7 @@ function showStateClosed(index){
     let quapercent = germany_states[index].closed.quantity/germany_closed.quantity
     quapercent = quapercent.toFixed(2)
 
-    volclosed.innerHTML = `${germany_states[index].closed.volume}Mrd € (${(germany_states[index].closed.volume/germany_closed.volume).toFixed(2)}%)`
+    volclosed.innerHTML = `${(germany_states[index].closed.volume/1000000).toFixed(2)}Mio € (${(germany_states[index].closed.volume/germany_closed.volume).toFixed(2)}%)`
     quaclosed.innerHTML = `${germany_states[index].closed.quantity} (${quapercent}%)`
 }
 

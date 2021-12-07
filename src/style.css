@@ -116,7 +116,7 @@ body
     width: 250%;
     height: 40%;
     background-color: var(--content-bg-color);
-    color: white;
+    color: #bfab60;
     border-radius: 10px;
     border: 2px solid white;
     text-align: center;
@@ -296,7 +296,7 @@ body
     width: 50%;
     color: #bfab60;
     font-weight: 700;
-    font-size: 200%;
+    font-size: 175%;
 }
 
 .card .hotdeal{
