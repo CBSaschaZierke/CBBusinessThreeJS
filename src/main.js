@@ -33,8 +33,6 @@ fetch('http://localhost:5000/healthcare')
             QuaProgress: data.QuaProgress,
             QuaClosed: data.QuaClosed
         }
-        console.log(healthcare)
-        changeHealthCaredata()
     })
 
 fetch('http://localhost:5000/commercial')
@@ -54,9 +52,6 @@ fetch('http://localhost:5000/commercial')
             QuaProgress: data.QuaProgress,
             QuaClosed: data.QuaClosed
         }
-        console.log(commercial)
-
-        changeCommercialdata()
     })
 
 fetch('http://localhost:5000/residential')
@@ -76,17 +71,15 @@ fetch('http://localhost:5000/residential')
             QuaProgress: data.QuaProgress,
             QuaClosed: data.QuaClosed
         }
-        console.log(residential)
-        changeResidentialdata()
     })
 
 // fetch('http://194.163.147.192:5555/germany')
 fetch('http://localhost:5000/germany')
     .then(res => res.json())
     .then(data => {
-        for(let e of data.objects){
-            germany_objects.push(e)
-        }
+        // for(let e of data.objects){
+        //     germany_objects.push(e)
+        // }
         for(let e of data.state){
             germany_states.push(e)
         }
@@ -95,12 +88,22 @@ fetch('http://localhost:5000/germany')
         germany_closed = data.closed
 
         showGermanyData()
-        showState()
+    })
+
+fetch('http://localhost:5000/germany/objects')
+    .then(res => res.json())
+    .then(data => {
+        germany_objects = data
         addFooterContent()
     })
 
 let healthcarecount = 0
-function changeHealthCaredata(){
+export let hcOnView = false
+export function setHcOnView(bool){
+    hcOnView = bool
+}
+
+export function changeHealthCaredata(){
     if(healthcarecount === 0){
         showHCHotDeals()
     }
@@ -116,7 +119,9 @@ function changeHealthCaredata(){
     if(healthcarecount > 6){
         healthcarecount = 0
     }
-    setTimeout(changeHealthCaredata, 5000)
+    if(hcOnView){
+        setTimeout(changeHealthCaredata, 5000)
+    }
 }
 
 function showHCHotDeals(){
@@ -204,7 +209,12 @@ function changeHCData(index){
  * Commercial
  */
 let commercialcount = 0
-function changeCommercialdata(){
+export let CoOnView = false
+export function setCoOnView(bool){
+    CoOnView = bool
+}
+
+export function changeCommercialdata(){
 
     if(commercialcount === 0){
         showCOHotDeals()
@@ -221,7 +231,10 @@ function changeCommercialdata(){
     if(commercialcount > 6){
         commercialcount = 0
     }
-    setTimeout(changeCommercialdata, 5000)
+
+    if(CoOnView){
+        setTimeout(changeCommercialdata, 5000)
+    }
 }
 
 function showCOHotDeals(){
@@ -308,7 +321,12 @@ function changeCOData(index){
  * Residential
  */
 let residentialcount = 0
-function changeResidentialdata(){
+export let ResOnView = false
+export function setResOnView(bool){
+    ResOnView = bool
+}
+
+export function changeResidentialdata(){
 
     if(residentialcount === 0){
         showREHotDeals()
@@ -325,7 +343,9 @@ function changeResidentialdata(){
     if(residentialcount > 6){
         residentialcount = 0
     }
-    setTimeout(changeResidentialdata, 5000)
+    if(ResOnView) {
+        setTimeout(changeResidentialdata, 5000)
+    }
 }
 
 function showREHotDeals(){
@@ -467,7 +487,6 @@ function chilliDeals(x,y, b){
 /**
  * Germany
  */
-
 function showGermanyData(){
     let gerVolInc = document.getElementById('gervol_inc')
     let gerQuaInc = document.getElementById('gerqua_inc')
@@ -488,7 +507,12 @@ function showGermanyData(){
 }
 
 let statecount = 0
-function showState(){
+export let onView = false
+export function setOnView(bool){
+    onView = bool;
+}
+
+export function showState(){
     let state = document.getElementById('germandesc')
     let img = document.getElementById('Germany germanyImg')
 
@@ -502,7 +526,10 @@ function showState(){
     if(statecount > 15){
         statecount = 0
     }
-    setTimeout(showState, 5000)
+
+    if(onView) {
+        setTimeout(showState, 5000)
+    }
 }
 
 function showStateIncome(index){
@@ -538,34 +565,6 @@ function showStateClosed(index){
 /**
  * Footer
  */
-// const fs = require('fs')
-// const csv = require('csv-parser')
-// const germany_objects = [];
-//
-// fs.createReadStream('test.csv')
-//     .pipe(csv({ separator: ';' }))
-//     .on('data', function (row) {
-//
-//         const data = {
-//             offerId: row.offerId,
-//             // locality: row.locality,
-//             place: `${row.locality} ${row.federalState}`,
-//             ic: row.investmentClass,
-//             ac: row.assetClass,
-//             priceEuros: row.priceEuros,
-//             plotAreaSqm: row.plotAreaSqm,
-//             priceperm: `${row.priceEuros/row.plotAreaSqm}`,
-//             netIncomeYearly: row.netIncomeYearly,
-//             federalState: row.federalState,
-//         }
-//         germany_objects.push(data)
-//     })
-//     .on('end', function () {
-//         console.table(germany_objects)
-//         // TODO: SAVE users data to another file
-//     })
-
-
 function addFooterContent(){
     let contentpanel = document.getElementById('list')
 
@@ -595,7 +594,7 @@ function addFooterContent(){
 
 function footerautoslide(sec){
     let item = document.getElementById('list')
-    // item.style.animation = `scroll ${sec*8}s linear infinite`
+    // item.style.animation = `scroll ${sec}s linear infinite`
     item.classList.add('auto')
 }
 
@@ -608,8 +607,3 @@ function lowerCaseAllWordsExceptFirstLetters(string) {
         return word.charAt(0) + word.slice(1).toLowerCase();
     });
 }
-
-let input = 'hello World, whatS up?';
-let desiredOutput = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(input));
-
-console.log(desiredOutput);

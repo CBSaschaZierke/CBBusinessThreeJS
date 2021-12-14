@@ -6,6 +6,16 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import {gsap} from "gsap/gsap-core";
+import {
+    changeCommercialdata, changeHealthCaredata,
+    changeResidentialdata,
+    onView,
+    ResOnView,
+    setCoOnView, setHcOnView,
+    setOnView,
+    setResOnView,
+    showState
+} from "./main";
 
 /**
  * Base
@@ -1086,7 +1096,6 @@ const tick = () =>
             // if(offset < 0){
             //     offset *= -1
             // }
-
             let translateX = screenPosition.x * canvas.clientWidth *.5 // *offset
             let translateY = - screenPosition.y * canvas.clientHeight * .5 // *offset
             homecards[i].element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)` //  scale(${dist})
@@ -1151,21 +1160,33 @@ function cameraAnimation(){
 
         if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
             showElBool1 = true
+            setHcOnView(true)
+            changeHealthCaredata()
         }
         else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
             showElBool2 = true
+            setCoOnView(true)
+            changeCommercialdata()
         }
         else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
             showElBool3 = true
+            setResOnView(true)
+            changeResidentialdata()
         }
         else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
             showHomeBool = true
+            setOnView(true)
+            showState()
         }
         else {
             showElBool1 = false
             showElBool2 = false
             showElBool3 = false
             showHomeBool = false
+            setOnView(false)
+            setResOnView(false)
+            setCoOnView(false)
+            setHcOnView(false)
         }
 
         if(longerTimeout){
