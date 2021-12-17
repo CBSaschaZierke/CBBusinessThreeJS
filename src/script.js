@@ -9,8 +9,6 @@ import {gsap} from "gsap/gsap-core";
 import {
     changeCommercialdata, changeHealthCaredata,
     changeResidentialdata,
-    onView,
-    ResOnView,
     setCoOnView, setHcOnView,
     setOnView,
     setResOnView,
@@ -43,8 +41,10 @@ const loadingManager = new THREE.LoadingManager(
             document.querySelector('.loading').classList.add('m-fadeOut')
             loadingBarElement.classList.add('ended')
             loadingBarElement.style.transform = ''
+            video.classList.add('active')
+            video.currentTime = 0
+            video.play()
         }, 500)
-        loaders = true
     },
     (itemUrl, itemsLoaded, itemsTotal) =>{
         const progressRatio = itemsLoaded/itemsTotal
@@ -52,7 +52,7 @@ const loadingManager = new THREE.LoadingManager(
     }
 )
 let video = document.getElementById('video-1')
-if(video.readyState === 4 && loaders){
+if(loaders){
     showVideo()
 }
 // Texture loader

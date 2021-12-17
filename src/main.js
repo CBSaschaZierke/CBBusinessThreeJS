@@ -30,6 +30,8 @@ fetch('http://localhost:5000/germany')
         germany_inprogress = data.in_progress
         germany_closed = data.closed
 
+        document.querySelector('.testytd').innerHTML = `${((germany_income.volume + germany_closed.volume + germany_inprogress.volume)/1000000).toFixed(0)} Mio €`
+
         showGermanyData()
     })
 
