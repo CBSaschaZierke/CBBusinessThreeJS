@@ -130,9 +130,9 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
  * Object
  */
 
-const bakedTexture = textureLoader.load('baked.jpg')
-bakedTexture.flipY = false
-bakedTexture.encoding = THREE.sRGBEncoding
+// const bakedTexture = textureLoader.load('baked.jpg')
+// bakedTexture.flipY = false
+// bakedTexture.encoding = THREE.sRGBEncoding
 
 const cbcTex = textureLoader.load('cbcmat.png')
 cbcTex.flipY = false

@@ -16,63 +16,6 @@ let healthcare
 
 let allHeaderClasses = ['Hot Deals', 'Super Core', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
 
-fetch('http://localhost:5000/healthcare')
-    .then(res => res.json())
-    .then(data => {
-        for(let e of data.ic){
-            healthcare_ic.push(e)
-        }
-        for(let e of data.hotdeals){
-            healthcare_hotdeals.push(e)
-        }
-        healthcare = {
-            VolClosed: data.VolClosed,
-            VolIncome: data.VolIncome,
-            VolProgress: data.VolProgress,
-            QuaIncome: data.QuaIncome,
-            QuaProgress: data.QuaProgress,
-            QuaClosed: data.QuaClosed
-        }
-    })
-
-fetch('http://localhost:5000/commercial')
-    .then(res => res.json())
-    .then(data => {
-        for(let e of data.ic){
-            commercial_ic.push(e)
-        }
-        for(let e of data.hotdeals){
-            commercial_hotdeals.push(e)
-        }
-        commercial = {
-            VolClosed: data.VolClosed,
-            VolIncome: data.VolIncome,
-            VolProgress: data.VolProgress,
-            QuaIncome: data.QuaIncome,
-            QuaProgress: data.QuaProgress,
-            QuaClosed: data.QuaClosed
-        }
-    })
-
-fetch('http://localhost:5000/residential')
-    .then(res => res.json())
-    .then(data => {
-        for(let e of data.ic){
-            residential_ic.push(e)
-        }
-        for(let e of data.hotdeals){
-            residential_hotdeals.push(e)
-        }
-        residential = {
-            VolClosed: data.VolClosed,
-            VolIncome: data.VolIncome,
-            VolProgress: data.VolProgress,
-            QuaIncome: data.QuaIncome,
-            QuaProgress: data.QuaProgress,
-            QuaClosed: data.QuaClosed
-        }
-    })
-
 // fetch('http://194.163.147.192:5555/germany')
 fetch('http://localhost:5000/germany')
     .then(res => res.json())
@@ -125,6 +68,25 @@ export function changeHealthCaredata(){
 }
 
 function showHCHotDeals(){
+    fetch('http://localhost:5000/healthcare')
+        .then(res => res.json())
+        .then(data => {
+            for(let e of data.ic){
+                healthcare_ic.push(e)
+            }
+            for(let e of data.hotdeals){
+                healthcare_hotdeals.push(e)
+            }
+            healthcare = {
+                VolClosed: data.VolClosed,
+                VolIncome: data.VolIncome,
+                VolProgress: data.VolProgress,
+                QuaIncome: data.QuaIncome,
+                QuaProgress: data.QuaProgress,
+                QuaClosed: data.QuaClosed
+            }
+        })
+
     let generalDivs = document.getElementsByClassName('generaldata')
     let hotdealDivs = document.getElementsByClassName('hotdealdata')
 
@@ -238,6 +200,24 @@ export function changeCommercialdata(){
 }
 
 function showCOHotDeals(){
+    fetch('http://localhost:5000/commercial')
+        .then(res => res.json())
+        .then(data => {
+            for(let e of data.ic){
+                commercial_ic.push(e)
+            }
+            for(let e of data.hotdeals){
+                commercial_hotdeals.push(e)
+            }
+            commercial = {
+                VolClosed: data.VolClosed,
+                VolIncome: data.VolIncome,
+                VolProgress: data.VolProgress,
+                QuaIncome: data.QuaIncome,
+                QuaProgress: data.QuaProgress,
+                QuaClosed: data.QuaClosed
+            }
+        })
     let generalDivs = document.getElementsByClassName('COgeneraldata')
     let hotdealDivs = document.getElementsByClassName('COhotdealdata')
 
@@ -349,6 +329,25 @@ export function changeResidentialdata(){
 }
 
 function showREHotDeals(){
+    fetch('http://localhost:5000/residential')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            residential_ic.push(e)
+        }
+        for(let e of data.hotdeals){
+            residential_hotdeals.push(e)
+        }
+        residential = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+    })
+
     let generalDivs = document.getElementsByClassName('REgeneraldata')
     let hotdealDivs = document.getElementsByClassName('REhotdealdata')
 
