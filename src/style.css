@@ -19,6 +19,7 @@ body
 {
     overflow: hidden;
     font-family: "Segoe UI", sans-serif;
+    background: black;
 }
 
 .webgl
@@ -27,6 +28,8 @@ body
     top: 0;
     left: 0;
     outline: none;
+    visibility: hidden;
+    opacity: 1;
 }
 
 .video-1{
@@ -323,4 +326,45 @@ body
     font-weight: 800;
     font-size: 125%;
     line-height: 125%;
+}
+
+
+.loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 1);
+    color: black;
+}
+
+.loadingbar{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: top left;
+    transition: transform 1s;
+    will-change: transform;
+}
+
+.loadingbar.ended{
+    transform: scaleX(0);
+    transform-origin: top right;
+    transition: transform 1.5s ease-in-out;
+}
+
+.m-fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+.m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
 }

@@ -1,5 +1,5 @@
 import './style.css'
-import './main.js'
+// import './main.js'
 import * as dat from 'dat.gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -34,20 +34,41 @@ const scene = new THREE.Scene()
 /**
  * Loaders
  */
+let loaders = false
+const loadingBarElement = document.querySelector('.loadingbar')
+const loadingManager = new THREE.LoadingManager(
+    () =>{
+        window.setTimeout(() =>{
+            document.querySelector('.webgl').classList.add('m-fadeIn')
+            document.querySelector('.loading').classList.add('m-fadeOut')
+            loadingBarElement.classList.add('ended')
+            loadingBarElement.style.transform = ''
+        }, 500)
+        loaders = true
+    },
+    (itemUrl, itemsLoaded, itemsTotal) =>{
+        const progressRatio = itemsLoaded/itemsTotal
+        loadingBarElement.style.transform = `scaleX(${progressRatio})`
+    }
+)
+let video = document.getElementById('video-1')
+if(video.readyState === 4 && loaders){
+    showVideo()
+}
 // Texture loader
-const textureLoader = new THREE.TextureLoader()
+const textureLoader = new THREE.TextureLoader(loadingManager)
 const matCapTexture = textureLoader.load('textures/matcaps/whitegrey.png')
 const matCapTexture2 = textureLoader.load('textures/matcaps/BB.png')
 
 // Draco loader
-const dracoLoader = new DRACOLoader()
+const dracoLoader = new DRACOLoader(loadingManager)
 dracoLoader.setDecoderPath('draco/')
 
 // GLTF loader
-const gltfLoader = new GLTFLoader()
+const gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
 
-const fontLoader = new THREE.FontLoader()
+const fontLoader = new THREE.FontLoader(loadingManager)
 
 const textHealthCare = 'HEALTH CARE'
 const textCommercial = 'COMMERCIAL'
@@ -1121,9 +1142,8 @@ tick()
 // index 30 für res view
 
 let cameraAnimIndex = 0
-
 function showVideo() {
-    let video = document.getElementById('video-1')
+
     if(cameraAnimIndex === -1){
         video.classList.add('active')
         video.currentTime = 0
