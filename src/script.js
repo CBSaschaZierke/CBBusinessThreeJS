@@ -1147,7 +1147,7 @@ function showVideo() {
     if(cameraAnimIndex === -1){
         video.classList.add('active')
         video.currentTime = 0
-        video.load()
+        video.play()
     }
     video.onended = () => {
         video.classList.remove('active')
