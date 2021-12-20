@@ -155,9 +155,9 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
 // bakedTexture.flipY = false
 // bakedTexture.encoding = THREE.sRGBEncoding
 
-const cbcTex = textureLoader.load('cbcmat.png')
-cbcTex.flipY = false
-cbcTex.encoding = THREE.sRGBEncoding
+// const cbcTex = textureLoader.load('cbcmat.png')
+// cbcTex.flipY = false
+// cbcTex.encoding = THREE.sRGBEncoding
 
 
 // gltfLoader.load(
@@ -1179,24 +1179,32 @@ function cameraAnimation(){
         let timeout = animArray[cameraAnimIndex].duration() * 1000
 
         if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
+            if(!showElBool1){
+                setHcOnView(true)
+                changeHealthCaredata()
+            }
             showElBool1 = true
-            setHcOnView(true)
-            changeHealthCaredata()
         }
         else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
+            if(!showElBool2){
+                setCoOnView(true)
+                changeCommercialdata()
+            }
             showElBool2 = true
-            setCoOnView(true)
-            changeCommercialdata()
         }
         else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
+            if(!showElBool3){
+                setResOnView(true)
+                changeResidentialdata()
+            }
             showElBool3 = true
-            setResOnView(true)
-            changeResidentialdata()
         }
         else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
+            if(!showHomeBool){
+                setOnView(true)
+                showState()
+            }
             showHomeBool = true
-            setOnView(true)
-            showState()
         }
         else {
             showElBool1 = false

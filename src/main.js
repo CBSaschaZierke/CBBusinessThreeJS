@@ -16,6 +16,63 @@ let healthcare
 
 let allHeaderClasses = ['Hot Deals', 'Super Core', 'Core/Core Plus', 'Value Added', 'Opportunity', 'Development', 'Workout']
 
+fetch('http://localhost:5000/healthcare')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            healthcare_ic.push(e)
+        }
+        for(let e of data.hotdeals){
+            healthcare_hotdeals.push(e)
+        }
+        healthcare = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+    })
+
+fetch('http://localhost:5000/commercial')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            commercial_ic.push(e)
+        }
+        for(let e of data.hotdeals){
+            commercial_hotdeals.push(e)
+        }
+        commercial = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+    })
+
+fetch('http://localhost:5000/residential')
+    .then(res => res.json())
+    .then(data => {
+        for(let e of data.ic){
+            residential_ic.push(e)
+        }
+        for(let e of data.hotdeals){
+            residential_hotdeals.push(e)
+        }
+        residential = {
+            VolClosed: data.VolClosed,
+            VolIncome: data.VolIncome,
+            VolProgress: data.VolProgress,
+            QuaIncome: data.QuaIncome,
+            QuaProgress: data.QuaProgress,
+            QuaClosed: data.QuaClosed
+        }
+    })
+
 // fetch('http://194.163.147.192:5555/germany')
 fetch('http://localhost:5000/germany')
     .then(res => res.json())
@@ -70,24 +127,6 @@ export function changeHealthCaredata(){
 }
 
 function showHCHotDeals(){
-    fetch('http://localhost:5000/healthcare')
-        .then(res => res.json())
-        .then(data => {
-            for(let e of data.ic){
-                healthcare_ic.push(e)
-            }
-            for(let e of data.hotdeals){
-                healthcare_hotdeals.push(e)
-            }
-            healthcare = {
-                VolClosed: data.VolClosed,
-                VolIncome: data.VolIncome,
-                VolProgress: data.VolProgress,
-                QuaIncome: data.QuaIncome,
-                QuaProgress: data.QuaProgress,
-                QuaClosed: data.QuaClosed
-            }
-        })
 
     let generalDivs = document.getElementsByClassName('generaldata')
     let hotdealDivs = document.getElementsByClassName('hotdealdata')
@@ -131,12 +170,10 @@ function unshowHCHotDeals(){
 }
 
 function changeAssetClass() {
-    let hcard = document.getElementsByClassName('hcdesc')
-    for(let i =0; i<hcard.length;i++){
-        hcard[i].innerHTML = allHeaderClasses[healthcarecount]
-        if(healthcarecount != 0){
-            changeHCData(healthcarecount-1)
-        }
+    let hcard = document.querySelector('.hcdesc')
+    hcard.innerHTML = allHeaderClasses[healthcarecount]
+    if(healthcarecount != 0){
+        changeHCData(healthcarecount-1)
     }
 }
 function changeHCData(index){
@@ -202,24 +239,7 @@ export function changeCommercialdata(){
 }
 
 function showCOHotDeals(){
-    fetch('http://localhost:5000/commercial')
-        .then(res => res.json())
-        .then(data => {
-            for(let e of data.ic){
-                commercial_ic.push(e)
-            }
-            for(let e of data.hotdeals){
-                commercial_hotdeals.push(e)
-            }
-            commercial = {
-                VolClosed: data.VolClosed,
-                VolIncome: data.VolIncome,
-                VolProgress: data.VolProgress,
-                QuaIncome: data.QuaIncome,
-                QuaProgress: data.QuaProgress,
-                QuaClosed: data.QuaClosed
-            }
-        })
+
     let generalDivs = document.getElementsByClassName('COgeneraldata')
     let hotdealDivs = document.getElementsByClassName('COhotdealdata')
 
@@ -261,12 +281,10 @@ function unshowCOHotDeals(){
     }
 }
 function automateCommercialDate() {
-    let hcard = document.getElementsByClassName('COdesc') // TODO change it+
-    for(let i =0; i<hcard.length;i++){
-        hcard[i].innerHTML = allHeaderClasses[commercialcount]
-        if(commercialcount != 0){
-            changeCOData(commercialcount-1)
-        }
+    let hcard = document.querySelector('.COdesc') // TODO change it+
+    hcard.innerHTML = allHeaderClasses[commercialcount]
+    if(commercialcount != 0){
+        changeCOData(commercialcount-1)
     }
 }
 function changeCOData(index){
@@ -303,12 +321,15 @@ function changeCOData(index){
  * Residential
  */
 let residentialcount = 0
+let testcounter = 0
 export let ResOnView = false
 export function setResOnView(bool){
     ResOnView = bool
 }
 
 export function changeResidentialdata(){
+    testcounter++
+    console.log('AUFRUF: ' + testcounter)
 
     if(residentialcount === 0){
         showREHotDeals()
@@ -322,7 +343,7 @@ export function changeResidentialdata(){
         automateResidentialDate()
     }
     residentialcount++
-    if(residentialcount > 6){
+    if(residentialcount > allHeaderClasses.length-1){
         residentialcount = 0
     }
     if(ResOnView) {
@@ -331,24 +352,6 @@ export function changeResidentialdata(){
 }
 
 function showREHotDeals(){
-    fetch('http://localhost:5000/residential')
-    .then(res => res.json())
-    .then(data => {
-        for(let e of data.ic){
-            residential_ic.push(e)
-        }
-        for(let e of data.hotdeals){
-            residential_hotdeals.push(e)
-        }
-        residential = {
-            VolClosed: data.VolClosed,
-            VolIncome: data.VolIncome,
-            VolProgress: data.VolProgress,
-            QuaIncome: data.QuaIncome,
-            QuaProgress: data.QuaProgress,
-            QuaClosed: data.QuaClosed
-        }
-    })
 
     let generalDivs = document.getElementsByClassName('REgeneraldata')
     let hotdealDivs = document.getElementsByClassName('REhotdealdata')
@@ -365,7 +368,7 @@ function showREHotDeals(){
     let ac = document.getElementsByClassName('REhotdealAC')
     let priceSize = document.getElementsByClassName('REhotdealPriceSize')
     let place = document.getElementsByClassName('REhotdealPlace')
-    let coyield = document.getElementsByClassName('REhotdealYieald')
+    let reyield = document.getElementsByClassName('REhotdealYieald')
     hotScoreResidential()
 
     for(let i = 0; i<residential_hotdeals.length; i++){
@@ -374,7 +377,7 @@ function showREHotDeals(){
         ac[i].innerHTML = residential_hotdeals[i].investclass
         priceSize[i].innerHTML = `${price}€/m²`
         place[i].innerHTML = residential_hotdeals[i].place
-        coyield[i].innerHTML = `+${residential_hotdeals[i].hotdealyield}%`
+        reyield[i].innerHTML = `+${residential_hotdeals[i].hotdealyield}%`
     }
 }
 
@@ -391,12 +394,10 @@ function unshowREHotDeals(){
     }
 }
 function automateResidentialDate() {
-    let hcard = document.getElementsByClassName('REdesc')
-    for(let i =0; i<hcard.length;i++){
-        hcard[i].innerHTML = allHeaderClasses[residentialcount]
-        if(residentialcount != 0){
-            changeREData(residentialcount-1)
-        }
+    let hcard = document.querySelector('.REdesc')
+    hcard.innerHTML = allHeaderClasses[residentialcount]
+    if(residentialcount != 0){
+        changeREData(residentialcount-1)
     }
 }
 function changeREData(index){
