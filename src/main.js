@@ -1,3 +1,5 @@
+import {gsap} from "gsap";
+
 let healthcare_ic = []
 let healthcare_hotdeals = []
 let residential_ic = []
@@ -96,7 +98,7 @@ fetch('http://localhost:5000/germany/objects')
     .then(res => res.json())
     .then(data => {
         germany_objects = data
-        addFooterContent()
+
     })
 
 let healthcarecount = 0
@@ -567,7 +569,8 @@ function showStateClosed(index){
 /**
  * Footer
  */
-function addFooterContent(){
+export function addFooterContent(){
+
     let contentpanel = document.getElementById('list')
 
     for(const e of germany_objects){
@@ -588,17 +591,42 @@ function addFooterContent(){
         e.ac = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(e.ac));
         contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm} ${e.ic}</h1></li>`
     }
-
     let len = germany_objects.length;
+    // footerautoslide(len)
+    betterFooterSlide()
 
-    footerautoslide(len)
 }
 
-function footerautoslide(sec){
-    let item = document.getElementById('list')
-    // item.style.animation = `scroll ${sec}s linear infinite`
-    item.classList.add('auto')
+// function footerautoslide(sec){
+//     let item = document.getElementById('list')
+//     item.style.animation = `scroll ${sec*10 + 10}s linear infinite`
+//
+//     // item.classList.add('auto')
+// }
+
+
+function betterFooterSlide() {
+    let tl = gsap.timeline({repeat: -1, repeatDelay: 0})
+    let items = document.getElementsByClassName('footer-item')
+    for (let i = 0; i < items.length; i++) {
+        if(i === 0){
+            tl.fromTo(items[i],{x: 1920}, {
+                duration: 15,
+                x: -400,
+                ease: "none"
+            })
+        }else{
+            tl.fromTo(items[i],{x: 1920}, {
+                duration: 15,
+                x: -400,
+                ease: "none"
+            }, '-=7')
+        }
+
+    }
 }
+
+
 
 function upperCaseFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

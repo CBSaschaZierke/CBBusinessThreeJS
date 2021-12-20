@@ -12,7 +12,8 @@ import {
     setCoOnView, setHcOnView,
     setOnView,
     setResOnView,
-    showState
+    showState,
+    addFooterContent
 } from "./main";
 
 /**
@@ -44,6 +45,7 @@ const loadingManager = new THREE.LoadingManager(
             video.classList.add('active')
             video.currentTime = 0
             video.play()
+            addFooterContent()
         }, 500)
     },
     (itemUrl, itemsLoaded, itemsTotal) =>{
