@@ -27,7 +27,6 @@ const scene = new THREE.Scene()
 /**
  * Loaders
  */
-let loaders = false
 const loadingBarElement = document.querySelector('.loadingbar')
 const loadingManager = new THREE.LoadingManager(
     () =>{
@@ -586,9 +585,7 @@ let homecards=[
 /**
  * Animate
  */
-const clock = new THREE.Clock()
 
-let currentIntersect = null
 let showElBool1 = false
 let showElBool2 = false
 let showElBool3 = false
@@ -597,7 +594,7 @@ let showHomeBool = false
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
+
 
     // Update controls
     controls.update()
@@ -831,7 +828,7 @@ function showVideo() {
     video.play()
 }
 
-video.addEventListener('ended', (event) => {
+video.addEventListener('ended', () => {
     video.classList.remove('active')
     videotl.resume()
 });

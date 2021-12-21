@@ -176,7 +176,7 @@ function unshowHCHotDeals(){
 function changeAssetClass() {
     let hcard = document.querySelector('.hcdesc')
     hcard.innerHTML = allHeaderClasses[healthcarecount]
-    if(healthcarecount != 0){
+    if(healthcarecount !== 0){
         changeHCData(healthcarecount-1)
     }
 }
@@ -289,7 +289,7 @@ function unshowCOHotDeals(){
 function automateCommercialDate() {
     let hcard = document.querySelector('.COdesc')
     hcard.innerHTML = allHeaderClasses[commercialcount]
-    if(commercialcount != 0){
+    if(commercialcount !== 0){
         changeCOData(commercialcount-1)
     }
 }
@@ -404,7 +404,7 @@ function unshowREHotDeals(){
 function automateResidentialDate() {
     let hcard = document.querySelector('.REdesc')
     hcard.innerHTML = allHeaderClasses[residentialcount]
-    if(residentialcount != 0){
+    if(residentialcount !== 0){
         changeREData(residentialcount-1)
     }
 }
