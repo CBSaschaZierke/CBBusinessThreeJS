@@ -36,8 +36,6 @@ body
     position: absolute;
     top: 0;
     left: 0;
-    /*height: 600px;*/
-    /*width: 1400px;*/
     height: 100%;
     width: 100%;
     opacity: 0;
@@ -87,8 +85,6 @@ body
     line-height: 130%;
     font-weight: 100;
     font-size: 100%;
-    /*opacity: 0;*/
-    /*transition: opacity 0.3s;*/
     transform: scale(0,0);
     transition: transform .3s;
 }
@@ -108,8 +104,6 @@ body
     text-align: center;
     line-height: 2rem;
     font-weight: 100;
-    /*opacity: 0;*/
-    /*transition: opacity 0.3s;*/
     transform: scale(0,0);
     transition: transform .3s;
 }
@@ -125,8 +119,6 @@ body
     text-align: center;
     line-height: 1.3em;
     font-weight: 100;
-    /*opacity: 0;*/
-    /*transition: opacity 0.3s;*/
     transform: scale(0,0);
     transition: transform .3s;
 }
@@ -202,7 +194,6 @@ body
 
 .header{
     position: absolute;
-    /*margin: .5% 0 .5% 0;*/
     margin-top: .3%;
     left: 0;
     width: 9%;
@@ -238,23 +229,9 @@ body
     z-index: 1;
 }
 
-/*.footer-item{*/
-/*    position: relative;*/
-/*    margin-top: .3%;*/
-/*    margin-left: 10%;*/
-/*    min-width: 30%;*/
-/*    width: 9%;*/
-/*    left: 100vw;*/
-/*    z-index: 0;*/
-/*    overflow: hidden;*/
-/*    -webkit-transform: translateX(100%);*/
-/*    transform: translateX(100%);*/
-/*}*/
-
 .footer-item{
     position: absolute;
     margin-top: .3%;
-    /*margin-left: 10%;*/
     min-width: 30%;
     width: 9%;
     left: 0;

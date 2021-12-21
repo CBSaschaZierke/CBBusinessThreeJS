@@ -1,6 +1,4 @@
 import './style.css'
-// import './main.js'
-import * as dat from 'dat.gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -13,16 +11,12 @@ import {
     setOnView,
     setResOnView,
     showState,
-    addFooterContent, onView
+    addFooterContent,
 } from "./main";
 
 /**
  * Base
  */
-// Debug
-// const gui = new dat.GUI({
-//     width: 400
-// })
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -51,9 +45,6 @@ const loadingManager = new THREE.LoadingManager(
     }
 )
 let video = document.getElementById('video-1')
-if(loaders){
-    // showVideo()
-}
 // Texture loader
 const textureLoader = new THREE.TextureLoader(loadingManager)
 const matCapTexture = textureLoader.load('textures/matcaps/whitegrey.png')
@@ -92,12 +83,6 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     })
     const text1Material = new THREE.MeshMatcapMaterial({matcap: matCapTexture2})
     const text = new THREE.Mesh(textGeometry, text1Material)
-    // textGeometry.computeBoundingBox()
-    // textGeometry.translate(
-    //     -(textGeometry.boundingBox.max.x -.02) * .5,
-    //     (textGeometry.boundingBox.max.y - .5),
-    //     -(textGeometry.boundingBox.max.z -.03) * .5
-    // )
     textGeometry.center()
     text.position.set(-10, .55, 67) //.22
     text.castShadow = true
@@ -137,9 +122,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     const textRes = new THREE.Mesh(textResGeometry, textMaterial)
     textResGeometry.center()
     textRes.position.set(-42, .22, -9) //.22
-    // textRes.rotation.x = Math.PI * .5
     textRes.rotation.y = - Math.PI * .5
-    // textRes.rotation.z = Math.PI
     textRes.castShadow = true
     textRes.receiveShadow = true
     scene.add(textRes)
@@ -149,27 +132,6 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
 /**
  * Object
  */
-
-// const bakedTexture = textureLoader.load('baked.jpg')
-// bakedTexture.flipY = false
-// bakedTexture.encoding = THREE.sRGBEncoding
-
-// const cbcTex = textureLoader.load('cbcmat.png')
-// cbcTex.flipY = false
-// cbcTex.encoding = THREE.sRGBEncoding
-
-
-// gltfLoader.load(
-//     'platform.glb',
-//     (gltf) => {
-//         gltf.scene.traverse((child) =>{
-//             child.material = bakedMaterial
-//         })
-//         scene.add(gltf.scene)
-//         test = gltf.scene
-//         console.log(test)
-//     }
-// )
 
 const light = new THREE.AmbientLight( 0xFFFFFF, .7 ); //0xFFF7A0
 scene.add( light );
@@ -225,17 +187,13 @@ const controls = new OrbitControls(camera, canvas)
 
 controls.target = new THREE.Vector3(-11,4,-12)
 
-/* TODO: you can add pause, play, resume restart and for fun reverse for debug purpose
+/*
+    TODO: you can add pause, play, resume restart and for fun reverse for debug purpose
     https://greensock.com/get-started/
  */
 
 export let videotl = gsap.timeline({repeat: -1})
 videotl.timeScale(2)
-
-
-let animArray = []
-let playMeToo = false
-let longerTimeout = false
 
 videotl.to( camera.position, {
     duration: 5,
@@ -257,7 +215,6 @@ videotl.to( controls.target, {
 
 
 videotl.to( controls.target, {
-    //delay: 20,
     duration: 5,
     x: -12,
     y: 1,
@@ -280,7 +237,6 @@ videotl.to(camera.position, {
 })
 
 videotl.to( controls.target, {
-    // delay: 23,
     duration: 2,
     x: -40,
     y: 1,
@@ -298,7 +254,6 @@ videotl.to(camera.position, {
 })
 
 videotl.to( controls.target, {
-    // delay: 31,
     duration:2,
     x: -20,
     y: 1,
@@ -316,8 +271,6 @@ videotl.addLabel('toHCView')
 
 // Play more
 videotl.to( controls.target, {
-    delay: 2,
-    // delay: 58,
     duration: 5,
     x: -10,
     y: 1,
@@ -336,7 +289,6 @@ videotl.to(camera.position, {
 }, 'toHCView')
 
 videotl.to( controls.target, {
-    // delay: 78,
     duration: 10,
     x: -20,
     y: 1,
@@ -361,7 +313,6 @@ videotl.to(camera.position, {
 }, 'afterHCView')
 
 videotl.to( controls.target, {
-    // delay: 87,
     duration: 5,
     x: -100,
     y: 1,
@@ -381,7 +332,6 @@ videotl.to(camera.position, {
 videotl.addLabel('toComView')
 
 videotl.to( controls.target, {
-    // delay: 124,
     duration:5,
     x: -42,
     y: 3,
@@ -427,7 +377,6 @@ videotl.to(camera.position, {
 
 
 videotl.to( camera.position, {
-    // delay: 159,
     duration:5,
     x: -20,
     y: 1,
@@ -438,7 +387,6 @@ videotl.to( camera.position, {
 })
 
 videotl.to( controls.target, {
-    // delay: 163,
     duration: 5,
     x: -20,
     y: 1,
@@ -446,7 +394,6 @@ videotl.to( controls.target, {
 })
 
 videotl.to( camera.position, {
-    // delay: 166,
     duration:5,
     x: -20,
     y: 1,
@@ -454,16 +401,13 @@ videotl.to( camera.position, {
 })
 
 videotl.to( controls.target, {
-    // delay: 170,
     duration: 5,
     x: -35,
     y: 1,
     z: -20.5,
 })
 
-// TOO
 videotl.to( camera.position, {
-    // delay: 176,
     duration:5,
     x: -35,
     y: 10,
@@ -471,7 +415,6 @@ videotl.to( camera.position, {
 })
 
 videotl.to( camera.position, {
-    // delay: 176,
     duration:5,
     x: -40,
     y: 10,
@@ -481,7 +424,6 @@ videotl.to( camera.position, {
 videotl.addLabel('toResView')
 
 videotl.to( controls.target, {
-    // delay: 180,
     duration: 5,
     x: -35,
     y: 1,
@@ -492,7 +434,6 @@ videotl.to( controls.target, {
  * View Residential
  */
 videotl.to( camera.position, {
-    // delay: 180,
     duration:5,
     x: -52,
     y: 5,
@@ -528,21 +469,11 @@ videotl.to(controls.target,{
 }, 'afterResView')
 
 videotl.to( camera.position, {
-    // delay: 176,
     duration:2,
     x: -11,
     y: 4,
     z: -10,
 }, 'afterResView')
-
-
-// window.addEventListener('click', () => {
-//     console.log('clicked')
-//     camera.position.set(-12, 4, 6)
-//     controls.target = new THREE.Vector3(-7, 0, 5);
-// })
-
-// controls.object.position.set(-1, 3, 8);
 
 const raycaster = new THREE.Raycaster()
 const rayOrigin = new THREE.Vector3(-3,0,0)
@@ -562,17 +493,6 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-// renderer.outputEncoding = THREE.sRGBEncoding
-
-// const dirlight = new THREE.DirectionalLight( 0xFFF7A0, 1, 100 );
-// dirlight.position.set( 0, 10, 0 ); //default; light shining from top
-// dirlight.rotation.z = Math.PI * .5
-// dirlight.castShadow = true; // default false
-// dirlight.shadow.mapSize.width = 256;
-// dirlight.shadow.mapSize.height = 256;
-// dirlight.shadow.camera.near = 0.5;
-// dirlight.shadow.camera.far = 40;
-// scene.add( dirlight );
 
 const directionalLight = new THREE.DirectionalLight(0xFFF7A0, 0.5)
 directionalLight.position.set(5, 20, 0)
@@ -585,74 +505,6 @@ directionalLight.shadow.camera.top = 64
 directionalLight.shadow.camera.right = 64
 directionalLight.shadow.camera.bottom = - 64
 scene.add(directionalLight)
-
-
-// Mouse
-
-const mouse = new THREE.Vector2()
-
-window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX / sizes.width * 2 - 1
-    mouse.y = - (e.clientY / sizes.height) * 2 + 1
-})
-
-window.addEventListener('click', (e) => {
-    if(currentIntersect && rayBool){
-        // Techniker
-        if(currentIntersect.object.name === 'Cube032'){
-            camera.position.set(-12, 4, 6)
-            controls.target = new THREE.Vector3(-7, 0, 5);
-        }
-        // Bank
-        if(currentIntersect.object.name === 'Cube002'){
-            camera.position.set(5, 4, 11)
-            controls.target = new THREE.Vector3(4, 0, 5);
-        }
-        // Makler
-        if(currentIntersect.object.name === 'Cube001'){
-            camera.position.set(10, 4, -8)
-            controls.target = new THREE.Vector3(5, 0, -6);
-        }
-        // Gesellschaft
-        if(currentIntersect.object.name === 'Cube003'){
-            camera.position.set(-7, 4, -11)
-            controls.target = new THREE.Vector3(-5, 0, -5);
-        }
-        //Ground
-        if(currentIntersect.object.name === 'Plane'){
-            camera.position.set(-6, 5, 3)
-            controls.target = new THREE.Vector3(0,0,0);
-        }
-    }
-})
-
-/**
- * EventListeners for Switch in States
- */
-
-let rayBool = true
-
-// window.addEventListener('keydown', (e) => {
-//     if(e.code === 'Space'){
-//         camera.position.set(0, 30, 0)
-//         controls.target = new THREE.Vector3(0,0,0);
-//         for(const point of points){
-//             point.element.classList.add('visible')
-//         }
-//         rayBool = false
-//     }
-// })
-//
-// window.addEventListener('keydown', (e) => {
-//     if(e.code === 'Escape'){
-//         camera.position.set(-6, 5, 3)
-//         controls.target = new THREE.Vector3(0,0,0);
-//         for(const point of points){
-//             point.element.classList.remove('visible')
-//         }
-//         rayBool = true
-//     }
-// })
 
 
 
@@ -945,7 +797,6 @@ const tick = () =>
                 {
                     // Show
                     homecards[i].element.classList.add('visible')
-                    // homecards[i].element.style.transform = `scale(${dis}, ${dis})`
                 }
             }
 
@@ -979,11 +830,6 @@ function showVideo() {
     video.playbackRate = 2.0
     video.play()
 }
-
-// video.onended = function () {
-//     video.classList.remove('active')
-//     videotl.resume()
-// }
 
 video.addEventListener('ended', (event) => {
     video.classList.remove('active')

@@ -82,9 +82,6 @@ fetch('http://localhost:5000/residential')
 fetch('http://localhost:5000/germany')
     .then(res => res.json())
     .then(data => {
-        // for(let e of data.objects){
-        //     germany_objects.push(e)
-        // }
         for(let e of data.state){
             germany_states.push(e)
         }
@@ -531,7 +528,6 @@ export function showState(){
 
     state.innerHTML = germany_states[statecount].name_eng
     img.src = germany_states[statecount].imgsrc
-    let file = germany_states[statecount].imgsrc
     showStateIncome(statecount)
     showStateProgress(statecount)
     showStateClosed(statecount)
@@ -602,19 +598,9 @@ export function addFooterContent(){
         e.ac = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(e.ac));
         contentpanel.innerHTML += `<li class="footer-item"><h3>${e.place} ${e.ac}</h3><h1>${priceperm} ${e.ic}</h1></li>`
     }
-    let len = germany_objects.length;
-    // footerautoslide(len)
     betterFooterSlide()
 
 }
-
-// function footerautoslide(sec){
-//     let item = document.getElementById('list')
-//     item.style.animation = `scroll ${sec*10 + 10}s linear infinite`
-//
-//     // item.classList.add('auto')
-// }
-
 
 function betterFooterSlide() {
     let tl = gsap.timeline({repeat: -1, repeatDelay: 0})
