@@ -1,4 +1,7 @@
 import {gsap} from "gsap";
+import {
+    videotl
+} from "./script";
 
 let healthcare_ic = []
 let healthcare_hotdeals = []
@@ -122,6 +125,8 @@ export function changeHealthCaredata(){
     healthcarecount++
     if(healthcarecount > 6){
         healthcarecount = 0
+        hcOnView = false
+        videotl.resume()
     }
     if(hcOnView){
         setTimeout(changeHealthCaredata, 5000)
@@ -233,6 +238,8 @@ export function changeCommercialdata(){
     commercialcount++
     if(commercialcount > 6){
         commercialcount = 0
+        CoOnView = false
+        videotl.resume()
     }
 
     if(CoOnView){
@@ -283,7 +290,7 @@ function unshowCOHotDeals(){
     }
 }
 function automateCommercialDate() {
-    let hcard = document.querySelector('.COdesc') // TODO change it+
+    let hcard = document.querySelector('.COdesc')
     hcard.innerHTML = allHeaderClasses[commercialcount]
     if(commercialcount != 0){
         changeCOData(commercialcount-1)
@@ -347,6 +354,8 @@ export function changeResidentialdata(){
     residentialcount++
     if(residentialcount > allHeaderClasses.length-1){
         residentialcount = 0
+        ResOnView = false
+        videotl.resume()
     }
     if(ResOnView) {
         setTimeout(changeResidentialdata, 5000)
@@ -528,6 +537,8 @@ export function showState(){
     showStateClosed(statecount)
     statecount++
     if(statecount > 15){
+        onView = false
+        videotl.resume()
         statecount = 0
     }
 

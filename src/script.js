@@ -13,7 +13,7 @@ import {
     setOnView,
     setResOnView,
     showState,
-    addFooterContent
+    addFooterContent, onView
 } from "./main";
 
 /**
@@ -42,9 +42,6 @@ const loadingManager = new THREE.LoadingManager(
             document.querySelector('.loading').classList.add('m-fadeOut')
             loadingBarElement.classList.add('ended')
             loadingBarElement.style.transform = ''
-            video.classList.add('active')
-            video.currentTime = 0
-            video.play()
             addFooterContent()
         }, 500)
     },
@@ -55,7 +52,7 @@ const loadingManager = new THREE.LoadingManager(
 )
 let video = document.getElementById('video-1')
 if(loaders){
-    showVideo()
+    // showVideo()
 }
 // Texture loader
 const textureLoader = new THREE.TextureLoader(loadingManager)
@@ -228,491 +225,315 @@ const controls = new OrbitControls(camera, canvas)
 
 controls.target = new THREE.Vector3(-11,4,-12)
 
+/* TODO: you can add pause, play, resume restart and for fun reverse for debug purpose
+    https://greensock.com/get-started/
+ */
+
+export let videotl = gsap.timeline({repeat: -1})
+videotl.timeScale(2)
+
 
 let animArray = []
 let playMeToo = false
 let longerTimeout = false
 
-let anim1 = gsap.to( camera.position, {
+videotl.to( camera.position, {
     duration: 5,
     x: -11,
     y: 2,
     z: -7,
+    onStart: function (){
+        videotl.pause()
+        showVideo()
+    }
 })
-anim1.pause()
-animArray.push(anim1)
 
-let anim1_1 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     duration: 5,
     x: -15,
     y: 2,
     z: -7,
-    onStart: () =>{
-        longerTimeout = true
-    }
 })
-anim1_1.pause()
-animArray.push(anim1_1)
-
-// let anim2 = gsap.to( camera.position, {
-//     // delay: 15,
-//     duration: 5,
-//     x: -11,
-//     y: 1,
-//     z: -6,
-//     onComplete: () => {
-//         gsap.to(controls.target, {
-//             duration: 1,
-//             x: -12,
-//             y: 1,
-//             z: -6,
-//         })
-//     }
-// })
-// anim2.pause()
-// animArray.push(anim2)
 
 
-let anim3 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     //delay: 20,
     duration: 5,
     x: -12,
     y: 1,
     z: 3,
+    onStart: function (){
+        showHomeBool = true
+        setOnView(true)
+        showState()
+    }
 })
-anim3.pause()
-animArray.push(anim3)
 
-let anim3_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 3,
     x: -12,
     y: 1,
     z: 0,
+    onStart:function () {
+        videotl.pause()
+    },
 })
-anim3_1.pause()
-animArray.push(anim3_1)
 
-let anim4 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 23,
     duration: 2,
     x: -40,
     y: 1,
     z: 0,
+    onStart: () => {
+        showHomeBool = false
+    }
 })
-anim4.pause()
-animArray.push(anim4)
 
-let anim4_1 =  gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 2,
     x: -20,
     y: 1,
     z: 0,
 })
-anim4_1.pause()
-animArray.push(anim4_1)
 
-let anim5 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 31,
     duration:2,
     x: -20,
     y: 1,
     z: 60,
 })
-anim5.pause()
-animArray.push(anim5)
 
-let anim5_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 2,
     x: -20,
     y: 1,
     z: 36,
-    onStart: () => {
-        playMeToo = true
-        longerTimeout = true
-    }
 })
-anim5_1.pause()
-animArray.push(anim5_1)
 
-// let anim6 = gsap.to( controls.target, {
-//     // delay: 40,
-//     duration: 2,
-//     x: -40,
-//     y: 1,
-//     z: 36,
-// })
-// anim6.pause()
-// animArray.push(anim6)
-
-// let anim6_1 = gsap.to(camera.position, {
-//     duration: 2,
-//     x: -32,
-//     y: 1,
-//     z: 36,
-// })
-// anim6_1.pause()
-// animArray.push(anim6_1)
-//
-// let anim7 = gsap.to( controls.target, {
-//     // delay: 49,
-//     duration: 2,
-//     x: -32,
-//     y: 1,
-//     z: 66,
-// })
-// anim7.pause()
-// animArray.push(anim7)
-//
-// let anim7_1 = gsap.to(camera.position, {
-//     duration: 2,
-//     x: -32,
-//     y: 1,
-//     z: 56,
-// })
-// anim7_1.pause()
-// animArray.push(anim7_1)
-
-// let anim7_2 = gsap.to(camera.position, {
-//     duration: 5,
-//     x: -12,
-//     y: 1,
-//     z: 60,
-// })
-// anim7_2.pause()
-// animArray.push(anim7_2)
+videotl.addLabel('toHCView')
 
 // Play more
-let anim8 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     delay: 2,
     // delay: 58,
     duration: 5,
     x: -10,
     y: 1,
     z: 55,
-})
-anim8.pause()
-animArray.push(anim8)
+}, 'toHCView')
 
 /**
  * View Healthcare view
  */
-let anim8_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 5,
     x: -10,
     y: 2,
     z: 73,
-    onStart: () => {
-        playMeToo = true
-    }
-})
-anim8_1.pause()
-animArray.push(anim8_1)
 
-let anim10 = gsap.to( controls.target, {
+}, 'toHCView')
+
+videotl.to( controls.target, {
     // delay: 78,
     duration: 10,
     x: -20,
     y: 1,
     z: 36,
-})
-anim10.pause()
-animArray.push(anim10)
+    onStart: function (){
+        showElBool1 = true
+        setHcOnView(true)
+        changeHealthCaredata()
+    }
+}, 'toHCView')
 
-let anim10_1 = gsap.to(camera.position, {
+videotl.addLabel('afterHCView')
+
+videotl.to(camera.position, {
     duration: 5,
     x: 5,
     y: 1,
     z: 36,
     onStart: () => {
-        playMeToo = true
+        videotl.pause()
     }
-})
-anim10_1.pause()
-animArray.push(anim10_1)
+}, 'afterHCView')
 
-let anim11 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 87,
     duration: 5,
     x: -100,
     y: 1,
     z: 36,
-})
-anim11.pause()
-animArray.push(anim11)
+}, 'afterHCView')
 
-let anim11_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 5,
     x: -32,
     y: 1,
     z: 36,
     onStart: () => {
-        playMeToo = true
-        longerTimeout = true
+        showElBool1 = false
     }
 })
-anim11_1.pause()
-animArray.push(anim11_1)
 
-// let anim12 = gsap.to( controls.target, {
-//     // delay: 96,
-//     duration: 5,
-//     x: -51.5,
-//     y: 1,
-//     z: -80,
-// })
-// anim12.pause()
-// animArray.push(anim12)
-//
-// let anim12_1 = gsap.to(camera.position, {
-//     duration: 5,
-//     x: -51.5,
-//     y: 1,
-//     z: 0,
-// })
-// anim12_1.pause()
-// animArray.push(anim12_1)
-//
-// let anim13 = gsap.to( controls.target, {
-//     // delay: 105,
-//     duration: 5,
-//     x: -100,
-//     y: 1,
-//     z: 0,
-// })
-// anim13.pause()
-// animArray.push(anim13)
-//
-// let anim13_1 = gsap.to(camera.position, {
-//     duration: 5,
-//     x: -71.5,
-//     y: 1,
-//     z: 0,
-// })
-// anim13_1.pause()
-// animArray.push(anim13_1)
-//
-// let anim14 = gsap.to( controls.target, {
-//     // delay: 114,
-//     duration: 5,
-//     x: -71.5,
-//     y: 1,
-//     z: 100,
-// })
-// anim14.pause()
-// animArray.push(anim14)
-//
-// // TOO
-// let anim14_1 = gsap.to(camera.position, {
-//     duration: 5,
-//     x: -71.5,
-//     y: 1,
-//     z: 20,
-// })
-// anim14_1.pause()
-// animArray.push(anim14_1)
+videotl.addLabel('toComView')
 
-let anim15 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 124,
     duration:5,
     x: -42,
     y: 3,
     z: 17,
-    onStart: () => {
-        // longer timeout
-    }
-})
-anim15.pause()
-animArray.push(anim15)
+}, 'toComView')
 
 
 /**
  * view Commercial
  */
 
-let anim15_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 7,
     x: -30,
     y: 4.5,
     z: 17,
-    onStart: () => {
-        // longer timeout
-        playMeToo = true
+    onStart: function (){
+        showElBool2 = true
+        setCoOnView(true)
+        changeCommercialdata()
     }
-})
-anim15_1.pause()
-animArray.push(anim15_1)
+}, 'toComView')
 
-// let anim16 = gsap.to( controls.target, {
-//     // delay: 136,
-//     duration: 10,
-//     x: -45,
-//     y: 15,
-//     z: 10,
-// })
-// anim16.pause()
-// animArray.push(anim16)
-//
-// let anim16_1 = gsap.to(camera.position, {
-//     duration: 10,
-//     x: -45,
-//     y: 25,
-//     z: 3,
-// })
-// anim16_1.pause()
-// animArray.push(anim16_1)
-//
-// //TOO
-// let anim16_2 = gsap.to(camera.position, {
-//     duration:2,
-//     x: -45,
-//     y: 25,
-//     z: 5,
-//     onStart: () => {
-//         playMeToo = true
-//     }
-// })
-// anim16_2.pause()
-// animArray.push(anim16_2)
+videotl.addLabel('afterComView')
 
-let anim17 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 150,
     duration: 5,
     x: 0,
     y: 1,
     z: 0,
-})
-anim17.pause()
-animArray.push(anim17)
+    onStart: () => {
+        videotl.pause()
+    }
+}, 'afterComView')
 
-let anim17_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 5,
     x: -30,
     y: 1,
     z: 0,
-})
-anim17_1.pause()
-animArray.push(anim17_1)
+}, 'afterComView')
 
 
-let anim18 = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 159,
     duration:5,
     x: -20,
     y: 1,
     z: 0,
+    onStart: function() {
+        showElBool2 = false
+    }
 })
-anim18.pause()
-animArray.push(anim18)
 
-let anim19 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 163,
     duration: 5,
     x: -20,
     y: 1,
     z: -50,
 })
-anim19.pause()
-animArray.push(anim19)
 
-let anim19_pos = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 166,
     duration:5,
     x: -20,
     y: 1,
     z: -20,
 })
-anim19_pos.pause()
-animArray.push(anim19_pos)
 
-let anim20 = gsap.to( controls.target, {
+videotl.to( controls.target, {
     // delay: 170,
     duration: 5,
     x: -35,
     y: 1,
     z: -20.5,
 })
-anim20.pause()
-animArray.push(anim20)
 
 // TOO
-let anim20_pos = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 176,
     duration:5,
     x: -35,
     y: 10,
     z: -21,
 })
-anim20_pos.pause()
-animArray.push(anim20_pos)
 
-let anim20_pos1 = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 176,
     duration:5,
     x: -40,
     y: 10,
     z: -21,
-    onStart: () => {
-        playMeToo = true
-        longerTimeout = true
-    }
 })
-anim20_pos1.pause()
-animArray.push(anim20_pos1)
 
-let anim21 = gsap.to( controls.target, {
+videotl.addLabel('toResView')
+
+videotl.to( controls.target, {
     // delay: 180,
     duration: 5,
     x: -35,
     y: 1,
     z: -9.9,
-})
-anim21.pause()
-animArray.push(anim21)
+}, 'toResView')
 
 /**
  * View Residential
  */
-let anim21_pos = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 180,
     duration:5,
     x: -52,
     y: 5,
     z: -9,
-})
-anim21_pos.pause()
-animArray.push(anim21_pos)
+    onStart: function (){
+        showElBool3 = true
+        setResOnView(true)
+        changeResidentialdata()
+    }
+}, 'toResView')
 
 //TOO
-let anim21_pos_1 = gsap.to(camera.position, {
+videotl.to(camera.position, {
     duration: 2,
     x: -50,
     y: 17,
     z: -10,
     onStart: () => {
-        playMeToo = true
+        videotl.pause()
     }
 })
-anim21_pos_1.pause()
-animArray.push(anim21_pos_1)
 
-let anim22_pos_1 = gsap.to(controls.target,{
+videotl.addLabel('afterResView')
+
+videotl.to(controls.target,{
     duration: 2,
     x: -11,
     y: 4,
     z: -12,
-})
-anim22_pos_1.pause()
-animArray.push(anim22_pos_1)
+    OnStart:function (){
+        showElBool3 = false
+    }
+}, 'afterResView')
 
-let anim22_pos = gsap.to( camera.position, {
+videotl.to( camera.position, {
     // delay: 176,
     duration:2,
     x: -11,
     y: 4,
     z: -10,
-})
-anim22_pos.pause()
-animArray.push(anim22_pos)
+}, 'afterResView')
 
 
 // window.addEventListener('click', () => {
@@ -833,7 +654,6 @@ let rayBool = true
 //     }
 // })
 
-const vidraycaster = new THREE.Raycaster()
 
 
 /**
@@ -929,6 +749,22 @@ const tick = () =>
 
     // Update controls
     controls.update()
+
+    if(!showHomeBool){
+        for(let i=0;i<homecards.length;i++){
+            homecards[i].element.classList.remove('visible')
+        }
+    }
+
+    if(!showElBool1 && !showElBool2 && !showElBool3){
+        for(let i = 0; i<hccards.length;i++){
+            hccards[i].element.classList.remove('visible')
+        }
+    }
+    console.log('Home: ' + showHomeBool)
+    console.log('HC: ' + showElBool1)
+    console.log('Com: ' + showElBool2)
+    console.log('Res: ' + showElBool3)
 
     // Show healthcare cards
     if(showElBool1){
@@ -1137,101 +973,19 @@ const tick = () =>
 
 tick()
 
-// index 10 für Healcare View
-
-// index 22 für Com View
-
-// index 30 für res view
-
-let cameraAnimIndex = 0
 function showVideo() {
-
-    if(cameraAnimIndex === -1){
-        video.classList.add('active')
-        video.currentTime = 0
-        video.play()
-    }
-    video.onended = () => {
-        video.classList.remove('active')
-        cameraAnimIndex = 0
-        cameraAnimation()
-    }
-}
-showVideo()
-
-function cameraAnimation(){
-    if(cameraAnimIndex >= animArray.length){
-        cameraAnimIndex = -1
-        showVideo()
-    }
-    if(cameraAnimIndex >= 0){
-        for(let i=0; i<animArray.length;i++){
-            animArray[i].pause()
-        }
-        for(let i = 0; i<hccards.length;i++){
-            hccards[i].element.classList.remove('visible')
-        }
-        for(let i=0;i<homecards.length;i++){
-            homecards[i].element.classList.remove('visible')
-        }
-        animArray[cameraAnimIndex].restart()
-        if(playMeToo){
-            playMultipleAnims(cameraAnimIndex)
-        }
-        let timeout = animArray[cameraAnimIndex].duration() * 1000
-
-        if(cameraAnimIndex > 8 && cameraAnimIndex < 15){
-            if(!showElBool1){
-                setHcOnView(true)
-                changeHealthCaredata()
-            }
-            showElBool1 = true
-        }
-        else if(cameraAnimIndex > 9 && cameraAnimIndex < 18){
-            if(!showElBool2){
-                setCoOnView(true)
-                changeCommercialdata()
-            }
-            showElBool2 = true
-        }
-        else if(cameraAnimIndex > 20 && cameraAnimIndex < 26){
-            if(!showElBool3){
-                setResOnView(true)
-                changeResidentialdata()
-            }
-            showElBool3 = true
-        }
-        else if(cameraAnimIndex > 1 && cameraAnimIndex <3){
-            if(!showHomeBool){
-                setOnView(true)
-                showState()
-            }
-            showHomeBool = true
-        }
-        else {
-            showElBool1 = false
-            showElBool2 = false
-            showElBool3 = false
-            showHomeBool = false
-            setOnView(false)
-            setResOnView(false)
-            setCoOnView(false)
-            setHcOnView(false)
-        }
-
-        if(longerTimeout){
-            timeout += (5000 * 7)
-            longerTimeout = false
-        }
-        cameraAnimIndex++
-        setTimeout(cameraAnimation, timeout)
-    }
+    video.classList.add('active')
+    video.currentTime = 0
+    video.playbackRate = 2.0
+    video.play()
 }
 
-function playMultipleAnims(index){
-    if(index+1 < animArray.length){
-        animArray[index+1].restart()
-        cameraAnimIndex++
-        playMeToo = false
-    }
-}
+// video.onended = function () {
+//     video.classList.remove('active')
+//     videotl.resume()
+// }
+
+video.addEventListener('ended', (event) => {
+    video.classList.remove('active')
+    videotl.resume()
+});
